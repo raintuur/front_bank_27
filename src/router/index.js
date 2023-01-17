@@ -7,25 +7,25 @@ import AboutView from "@/views/AboutView.vue";
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/cars',
-    name: 'carsRoute',
-    component: CarsView
-  },
-  {
-    path: '/',
-    name: 'homeRoute',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'aboutRoute',
-    component: AboutView
-  }
+    {
+        path: '/cars',
+        name: 'carsRoute',
+        component: CarsView
+    },
+    {
+        path: '/',
+        name: 'homeRoute',
+        component: HomeView
+    },
+    {
+        path: '/about',
+        name: 'aboutRoute',
+        component: AboutView
+    },
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router
