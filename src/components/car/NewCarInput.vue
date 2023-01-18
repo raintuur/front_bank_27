@@ -12,7 +12,12 @@
     </div>
 
     <!--  COLUMN 3    -->
-    <div class="col-3">
+    <div class="col col-3">
+      <input type="file" accept="image/png, image/jpeg" >
+    </div>
+
+    <!-- COLUMN 4   -->
+    <div class="col col-3">
       <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
 
@@ -23,7 +28,7 @@ export default {
   name: 'NewCarInput',
   props: {
     car: {}
-  },
+  },components:
   methods: {
     addCar: function () {
       this.$emit('clickAddCarEvent')
