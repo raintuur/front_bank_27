@@ -1,32 +1,65 @@
 <template>
   <div>
-<!-- ROW 1 -->
-     <div class="row justify-content-center">
 
-<!-- COLUMN 1 -->
-      <div class="col col-3">
-        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
+    <NewCarHeader :company-name="companyName"/>
+
+    <!-- ROW 1 -->
+    <NewCarInput :car="car"/>
+
+    <br>
+
+    <div class="row justify-content-center">
+
+      <div class=" col col-9">
+      <!--    Autod -->
+      <table class="table table-hover table-dark">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+        </tbody>
+      </table>
 
 
-<!--   COLUMN 2    -->
-      <div class="col col-3">
-        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
-      </div>
-
-<!-- COLUMN 3 -->
-       <div class="col-3">
-         <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
-       </div>
     </div>
+
+
+
 
   </div>
 
 </template>
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+
+
 export default {
   name: 'CarsView',
+  components: {NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
@@ -35,7 +68,8 @@ export default {
       },
 
 
-      cars: []
+      cars: [],
+      companyName: 'Kurvis Kraavis'
     }
   },
   methods: {
