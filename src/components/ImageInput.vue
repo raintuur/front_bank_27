@@ -3,6 +3,7 @@
     <input type="file" v-on:change="handleImage" accept="image/x-png,image/jpeg">
   </div>
 </template>
+
 <script>
 export default {
   name: 'ImageInput',
