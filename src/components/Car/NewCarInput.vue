@@ -10,9 +10,14 @@
       <input v-model="car.carModel" type="text" class="form-control" placeholder="mudel">
     </div>
 
-    <!--   COLUMN 3   -->
+    <!--   COLUMN 3 pildi lisamine   -->
+    <div class="col col-3">
+      <input class="form-control" type="file" accept="image/jpg, image/gif, image/png, image/">
+    </div>
+
+    <!--   COLUMN 4   -->
     <div class="col col-2">
-      <button type="button" class="btn btn-outline-success">Lisa auto</button>
+      <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
 
   </div>
@@ -22,6 +27,11 @@ export default {
   name: 'NewCarInput',
   props: {
     car: {}
+  },
+  methods: {
+    addCar: function () {
+      this.$emit('clickAddCarEvent')
+    },
   }
 }
 </script>
