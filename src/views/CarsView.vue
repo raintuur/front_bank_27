@@ -4,7 +4,7 @@
     <!--  ROW 1  -->
     <NewCarInput :car="car"
                  @clickAddCarEvent="addCar"
-                 @@pictureInputSuccess="setCarImage"
+                 @pictureInputSuccess="setCarImage"
     />
 
     <br>
@@ -12,6 +12,8 @@
     <!--  ROW 2  -->
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
+
+    <img :src="car.carImage" class="img-thumbnail" >
 
 
   </div>
@@ -66,6 +68,7 @@ export default {
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
+
   }
 }
 </script>
