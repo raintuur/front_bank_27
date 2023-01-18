@@ -4,57 +4,49 @@
 
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <AddNewCarInput :car="car"/>
+    <AddNewCarInput :car="car" @clickAddCarEvent="addCar"
+                    @pictureInputSuccess="setCarImage"/>
+    <!--  Autod  -->
     <br>
-    <div class="row justify-content-center">
-      <div class="col col-9">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Auto mark</th>
-          <th>Auto mudel</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(car, index) in cars">
-          <th>{{index + 1}}</th>
-          <td>{{car.carMake}}</td>
-          <td>{{car.carModel}}</td>
-        </tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
+    <CarsTable :cars="cars"/>
   </div>
 
 </template>
 
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
-import AddNewCarInput from "@/components/AddNewCarInput.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
+import AddNewCarInput from "@/components/car/AddNewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {AddNewCarInput, NewCarHeader},
+  components: {CarsTable, AddNewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
+        carId: '',
         carMake: '',
-        carModel: ''
+        carModel: '',
+        carImage: ''
       },
       cars: [
         {
+          carId: '1',
           carMake: 'Kia',
-          carModel: 'ceed'
+          carModel: 'ceed',
+          carImage: ''
         },
         {
+          carId: '2',
           carMake: 'Lexus',
-          carModel: 'IS200'
+          carModel: 'IS200',
+          carImage: ''
         },
         {
+          carId: '3',
           carMake: 'Volkswagen',
-          carModel: 'Golf Variant'
+          carModel: 'Golf Variant',
+          carImage: ''
         }
       ],
       companyName: 'AAA'
@@ -63,7 +55,13 @@ export default {
 
   methods: {
     addCar: function () {
-      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+      let newCarString = JSON.stringify(this.car)
+      let parseNewCar = JSON.parse(newCarString)
+      parseNewCar.carId = this.cars.length + 1
+      this.cars.push(parseNewCar)
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
   }
 }
