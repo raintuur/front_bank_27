@@ -1,20 +1,20 @@
 <template>
   <div>
- <NewCarHeader/>
-    <!-- ROW 1-->
+    <NewCarHeader/>
+    <!--  ROW 1  -->
     <div class="row justify-content-center">
 
-      <!--   COLUMN 1   -->
-      <div class="col col-2">
+      <!--  COLUMN 1    -->
+      <div class="col col-3">
         <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
       </div>
 
-      <!--   COLUMN 2   -->
-      <div class="col col-2">
+      <!--  COLUMN 2    -->
+      <div class="col col-3">
         <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
       </div>
 
-      <!--   COLUMN 3   -->
+      <!--  COLUMN 3    -->
       <div class="col-3">
         <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
@@ -22,14 +22,16 @@
     </div>
 
   </div>
+
 </template>
 
+
 <script>
-import newCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/NewCarHeader.vue";
 
 export default {
   name: 'CarsView',
-  components: {newCarHeader},
+  components: {NewCarHeader},
   data: function () {
     return {
       car: {
@@ -37,16 +39,12 @@ export default {
         carModel: '',
       },
       cars: []
-
     }
   },
   methods: {
     addCar: function () {
-      let carMake = "";
-      let carModel = "";
-      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati systeemi")
+      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
     }
   }
 }
 </script>
-
