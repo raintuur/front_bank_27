@@ -7,45 +7,8 @@
     <br>
 
     <!--  ROW 2  -->
-    <div class="row justify-content-center">
-
-      <div class="col col-9">
-
-
-        <!--  Autod   -->
-        <table class="table table-hover table-dark">
-          <thead>
-          <tr>
-            <th scope="col">Auto mark</th>
-            <th scope="col">Auto mudel</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>BMW</td>
-            <td>X5</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          </tbody>
-        </table>
-
-
-
-      </div>
-
-
-
-    </div>
+    <!--  Autod   -->
+    <CarsTable :cars="cars"/>
 
 
 
@@ -55,19 +18,39 @@
 
 
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
 import NewCarInput from "@/components/car/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarInput, NewCarHeader},
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
+        carId: 0,
         carMake: '',
         carModel: '',
       },
-      cars: [],
+
+      cars: [
+        {
+          carId: 1,
+          carMake: 'Audi',
+          carModel: 'R8',
+        },
+        {
+          carId: 2,
+          carMake: 'BMW',
+          carModel: 'X5',
+        },
+        {
+          carId: 3,
+          carMake: 'Tesla',
+          carModel: 'CyberTruck',
+        }
+
+      ],
       companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
