@@ -21,7 +21,6 @@ const routes = [
     path: '/about',
     name: 'aboutRoute',
     component: AboutView
-
   }
 ]
 

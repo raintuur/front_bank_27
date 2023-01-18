@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <h1>
-      {{companyName}} - Autode lisamine
-    </h1>
-  </div>
+  <h1>{{companyName}} - Autode lisamine</h1>
 </template>
 
 <script>
@@ -14,4 +10,3 @@ export default {
   }
 }
 </script>
-
