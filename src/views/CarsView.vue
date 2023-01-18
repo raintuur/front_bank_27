@@ -1,52 +1,67 @@
 <template>
   <div>
-  <NewCarHeader/>
+    <NewCarHeader :company-name="companyName"/>
+    <!--    ROW 1     -->
+    <NewCarInput :car="car"/>
+
     <!--    ROW 1     -->
     <div class="row justify-content-center">
+      <div class="col col-7">
 
-      <!--      COLUMN 1    -->
-      <div class="col col-2">
-        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
-
-      <!--      COLUMN 2    -->
-      <div class="col col-2">
-        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
-      </div>
-
-      <!--      COLUMN 3    -->
-      <div class="col col-2">
-        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
+        <!--    Autod    -->
+        <table class="table table-hover table-dark">
+          <thead>
+          <tr>
+            <th scope="col">Auto mark</th>
+            <th scope="col">Auto mudel</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>
+
+
 
   </div>
 </template>
 
 <script>
 import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarHeader},
+  components: {NewCarInput, NewCarHeader},
   data: function () {
     return {
-
       car: {
         carMake: 'asd',
         carModel: 'dsa',
       },
-      mingiTekst: '',
-
-      cars: [
-        {
-          carMake: 'asdasd',
-          carModel: 'asdasd',
-        }
-
-      ]
-
+      cars: [],
+      companyName: 'Kurvis Kraavis',
     }
   },
   methods: {
