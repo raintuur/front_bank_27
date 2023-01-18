@@ -33,7 +33,7 @@
 
 <script>
 import NewCarHeader from "@/components/NewCarHeader.vue";
-import NewCarInput from "@/views/NewCarInput.vue";
+import NewCarInput from "@/components/Car/NewCarInput.vue";
 
 export default {
   name: "CarsView",
