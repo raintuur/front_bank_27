@@ -2,7 +2,7 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car"/>
+    <NewCarInput :car="car" @clickAddCarEvent="addCar"/>
 <br>
     <!--  ROW 2  -->
     <CarsTable :cars="cars"/>
@@ -13,7 +13,7 @@
 
 
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
 import NewCarInput from "@/components/car/NewCarInput.vue";
 import CarsTable from "@/components/car/CarsTable.vue";
 
@@ -49,7 +49,9 @@ export default {
   },
   methods: {
     addCar: function () {
-      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     }
   }
 }
