@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <NewCarHeader :company-name="companyName"/>
     <!-- ROW 1 -->
     <div class="row justify-content-center">
 
@@ -19,26 +19,24 @@
     </div>
 
 
-
-
   </div>
 
 </template>
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarHeader},
   data: function () {
     return {
       car: {
         carMake: '',
         carModel: '',
       },
-      cars: [
-        {
-
-        }
-      ]
+      cars: [],
+      companyName: 'Kurvis Kraavis'
     }
   },
   methods: {
