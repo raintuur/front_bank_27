@@ -13,7 +13,7 @@
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
-<img src="car.carImage" class="img-thumbnail" alt="tsau">
+<img src="car.carImage" class="img-thumbnail" >
 
   </div>
 
