@@ -1,18 +1,19 @@
 <template>
   <div>
-
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
     <NewCarInput :car="car"
-                 @clickAddCarEvent="addCar" />
-                  @pictureInputSuccess="setCarImage"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
     />
 
     <br>
 
     <!--  ROW 2  -->
-      <!--    Autod-->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
+
+    <img :src="car.carImage" class="img-thumbnail" >
 
 
   </div>
@@ -34,6 +35,7 @@ export default {
         carId: 0,
         carMake: '',
         carModel: '',
+        carImage: '',
       },
 
       cars: [
@@ -51,21 +53,22 @@ export default {
           carId: 3,
           carMake: 'Tesla',
           carModel: 'CyberTruck',
-        },
-      ],
+        }
 
-      companyName: 'Kurvis Kraavis!'
+      ],
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
     addCar: function () {
-      //let carAsString JSON.stringify(this.car)
-      //let copyOfCar = JSON.parse(carAsString)
-      this.cars.push(JSON.parse(JSON.stringify(this.car)))
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     },
     setCarImage: function (carImage) {
-      this.car.carImage= carImage
+      this.car.carImage = carImage
     }
+
   }
 }
 </script>

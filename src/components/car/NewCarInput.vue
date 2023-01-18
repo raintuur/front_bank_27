@@ -12,12 +12,13 @@
     </div>
 
     <!--  COLUMN 3    -->
-    <div class=" col-3">
-      <imageInput v-on="$listeners"/>
+    <div class="col col-3">
+      <ImageInput  v-on="$listeners"/>
+      
     </div>
 
     <!--  COLUMN 4    -->
-    <div class="col-3">
+    <div class="col col-3">
       <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
 
@@ -32,12 +33,13 @@ export default {
   props: {
     car: {}
   },
-  components: {ImageInput},
   methods: {
     addCar: function () {
-      this.$emit('clickAddCarEvent', '')
+      this.$emit('clickAddCarEvent')
     },
-    setPictureData: function ()
+    setPictureData: function () {
+      
+    }
   }
 }
 </script>

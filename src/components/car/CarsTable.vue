@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center">
-    <div class="col-9">
+    <div class="col col-9">
       <table class="table table-hover table-dark">
         <thead>
         <tr>
