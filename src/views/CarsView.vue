@@ -4,6 +4,53 @@
     <!--  ROW 1  -->
     <NewCarInput :car="car"/>
 
+    <br>
+
+    <!--  ROW 2  -->
+    <div class="row justify-content-center">
+
+      <div class="col col-9">
+
+
+        <!--  Autod   -->
+        <table class="table table-hover table-dark">
+          <thead>
+          <tr>
+            <th scope="col">Auto mark</th>
+            <th scope="col">Auto mudel</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
   </div>
 
 </template>
