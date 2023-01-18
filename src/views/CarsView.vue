@@ -1,16 +1,27 @@
 <template>
 
   <div>
-    {{carMake}} + {{carModel}}
-    <br>
+
+    <!--  ROW 1  -->
     <div class="row justify-content-center">
-      <div class="col col-1">
+
+      <!--   COLUMN 1   -->
+      <div class="col col-3">
         <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="AutoMark">
       </div>
-      <div class="col col-1">
+
+      <!--   COLUMN 2   -->
+      <div class="col col-3">
         <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="AutoMudel">
       </div>
+
+      <div class="col col-3">
+        <button type="button" class="btn btn-outline-success">Success</button>
+      </div>
     </div>
+
+    <br>
+
   </div>
 
 </template>
