@@ -1,38 +1,51 @@
 <template>
   <div>
+  <NewCarHeader/>
+
     <!--    ROW 1 -->
     <div class="row justify-content-center" >
 
       <!--    COLUMN 1  -->
       <div class="col col-3">
-        <input v-model="carMake" class="form-control" placeholder="Auto mark" aria-label="First name">
+        <input v-model="car.carMake" class="form-control" placeholder="Auto mark">
       </div>
 
       <!--    COLUMN 2  -->
       <div class="col col-3">
-        <input v-model="carModel" class="form-control" placeholder="Auto mudel" aria-label="Last name">
+        <input v-model="car.carModel" class="form-control" placeholder="Auto mudel">
       </div>
 
       <!--    COLUMN 3  -->
       <div class="col col-3">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="addCar()" class="btn btn-outline-success">Lisa auto</button>
       </div>
 
     </div>
   </div>
 </template>
 
+
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarHeader},
   data: function () {
     return {
-      carMake: 'Audi',
-      carModel: 'A7'
+
+      car: {
+        carMake: '',
+        carModel: ''
+      },
+
+      cars: []
     }
   },
   methods: {
-
+    addCar: function () {
+      alert("Auto " + this.car.carMake + " " + this.car.carModel +  " lisati süsteemi.")
+    }
   }
 }
 </script>
