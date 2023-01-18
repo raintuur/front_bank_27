@@ -13,7 +13,7 @@
 
     <!--  COLUMN 3    -->
     <div class="col-3">
-      <button type="button" class="btn btn-outline-success">Lisa auto</button>
+      <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
 
   </div>
@@ -23,6 +23,11 @@ export default {
   name: 'NewCarInput',
   props: {
     car: {}
+  },
+  methods: {
+    addCar: function () {
+      this.$emit('clickAddCarEvent')
+    }
   }
 }
 </script>

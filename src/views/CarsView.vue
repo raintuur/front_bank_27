@@ -2,7 +2,7 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car"/>
+    <NewCarInput :car="car" @clickAddCarEvent="addCar" />
 
     <br>
 
@@ -57,6 +57,10 @@ export default {
   methods: {
     addCar: function () {
       alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+      let carAtString =
+      let copyOfCar = JSON.parse(carAsString)
+
+      this.cars.push(this.car)
     }
   }
 }
