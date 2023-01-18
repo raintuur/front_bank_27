@@ -13,6 +13,8 @@
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
+    <img :src="car.carImage" class="img-thumbnail" >
+
 
   </div>
 
@@ -62,7 +64,11 @@ export default {
       let carAsString = JSON.stringify(this.car)
       let copyOfCar = JSON.parse(carAsString)
       this.cars.push(copyOfCar)
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
+
   }
 }
 </script>
