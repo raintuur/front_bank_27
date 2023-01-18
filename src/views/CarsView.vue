@@ -2,13 +2,18 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--    ROW 1-->
-    <NewCarInput :car="car" @clickAddCarEvent="addCarToBack" />
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCarToBack"
+                 @pictureInputSuccess="setCarImage"
+    />
 
     <br>
 
     <!--    ROW 2-->
     <!--    Autod-->
     <carsTable :cars="cars"/>
+
+    <img :src="car.carImage" class="img-thumbnail">
 
   </div>
 
@@ -28,7 +33,8 @@ export default {
       car: {
         carID: 0,
         carMake: '',
-        carModel: ''
+        carModel: '',
+        carImage: ''
       },
       cars: [
         {
@@ -59,6 +65,9 @@ export default {
       let carAsString = JSON.stringify(this.car)
       let copyOfCar = JSON.parse(carAsString)
       this.cars.push(copyOfCar)
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
   }
 }
