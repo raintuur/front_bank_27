@@ -6,12 +6,12 @@
 
       <!--COLUMN 1 -->
       <div class="col col-4">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
+        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
       </div>
 
       <!--COLUMN 2 -->
       <div class="col col-4">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
+        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
       </div>
 
       <!--COLUMN 3-->
@@ -32,14 +32,18 @@ export default {
   name: 'CarsView',
   data: function () {
     return {
-      carMake: '',
-      carModel: ''
+      car: {
+        carMake: '',
+        carModel: '',
+      },
+      cars: [
+      ]
     }
   },
 
   methods: {
     addCar: function () {
-      alert("Auto " + this.carMake + " " + this.carModel + " lisati süsteemi")
+      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
     }
   }
 }
