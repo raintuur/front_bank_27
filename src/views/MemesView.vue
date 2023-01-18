@@ -3,44 +3,21 @@
     <NewMemeHeader :company-name="companyName"/>
     <!--  ROW 1  -->
     <NewMemeInput :meme="meme"/>
+    <br>
     <!--    ROW 2  -->
-    <div>
-      <!--  COLUMN 1    -->
-      <div class=justify-content-center>
-        <button v-on:click="addMeme" type="button" class="btn btn-outline-success translate-middle">Lisa meem :)</button>
+    <div class="justify-content-center">
+      <div class="col col-12">
+        <button v-on:click="addMeme" type="button" class="btn btn-outline-success">Lisa meem :)</button>
       </div>
     </div>
+    <br>
     <div class=justify-content-center>
-      <img src="../assets/FB_IMG_1647564529352.jpg" height="640" width="640"/>
+      <div>
+        <img src="../assets/FB_IMG_1647564529352.jpg" height="640" width="640"/>
+      </div>
     </div>
-    <div>
-      <table class="table table-success table-striped">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Loom meemis</th>
-          <th scope="col">Meemi allikas</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>opossum</td>
-          <td>FB</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>kass</td>
-          <td>insta</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>koer</td>
-          <td>tumblr</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <br>
+    <MemeTable :memes="memes"/>
   </div>
 
 </template>
@@ -49,16 +26,35 @@
 <script>
 import NewMemeHeader from "@/components/NewMemeHeader.vue";
 import NewMemeInput from "@/views/NewMemeInput.vue";
+import MemeTable from "@/views/MemeTable.vue";
 
 export default {
   name: 'MemesView',
-  components: {NewMemeHeader,NewMemeInput},
+  components: {MemeTable, NewMemeHeader,NewMemeInput},
   data: function () {
     return {
       meme: {
+        memeId: 0,
         memeAnimal: '',
         memeSource: '',
       },
+      memes: [
+        {
+          memeId: 1,
+          memeAnimal: 'opossum',
+          memeSource: 'FB',
+        },
+        {
+          memeId: 2,
+          memeAnimal: 'kass',
+          memeSource: 'insta',
+        },
+        {
+          memeId: 3,
+          memeAnimal: 'pesukaru',
+          memeSource: 'tumblr',
+        },
+      ],
       companyName: 'Meemimutid'
     }
   },

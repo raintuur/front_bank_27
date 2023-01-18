@@ -1,4 +1,4 @@
-<template>
+<template class="justify-content-center">
   <div class="row justify-content-center">
 
     <!--  COLUMN 1    -->
