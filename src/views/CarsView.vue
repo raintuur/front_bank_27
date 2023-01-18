@@ -1,14 +1,22 @@
 <template>
-<!--siia käib lehekülje struktuur HTML'na-->
+  <!--siia käib lehekülje struktuur HTML'na-->
   <div>
-    <div class="row justify-content-center">
 
-      {{carMake}} + {{carModel}}
-      <div class="col col-2">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
+    <!--  row 1-->
+    <div class="row justify-content-center">
+      <!--   COLUMN 1   -->
+      <div class="col col-3">
+        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark">
       </div>
+
+      <!--   COLUMN 2   -->
+      <div class="col col-3">
+        <input v-model="carModel" type="text" class="form-control" placeholder="mudel">
+      </div>
+
+      <!--   COLUMN 3   -->
       <div class="col col-2">
-        <input v-model="carModel" type="text" class="form-control" placeholder="mudel" aria-label="Last name">
+        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
     </div>
   </div>
@@ -24,8 +32,11 @@ export default {
       carModel: 'A7'
     }
   },
-  methods: {
 
+  methods: {
+    addCar: function () {
+      alert("Auto xxxxxx lisatud andmebaasi")
+    }
   }
 }
 </script>
