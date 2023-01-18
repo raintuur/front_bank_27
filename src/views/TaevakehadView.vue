@@ -21,7 +21,7 @@
       </thead>
       <tbody>
       <tr>
-        <th v-for="planet. in planets"></th>
+        <th v-for="planet in planets"></th>
         <td>{{ planets.planetName }}</td>
         <td>{{ planets.planetNumber }}</td>
 
@@ -75,9 +75,8 @@ export default {
     addPlanet: function () {
 
       alert(this.planet.planetName + " ja " + this.planet.planetNumber + " on vastus")
-      let planetAsString = JSON.stringify(this.planet)
-      let copyOfPlanet = JSON.parse(carAsString)
-      this.planets.push(copyOfPlanet)
+
+      this.planets.push(JSON.parse(JSON.stringify(this.planet)))
     }
 
 
