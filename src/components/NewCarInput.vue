@@ -12,7 +12,7 @@
     </div>
 
     <div class="col col-3">
-      <ImageInput/>
+      <ImageInput v-on="$listeners"/>
 
     </div>
 
@@ -35,7 +35,10 @@ export default {
   methods: {
     addCar: function () {
       this.$emit('clickAddCarEvent', '')
-    }
+    },
+    setPictureData: () {
+
+}
   }
 }
 </script>
