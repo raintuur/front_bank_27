@@ -1,14 +1,14 @@
 <template>
   <div>
+    <img src="../assets/Screenshot 2023-01-18 at 21.23.34.png" class="img-fluid rounded-5"/>
+    <br>
     <NewCarHeader :company-name="companyName"/>
     <!--    ROW 1-->
     <NewCarInput :car="car"
                  @clickAddCarEvent="addCarToBack"
                  @pictureInputSuccess="setCarImage"
     />
-
     <br>
-
     <!--    ROW 2-->
     <!--    Autod-->
     <carsTable :cars="cars"/>
