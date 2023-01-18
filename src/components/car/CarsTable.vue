@@ -13,12 +13,9 @@
           <td>{{car.carMake}}</td>
           <td>{{car.carModel}}</td>
         </tr>
-
         </tbody>
       </table>
-
     </div>
-
   </div>
 </template>
 <script>

@@ -2,8 +2,9 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"
-                            @pictureInputSuccess="setCarImage"
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
     />
 
     <br>
@@ -11,9 +12,8 @@
     <!--  ROW 2  -->
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
-    
-    <img : src="car.carImage" class="img-thumbnail">
 
+    <img :src="car.carImage" class="img-thumbnail" >
 
 
   </div>
@@ -33,27 +33,26 @@ export default {
     return {
       car: {
         carId: 0,
-        carMake: 'Audi',
-        carModel: 'R8',
+        carMake: '',
+        carModel: '',
         carImage: '',
       },
 
       cars: [
-
         {
           carId: 1,
           carMake: 'Audi',
-          carModel: 'A8',
+          carModel: 'R8',
         },
         {
           carId: 2,
-          carMake: 'Tesla',
-          carModel: 'x',
+          carMake: 'BMW',
+          carModel: 'X5',
         },
         {
           carId: 3,
-          carMake: 'Volvo',
-          carModel: 'V70',
+          carMake: 'Tesla',
+          carModel: 'CyberTruck',
         }
 
       ],
@@ -62,19 +61,13 @@ export default {
   },
   methods: {
     addCar: function () {
-      // let carAsString = JSON.stringify(this.car)
-      // let copyOfCar= JSON.parse(carAsString)
-      // this.cars.push(copyOfCar)
-
-
-      this.cars.push(JSON.parse(JSON.stringify(this.car)))},
-
-          setCarImage: function (carImage) {
-      this.setCarImage(carImage)
-          }
-
-
-
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
+    }
 
   }
 }

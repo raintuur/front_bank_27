@@ -11,17 +11,14 @@
       <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
     </div>
 
-
-<!--    COLUMN 3 -->
-
+    <!--  COLUMN 3    -->
     <div class="col col-3">
-      <image-input v-on="$listeners">
-          //@pictureInputSuccess="addCar"/>
-
+      <ImageInput  v-on="$listeners"/>
+      
     </div>
 
     <!--  COLUMN 4    -->
-    <div class="col-3">
+    <div class="col col-3">
       <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
 
@@ -36,13 +33,12 @@ export default {
   props: {
     car: {}
   },
-
   methods: {
     addCar: function () {
-      this.$emit ('clickAddCarEvent')
+      this.$emit('clickAddCarEvent')
     },
-    setPictureData: function (){
-
+    setPictureData: function () {
+      
     }
   }
 }
