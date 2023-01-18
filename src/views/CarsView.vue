@@ -1,18 +1,53 @@
 <template>
   <div>
+    <NewCarHeader :company-name="companyName"/>
+    <!--  ROW 1  -->
+    <NewCarInput :car="car"/>
 
+    <br>
+
+    <!--  ROW 2  -->
     <div class="row justify-content-center">
 
-      {{carMake}} + {{carModel}}
-      <br>
-      <div class="col col-2">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
-      </div>
-      <div class="col col-2">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
+      <div class="col col-9">
+
+
+        <!--  Autod   -->
+        <table class="table table-hover table-dark">
+          <thead>
+          <tr>
+            <th scope="col">Auto mark</th>
+            <th scope="col">Auto mudel</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>BMW</td>
+            <td>X5</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+
+
+
       </div>
 
+
+
     </div>
+
+
 
   </div>
 
@@ -20,16 +55,26 @@
 
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarInput, NewCarHeader},
   data: function () {
     return {
-      carMake: '',
-      carModel: ''
+      car: {
+        carMake: '',
+        carModel: '',
+      },
+      cars: [],
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
-
+    addCar: function () {
+      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+    }
   }
 }
 </script>
