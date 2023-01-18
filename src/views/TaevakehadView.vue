@@ -48,6 +48,11 @@ export default {
   data: function () {
     return {
 
+      planet:
+          {
+            planetName: '',
+            planetNumber: '',
+          },
       planets: [
         {
           planetName: 'Merkuur',
@@ -63,11 +68,6 @@ export default {
         },
       ],
       companyName: 'Blablablaneet',
-      planet:
-          {
-            planetName: '',
-            planetNumber: '',
-          },
     }
   },
 
