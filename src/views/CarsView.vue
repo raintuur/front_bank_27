@@ -2,7 +2,9 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
     />
 
     <br>
@@ -11,15 +13,17 @@
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
+<img src="car.carImage" class="img-thumbnail" alt="tsau">
+
   </div>
 
 </template>
 
 
 <script>
-import NewCarHeader from "@/components/Car/NewCarHeader.vue";
-import NewCarInput from "@/components/Car/NewCarInput.vue";
-import CarsTable from "@/components/Car/CarsTable.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
@@ -29,7 +33,7 @@ export default {
       car: {
         carId: 0,
         carMake: '',
-        carModel: '',
+        carImage: '',
       },
 
       cars: [
@@ -50,14 +54,20 @@ export default {
         }
 
       ],
-      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
+      companyName: 'Kurvis Kraavis!'
     }
   },
+
+
   methods: {
     addCar: function () {
       let carAsString = JSON.stringify(this.car)
       let copyOfCar = JSON.parse(carAsString)
       this.cars.push(copyOfCar)
+    },
+
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage;
     }
   }
 }

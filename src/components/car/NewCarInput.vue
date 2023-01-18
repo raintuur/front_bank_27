@@ -12,22 +12,32 @@
     </div>
 
     <!--  COLUMN 3    -->
-    <div class="col-3">
-      <button v-on:click="addCar" class="btn btn-outline-success">Lisa auto</button>
+    <div class="col col-3">
+    <ImageInput  v-on:click="$listeners"/>
+
+    </div>
+
+    <!--  COLUMN 4    -->
+    <div class="col col-3">
+      <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
 
   </div>
 </template>
 <script>
+import ImageInput from "@/components/ImageInput.vue";
+
 export default {
   name: 'NewCarInput',
+  components: {ImageInput},
   props: {
     car: {}
   },
   methods: {
     addCar: function () {
       this.$emit('clickAddCarEvent')
+    },
+
     }
-  }
 }
 </script>
