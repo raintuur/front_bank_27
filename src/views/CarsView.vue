@@ -2,7 +2,8 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car"/>
+    <NewCarInput :car="car" @clickAddCarEvent="addCar"
+    />
 
     <br>
 
@@ -10,17 +11,15 @@
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
-
-
   </div>
 
 </template>
 
 
 <script>
-import NewCarHeader from "@/components/car/NewCarHeader.vue";
-import NewCarInput from "@/components/car/NewCarInput.vue";
-import CarsTable from "@/components/car/CarsTable.vue";
+import NewCarHeader from "@/components/Car/NewCarHeader.vue";
+import NewCarInput from "@/components/Car/NewCarInput.vue";
+import CarsTable from "@/components/Car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
@@ -56,7 +55,9 @@ export default {
   },
   methods: {
     addCar: function () {
-      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     }
   }
 }
