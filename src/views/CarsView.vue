@@ -1,35 +1,22 @@
 <template>
   <!--siia käib lehekülje struktuur HTML'na-->
   <div>
-    <NewCarHeader/>
+    <NewCarHeader :company-name="companyName" />
     <!--  row 1-->
-    <div class="row justify-content-center">
-      <!--   COLUMN 1   -->
-      <div class="col col-3">
-        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
+    <NewCarInput :car="car"/>
 
-      <!--   COLUMN 2   -->
-      <div class="col col-3">
-        <input v-model="car.carModel" type="text" class="form-control" placeholder="mudel">
-      </div>
-
-      <!--   COLUMN 3   -->
-      <div class="col col-2">
-        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
-      </div>
-    </div>
   </div>
 
 </template>
 
 <script>
 
-import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/Car/NewCarHeader.vue";
+import NewCarInput from "@/components/Car/NewCarInput.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarHeader},
+  components: {NewCarInput, NewCarHeader},
 
 
   data: function () {
@@ -40,7 +27,8 @@ export default {
         carModel: ''
       },
 
-      cars: []
+      cars: [],
+      companyName: 'Kurvis Kalluta'
     }
   },
 
