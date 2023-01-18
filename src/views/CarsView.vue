@@ -2,20 +2,27 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!-- ROW 1 -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"/>
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"/>
 
     <br>
 
     <!-- ROW 2 -->
     <!--    Autode tabel   -->
     <CarsTable :cars="cars"/>
+
+    <img :src="car.carImage" class="img-thumbnail" >
+
+
+
   </div>
 
 
 </template>
 
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
 import NewCarInput from "@/components/car/NewCarInput.vue";
 import CarsTable from "@/components/car/CarsTable.vue";
 
@@ -29,6 +36,7 @@ export default {
         carID: 0,
         carMake: '',
         carModel: '',
+        carImage: '',
       },
 
       cars: [
@@ -53,12 +61,14 @@ export default {
   },
   methods: {
     addCar: function () {
-      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
       let carAsString = JSON.stringify(this.car)
       let copyOfCar = JSON.parse(carAsString)
 
       this.cars.push(copyOfCar)
     //    this.cars.push(JSON.parse(JSON.stringify(this.car)))
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
   }
 }
