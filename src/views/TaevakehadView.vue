@@ -10,26 +10,7 @@
 
     <br><br>
 
-    <div class="row justify-content-center">
-      <div class="col col-3">
-    <table class="table table-hover table-dark">
-      <thead>
-      <tr>
-        <th scope="col">Nimi</th>
-        <th scope="col">Number</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th v-for="planet in planets"></th>
-        <td>{{ planets.planetName }}</td>
-        <td>{{ planets.planetNumber }}</td>
-
-      </tr>
-       </tbody>
-      </table>
-      </div>
-     </div>
+    <PlanetTable :planet="planets"/>
     </div>
 
 
@@ -41,10 +22,11 @@
 
 import NewPlanetHeader from "@/components/NewPlanetHeader.vue";
 import NewPlanetInput from "@/components/planet/NewPlanetInput.vue";
+import PlanetTable from "@/components/planet/PlanetTable.vue";
 
 export default {
   name: "TaevakehadView",
-  components: {NewPlanetInput, NewPlanetHeader},
+  components: {PlanetTable, NewPlanetInput, NewPlanetHeader},
   data: function () {
     return {
 
