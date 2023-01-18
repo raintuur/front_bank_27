@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NewCarHeader/>
+    <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -38,7 +38,8 @@ export default {
         carMake: '',
         carModel: '',
       },
-      cars: []
+      cars: [],
+      companyName: 'Kurvis Kraavis'
     }
   },
   methods: {
