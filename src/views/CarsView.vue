@@ -5,15 +5,15 @@
     <div class="row justify-content-center">
       <!--      COL 1-->
       <div class="col col-2">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
+        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
       </div>
       <!--      COL 2-->
       <div class="col col-2">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
+        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
       </div>
       <!--      COL 3-->
       <div class="col-3">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="addCarToBack" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
 
     </div>
@@ -28,12 +28,22 @@ export default {
   name: 'CarsView',
   data: function () {
     return {
-      carMake: 'Nissan',
-      carModel: 'Silvia'
+      car: {
+        carMake: '',
+        carModel: ''
+      },
+      cars: [
+
+      ]
     }
   },
   methods: {
-
+    addCarToBack: function () {
+      // AINULT <script> osas .this variable'd
+      // let carMakeInFunct = this.car.carMake;
+      // let carModelInFunct = this.car.carModel;
+      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+    }
   }
 }
 </script>
