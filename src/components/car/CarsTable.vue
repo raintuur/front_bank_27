@@ -1,9 +1,6 @@
 <template>
   <div class="row justify-content-center">
-
-    <div class="col-8">
-
-      <!-- Autod -->
+    <div class="col col-9">
       <table class="table table-hover table-dark">
         <thead>
         <tr>
@@ -16,11 +13,8 @@
           <td>{{car.carMake}}</td>
           <td>{{car.carModel}}</td>
         </tr>
-
-
         </tbody>
       </table>
-
     </div>
   </div>
 </template>

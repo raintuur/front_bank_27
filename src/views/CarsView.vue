@@ -1,19 +1,25 @@
 <template>
   <div>
-<NewCarHeader :company-name="companyName"/>
+    <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
     <NewCarInput :car="car"/>
-<br>
-<!--     ROW 1 -->
+
+    <br>
+
+    <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
+
+
+
   </div>
 
- </template>
+</template>
 
 
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
-import NewCarInput from "@/components/NewCarInput.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
 import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
@@ -22,31 +28,35 @@ export default {
   data: function () {
     return {
       car: {
-        carId: 1,
-      carMake: '',
-      carModel: '',
-    },
+        carId: 0,
+        carMake: '',
+        carModel: '',
+      },
 
       cars: [
         {
-          carId: 2,
+          carId: 1,
           carMake: 'Audi',
-          carModel: 'R8'
+          carModel: 'R8',
         },
         {
+          carId: 2,
           carMake: 'BMW',
-          carModel: 'X5'
+          carModel: 'X5',
+        },
+        {
+          carId: 3,
+          carMake: 'Tesla',
+          carModel: 'CyberTruck',
         }
+
       ],
-      companyName: "Kurvis kraavis"
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
     addCar: function () {
-      let carMake = "gtrgex";
-      let carModel = "ygergege";
-
-      alert("Auto" + this.car.carMake + " " + this.car.carModel + "lisati susteemi")
+      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
     }
   }
 }
