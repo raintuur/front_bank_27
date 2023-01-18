@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-3">
-      <button id= "myButton" type="button" class="btn btn-primary btn-sm">Sisesta</button>
+      <button v-on:click="addPlanet" id= "myButton" type="button" class="btn btn-primary btn-sm">Sisesta</button>
     </div>
   </div>
 </template>
@@ -25,6 +25,11 @@ export default {
   name: 'NewPlanetInput',
   props: {
     planet: {}
+  },
+  methods: {
+    addPlanet: function () {
+      this.$emit('clickAddPlanetEvent')
+    }
   }
 }
 </script>
