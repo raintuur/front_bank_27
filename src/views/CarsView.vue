@@ -1,10 +1,10 @@
 <template>
   <div>
-
+    <NewCarHeader/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
-       <!--  COLUMN 1    -->
+      <!--  COLUMN 1    -->
       <div class="col col-3">
         <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
       </div>
@@ -27,8 +27,11 @@
 
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarHeader},
   data: function () {
     return {
       car: {
