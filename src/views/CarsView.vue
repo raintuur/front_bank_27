@@ -1,24 +1,9 @@
 <template>
 
   <div>
-    <NewCarHeader/>
     <!--  ROW 1  -->
-    <div class="row justify-content-center">
-
-      <!--   COLUMN 1   -->
-      <div class="col col-3">
-        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
-
-      <!--   COLUMN 2   -->
-      <div class="col col-3">
-        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
-      </div>
-
-      <div class="col col-3">
-        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
-      </div>
-    </div>
+    <NewCarHeader  :company-name="companyName"/>
+    <AddNewCarInput :car="car"/>
 
     <br>
 
@@ -28,10 +13,11 @@
 
 <script>
 import NewCarHeader from "@/components/NewCarHeader.vue";
+import AddNewCarInput from "@/components/AddNewCarInput.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarHeader},
+  components: {AddNewCarInput, NewCarHeader},
   data: function () {
     return {
 
@@ -39,7 +25,8 @@ export default {
         carMake: '',
         carModel: ''
       },
-      cars: []
+      cars: [],
+      companyName: 'AAA'
     }
   },
 
@@ -51,6 +38,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
