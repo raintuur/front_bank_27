@@ -1,0 +1,19 @@
+{
+  "mingiTekst": "Tere tere",
+  "mingiNumber": 200,
+  "mingiObjekt": {
+    "carMake": "Ford",
+    "carModel": "Focus"
+  },
+  "mingiMassiiv": [
+    {
+      "carMake": "Ford",
+      "carModel": "Focus"
+    },
+    {
+      "carMake": "Volvo",
+      "carModel": "S60"
+    }
+  ],
+  "mingiTõeväärtus": false
+}
