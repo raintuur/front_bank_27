@@ -1,43 +1,52 @@
 <template>
   <div>
-
+<NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <div class="row justify-content-center">
-
-       <!--  COLUMN 1    -->
-      <div class="col col-3">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
-
-      <!--  COLUMN 2    -->
-      <div class="col col-3">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel">
-      </div>
-
-      <!--  COLUMN 3    -->
-      <div class="col-3">
-        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
-      </div>
-
-    </div>
-
+    <NewCarInput :car="car"/>
+<br>
+<!--     ROW 1 -->
+    <CarsTable :cars="cars"/>
   </div>
 
-</template>
+ </template>
 
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarInput from "@/components/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
+
 export default {
   name: 'CarsView',
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
+      car: {
+        carId: 1,
       carMake: '',
-      carModel: ''
+      carModel: '',
+    },
+
+      cars: [
+        {
+          carId: 2,
+          carMake: 'Audi',
+          carModel: 'R8'
+        },
+        {
+          carMake: 'BMW',
+          carModel: 'X5'
+        }
+      ],
+      companyName: "Kurvis kraavis"
     }
   },
   methods: {
     addCar: function () {
-     alert("Auto Audi A7 lisati süsteemi")
+      let carMake = "gtrgex";
+      let carModel = "ygergege";
+
+      alert("Auto" + this.car.carMake + " " + this.car.carModel + "lisati susteemi")
     }
   }
 }
