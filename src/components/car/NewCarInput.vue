@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     addCar: function () {
-      alert("Töötab")
+      this.$emit('clickAddCarEvent')
     }
   }
 }
