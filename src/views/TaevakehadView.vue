@@ -75,8 +75,9 @@ export default {
     addPlanet: function () {
 
       alert(this.planet.planetName + " ja " + this.planet.planetNumber + " on vastus")
-
-      this.planets.push(JSON.parse(JSON.stringify(this.planet)))
+      let planetAsString = JSON.stringify(this.planet)
+      let copyOfPlanet = JSON.parse(carAsString)
+      this.planets.push(copyOfPlanet)
     }
 
 
