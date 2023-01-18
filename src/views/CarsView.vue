@@ -1,22 +1,14 @@
 <template>
   <div>
-    <NewCarHeader/>
+    <NewCarHeader :company-name="companyName"/>
     <!--    ROW 1-->
-    <div class="row justify-content-center">
-      <!--      COL 1-->
-      <div class="col col-2">
-        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
-      <!--      COL 2-->
-      <div class="col col-2">
-        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
-      </div>
-      <!--      COL 3-->
-      <div class="col-3">
-        <button v-on:click="addCarToBack" type="button" class="btn btn-outline-success">Lisa auto</button>
-      </div>
+    <NewCarInput :car="car" @clickAddCarEvent="addCarToBack" />
 
-    </div>
+    <br>
+
+    <!--    ROW 2-->
+    <!--    Autod-->
+    <carsTable :cars="cars"/>
 
   </div>
 
@@ -24,17 +16,38 @@
 
 
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/Car/NewCarHeader.vue";
+import NewCarInput from "@/components/Car/NewCarInput.vue";
+import CarsTable from "@/components/Car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarHeader},
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
+        carID: 0,
         carMake: '',
         carModel: ''
-      }
+      },
+      cars: [
+        {
+          carID: 1,
+          carMake: 'Toyota',
+          carModel: 'Supra'
+        },
+        {
+          carID: 2,
+          carMake: 'Mazda',
+          carModel: 'RX-7'
+        },
+        {
+          carID: 3,
+          carMake: 'BMW',
+          carModel: 'i8'
+        }
+      ],
+      companyName: 'BestEst Cars OÜ'
     }
   },
   methods: {
