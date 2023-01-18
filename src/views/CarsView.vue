@@ -1,7 +1,6 @@
 <template>
   <div>
     <NewCarHeader :company-name="companyName"/>
-
     <!--  ROW 1  -->
     <NewCarInput :car="car"/>
 
@@ -12,7 +11,7 @@
 
 <script>
 import NewCarHeader from "@/components/NewCarHeader.vue";
-import NewCarInput from "@/views/NewCarInput.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
 
 export default {
   name: 'CarsView',
