@@ -1,10 +1,13 @@
 <template>
-<h1>Kurvis Kraavis - Autode lisamine</h1>
+<h1>{{ companyName }} - Autode lisamine</h1>
 </template>
 
 <script>
 
 export default {
-  name: "NewCarHeader"
+  name: "NewCarHeader",
+  props: {
+    companyName: String
+  }
 }
 </script>
