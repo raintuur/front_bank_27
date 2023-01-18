@@ -13,7 +13,7 @@
 
     <!--    COLUMN 3  -->
     <div class="col col-3">
-      <input type="file" accept="image/png, image/jpeg">
+      <image-input v-on="$listeners"/>
     </div>
 
     <!--    COLUMN 4  -->
@@ -24,8 +24,11 @@
 </template>
 
 <script>
+import ImageInput from "@/components/ImageInput.vue";
+
 export default {
   name: 'NewCarInput',
+  components: {ImageInput},
   props: {
     car: {}
   },
