@@ -36,9 +36,10 @@ export default {
       carModel: ''
     }
   },
+
   methods: {
     addCar: function () {
-      alert("Auto Audi A7 lisati süsteemi")
+      alert("Auto " + this.carMake + " " + this.carModel + " lisati süsteemi")
     }
   }
 }
