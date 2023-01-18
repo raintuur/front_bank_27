@@ -7,16 +7,16 @@
 
       <!--   COLUMN 1   -->
       <div class="col col-3">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="AutoMark">
+        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
       </div>
 
       <!--   COLUMN 2   -->
       <div class="col col-3">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="AutoMudel">
+        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
       </div>
 
       <div class="col col-3">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
     </div>
 
@@ -31,12 +31,19 @@ export default {
   name: 'CarsView',
   data: function () {
     return {
-      carMake: 'Audi',
-      carModel: 'A7'
+
+      car: {
+        carMake: '',
+        carModel: ''
+      },
+      cars: []
     }
   },
-  methods: {
 
+  methods: {
+    addCar: function () {
+      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+    }
   }
 }
 </script>
