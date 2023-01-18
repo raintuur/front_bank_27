@@ -3,6 +3,9 @@
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
     <NewCarInput :car="car"/>
+<br>
+    <!--  ROW 2  -->
+    <CarsTable :cars="cars"/>
 
   </div>
 
@@ -12,17 +15,35 @@
 <script>
 import NewCarHeader from "@/components/NewCarHeader.vue";
 import NewCarInput from "@/components/car/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarInput, NewCarHeader},
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
+        carID: 0,
         carMake: '',
         carModel: '',
       },
-      cars: [],
+      cars: [
+        {
+          carID: 1,
+          carMake: 'Audi',
+          carModel: 'R8',
+        },
+        {
+          carID: 2,
+          carMake: 'BMW',
+          carModel: 'X5',
+        },
+        {
+          carID: 3,
+          carMake: 'Tesla',
+          carModel: 'Cybertruck',
+        }
+      ],
       companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
