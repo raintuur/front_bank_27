@@ -1,0 +1,31 @@
+<template>
+<!--siia käib lehekülje struktuur HTML'na-->
+  <div>
+    <div class="row justify-content-center">
+
+      {{carMake}} + {{carModel}}
+      <div class="col col-2">
+        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
+      </div>
+      <div class="col col-2">
+        <input v-model="carModel" type="text" class="form-control" placeholder="mudel" aria-label="Last name">
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+export default {
+  name: 'CarsView',
+  data: function () {
+    return {
+      carMake: 'Audi',
+      carModel: 'A7'
+    }
+  },
+  methods: {
+
+  }
+}
+</script>

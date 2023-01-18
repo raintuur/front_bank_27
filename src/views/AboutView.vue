@@ -4,3 +4,9 @@
     <font-awesome-icon icon="fa-solid fa-user-secret" />
   </div>
 </template>
+
+<script>
+export default {
+  name: "AboutView"
+}
+</script>
