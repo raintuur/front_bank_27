@@ -14,7 +14,6 @@
     <div class="col col-3">
       <button type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
-
   </div>
 </template>
 <script>
@@ -22,6 +21,10 @@ export default {
   name: 'AddNewCarInput',
   props: {
     car: {}
+  },
+  data: function () {
+    return {
+    }
   }
 }
 </script>
