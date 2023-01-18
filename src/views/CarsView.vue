@@ -3,11 +3,14 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  row 1-->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar" />
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
+    />
 
     <!--  row 1-->
     <CarsTable :cars="cars"/>
-
+    <img src="car.carImage" class="img-thumbnail">
   </div>
 
 </template>
@@ -29,24 +32,28 @@ export default {
       car: {
         carId: '',
         carMake: '',
-        carModel: ''
+        carModel: '',
+        carImage: ''
       },
 
       cars: [
         {
           carId: '1',
           carMake: 'Tesla',
-          carModel: 'CyberTruck'
+          carModel: 'CyberTruck',
+          carImage: ''
         },
         {
           carId: '2',
           carMake: 'BMW',
-          carModel: 'X6'
+          carModel: 'X6',
+          carImage: ''
         },
         {
           carId: '3',
           carMake: 'Audi',
-          carModel: 'A4'
+          carModel: 'A4',
+          carImage: ''
         }
       ],
       companyName: 'Kurvis Kalluta'
@@ -58,6 +65,9 @@ export default {
       let carAsString = JSON.stringify(this.car)
       let copyOfCar = JSON.parse(carAsString)
       this.cars.push(copyOfCar)
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
   }
 }

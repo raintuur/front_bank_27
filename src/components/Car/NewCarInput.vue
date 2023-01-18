@@ -12,7 +12,8 @@
 
     <!--   COLUMN 3 pildi lisamine   -->
     <div class="col col-3">
-      <input class="form-control" type="file" accept="image/jpg, image/gif, image/png, image/">
+<!--      <input class="form-control" type="file" accept="image/jpg, image/gif, image/png, image/">-->
+      <image-input v-on="$listeners" />
     </div>
 
     <!--   COLUMN 4   -->
@@ -23,8 +24,11 @@
   </div>
 </template>
 <script>
+import ImageInput from "@/components/ImageInput.vue";
+
 export default {
   name: 'NewCarInput',
+  components: {ImageInput},
   props: {
     car: {}
   },
@@ -32,6 +36,7 @@ export default {
     addCar: function () {
       this.$emit('clickAddCarEvent')
     },
+
   }
 }
 </script>
