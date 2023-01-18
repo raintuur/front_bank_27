@@ -1,43 +1,28 @@
 <template>
   <div>
-
+    <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1 -->
-    <div class="row justify-content-center">
-
-      <!--COLUMN 1 -->
-      <div class="col col-4">
-        <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
-      </div>
-
-      <!--COLUMN 2 -->
-      <div class="col col-4">
-        <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
-      </div>
-
-      <!--COLUMN 3-->
-      <div class="col-3">
-        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
-      </div>
-
-
-    </div>
-
+    <NewCarInput :car="car"/>
 
 
   </div>
 </template>
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
         carMake: '',
         carModel: '',
       },
-      cars: [
-      ]
+      cars: [],
+      companyName: "Kurvis Kraavis"
     }
   },
 
