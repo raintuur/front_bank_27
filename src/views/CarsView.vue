@@ -1,85 +1,35 @@
 <template>
   <div>
 
-    <NewCarHeader :company-name="companyName"/>
-
-    <!-- ROW 1 -->
-    <NewCarInput :car="car"/>
-
-    <br>
-
     <div class="row justify-content-center">
 
-      <div class=" col col-9">
-      <!--    Autod -->
-      <table class="table table-hover table-dark">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        </tbody>
-      </table>
-
+      {{carMake}} + {{carModel}}
+      <br>
+      <div class="col col-2">
+        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
+      </div>
+      <div class="col col-2">
+        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
+      </div>
 
     </div>
-
-
-
 
   </div>
 
 </template>
 
+
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
-import NewCarInput from "@/components/car/NewCarInput.vue";
-
-
 export default {
   name: 'CarsView',
-  components: {NewCarInput, NewCarHeader},
   data: function () {
     return {
-      car: {
-        carMake: '',
-        carModel: '',
-      },
-
-
-      cars: [],
-      companyName: 'Kurvis Kraavis'
+      carMake: '',
+      carModel: ''
     }
   },
   methods: {
-    addCar: function () {
-      let carMake = "tyhjus";
-      let carModel = "tyhjus"
 
-      alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
-    }
   }
 }
 </script>
-
