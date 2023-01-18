@@ -16,7 +16,7 @@
 
       <!--  COLUMN 3    -->
       <div class="col-3">
-        <button type="button" class="btn btn-outline-success">Lisa auto</button>
+        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
 
     </div>
@@ -39,7 +39,7 @@ export default {
         carModel: '',
       },
       cars: [],
-      companyName: 'Kurvis Kraavis'
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
