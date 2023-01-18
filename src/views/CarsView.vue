@@ -16,7 +16,7 @@
 
       <!--COLUMN 3-->
       <div class="col-3">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
 
 
@@ -33,7 +33,12 @@ export default {
   data: function () {
     return {
       carMake: '',
-      carModel: '',
+      carModel: ''
+    }
+  },
+  methods: {
+    addCar: function () {
+      alert("Auto Audi A7 lisati süsteemi")
     }
   }
 }
