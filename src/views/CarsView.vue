@@ -1,6 +1,6 @@
 <template>
   <div>
-
+  <NewCarHeader/>
     <!--    ROW 1     -->
     <div class="row justify-content-center">
 
@@ -25,8 +25,11 @@
 </template>
 
 <script>
+import NewCarHeader from "@/components/NewCarHeader.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarHeader},
   data: function () {
     return {
 
