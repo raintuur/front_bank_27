@@ -56,6 +56,9 @@ export default {
       // let carMakeInFunct = this.car.carMake;
       // let carModelInFunct = this.car.carModel;
       alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     }
   }
 }
