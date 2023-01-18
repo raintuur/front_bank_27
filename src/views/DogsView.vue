@@ -1,19 +1,16 @@
 <template>
   <div>
+<!--    <NewDogHeader company-name="Üksinda kodus"/>-->
+    <NewDogHeader :company-name="companyName"/>
+<!--    kui koolon on company name ees siis ta ei oota stringi vaid muutujat-->
     <!--  ROW 1 see div mille sees col div-id  -->
-    <div class="row justify-content-center">
-      <!--   COLUM 1   -->
-      <div class="col col-3">
-        <input v-model="koer.krantsNimi" class="form-control" placeholder="Krants">
-      </div>
-      <!--   COLUM 2 classiga col   -->
-      <div class="col col-3">
-        <input v-model="koer.krantsiPoegNimi" class="form-control" placeholder="Krantsipoeg">
-      </div>
-      <div class="col col-3">
-        <button v-on:click="addDog" class="btn btn-warning">Lisa koer</button>
-      </div>
-    </div>
+    <NewDogInput :koer="koer" @clickAddDogEvent="addDog" @pictureInputSuccess="setDogImage"/>
+    <br>
+    <!--    Varjupaik-->
+    <DogsTable :varjupaik="varjupaik"/>
+
+    <img :src="koer.dogImage" class="img-thumbnail">
+
 
 
     <br>
@@ -22,21 +19,56 @@
 </template>
 
 <script>
+
+
+import NewDogHeader from "@/components/Dog/NewDogHeader.vue";
+import NewDogInput from "@/components/Dog/NewDogInput.vue";
+import DogsTable from "@/components/Dog/DogsTable.vue";
+
 export default {
   name: 'DogsView',
+  components: {DogsTable, NewDogInput, NewDogHeader},
   data: function () {
     return {
       koer:
         {
+          krantsId: '',
           krantsNimi: '',
-          krantsiPoegNimi: ''
+          krantsiPoegNimi: '',
+          dogImage: '',
         },
-      varjupaik: []
+      varjupaik: [
+        {
+          krantsId: '1',
+          krantsNimi: 'Leedi',
+          krantsiPoegNimi: 'Lontu',
+          dogImage: '',
+        },
+        {
+          krantsId: '2',
+          krantsNimi: 'Bella',
+          krantsiPoegNimi: 'Muki',
+          dogImage: '',
+        },
+        {
+          krantsId: '3',
+          krantsNimi: 'Leili',
+          krantsiPoegNimi: 'Väints',
+          dogImage: '',
+        }
+      ],
+      companyName: 'Üksinda kodus'
     }
   },
   methods:{
     addDog: function () {
-      alert("Koer " + this.koer.krantsNimi + this.koer.krantsiPoegNimi +  " lisati süsteemi")
+      alert("Koer " + this.koer.krantsNimi + ' '+ this.koer.krantsiPoegNimi +  " lisati süsteemi")
+      let DogAsStrign = JSON.stringify(this.koer)
+      let copyOfDog = JSON.parse(DogAsStrign)
+      this.varjupaik.push(copyOfDog)
+    },
+    setDogImage: function (dogImage) {
+    this.koer.dogImage = dogImage
     }
   }
 }
