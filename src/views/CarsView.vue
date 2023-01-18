@@ -6,17 +6,17 @@
 
        <!--  COLUMN 1    -->
       <div class="col col-3">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark" aria-label="First name">
+        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark">
       </div>
 
       <!--  COLUMN 2    -->
       <div class="col col-3">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel" aria-label="Last name">
+        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel">
       </div>
 
       <!--  COLUMN 3    -->
       <div class="col-3">
-        <button type="button" class="btn btn-outline-success">Success</button>
+        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
       </div>
 
     </div>
@@ -36,7 +36,9 @@ export default {
     }
   },
   methods: {
-
+    addCar: function () {
+     alert("Auto Audi A7 lisati süsteemi")
+    }
   }
 }
 </script>
