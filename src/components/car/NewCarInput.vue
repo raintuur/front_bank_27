@@ -13,7 +13,8 @@
 
     <!--  COLUMN 3    -->
     <div class="col col-3">
-      <ImageInput/>
+      <ImageInput  v-on="$listeners"/>
+      
     </div>
 
     <!--  COLUMN 4    -->
@@ -35,6 +36,9 @@ export default {
   methods: {
     addCar: function () {
       this.$emit('clickAddCarEvent')
+    },
+    setPictureData: function () {
+      
     }
   }
 }

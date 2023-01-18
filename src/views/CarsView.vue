@@ -2,7 +2,9 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
     />
 
     <br>
@@ -31,6 +33,7 @@ export default {
         carId: 0,
         carMake: '',
         carModel: '',
+        carImage: '',
       },
 
       cars: [
