@@ -2,12 +2,15 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1 -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"/>
+    <NewCarInput :car="car" @clickAddCarEvent="addCar" @pictureInputSuccess="setCarImage"
+    />
 
     <br>
 
     <!--  ROW 2 -->
     <CarsTable :cars="cars"/>
+
+    <img :src="car.carImage" class="img-thumbnail">
 
   </div>
 </template>
@@ -26,6 +29,7 @@ export default {
         carId: 0,
         carMake: '',
         carModel: '',
+        carImage: ''
       },
       cars: [
         {
@@ -53,6 +57,9 @@ export default {
       alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
      let carAsString = JSON.stringify(this.car)
       this.cars.push(JSON.parse(carAsString))
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
   }
 }
