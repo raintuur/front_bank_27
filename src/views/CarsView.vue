@@ -1,7 +1,7 @@
 <template>
   <!--siia käib lehekülje struktuur HTML'na-->
   <div>
-
+    <NewCarHeader/>
     <!--  row 1-->
     <div class="row justify-content-center">
       <!--   COLUMN 1   -->
@@ -24,8 +24,14 @@
 </template>
 
 <script>
+
+import NewCarHeader from "@/components/NewCarHeader.vue";
+
 export default {
   name: 'CarsView',
+  components: {NewCarHeader},
+
+
   data: function () {
     return {
 
