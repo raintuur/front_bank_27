@@ -1,50 +1,61 @@
 <template>
   <div>
-  <NewCarHeader/>
+    <NewCarHeader :company-name="companyName"/>
+    <!--  ROW 1 -->
+    <NewCarInput :car="car" @clickAddCarEvent="addCar"/>
 
-    <!--    ROW 1 -->
-    <div class="row justify-content-center" >
+    <br>
 
-      <!--    COLUMN 1  -->
-      <div class="col col-3">
-        <input v-model="car.carMake" class="form-control" placeholder="Auto mark">
-      </div>
+    <!--  ROW 2 -->
+    <!--  AUTOD -->
+    <CarsTable :cars="cars"/>
 
-      <!--    COLUMN 2  -->
-      <div class="col col-3">
-        <input v-model="car.carModel" class="form-control" placeholder="Auto mudel">
-      </div>
-
-      <!--    COLUMN 3  -->
-      <div class="col col-3">
-        <button v-on:click="addCar()" class="btn btn-outline-success">Lisa auto</button>
-      </div>
-
-    </div>
   </div>
 </template>
 
-
 <script>
-import NewCarHeader from "@/components/NewCarHeader.vue";
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {NewCarHeader},
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
 
       car: {
+        carId: 0,
         carMake: '',
         carModel: ''
       },
 
-      cars: []
+      cars: [
+        {
+          carId: 1,
+          carMake: 'Audi',
+          carModel: 'R8'
+        },
+        {
+          carId: 2,
+          carMake: 'BMW',
+          carModel: 'X5'
+        },
+        {
+          carId: 3,
+          carMake: 'Tesla',
+          carModel: 'Cybertruck'
+        }
+      ],
+      companyName: "Kurvis Kraavis"
     }
   },
   methods: {
     addCar: function () {
       alert("Auto " + this.car.carMake + " " + this.car.carModel +  " lisati süsteemi.")
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     }
   }
 }
