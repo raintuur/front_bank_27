@@ -20,7 +20,9 @@ export default {
   name: "AtmsView",
   methods: {
     getAllCities: function (){
-      alert("Linnade päring")
+
+      this.$http.get()
+
     }
   },
   beforeMount() {
