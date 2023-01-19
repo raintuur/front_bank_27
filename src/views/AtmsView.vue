@@ -8,18 +8,24 @@
       </select>
     </div>
 
-
-
-
   </div>
 </template>
 
 <script>
+import * as url from "url";
+
 export default {
   name: "AtmsView",
   methods: {
     getAllCities: function () {
-      alert("Linnade päring")
+
+      this.$http.get("/all/atm/city")
+          .then(result => {
+            //siia satume vaid siis kui status CODE ON 200
+          }).catch(reason => {
+            //siia satume vaid siis kui status code EI OLE 200
+
+      })
     }
   },
   beforeMount() {
