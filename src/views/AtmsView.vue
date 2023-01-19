@@ -25,8 +25,19 @@ export default {
   name: "AtmsView",
   methods : {
     getAllCities: function () {
-      alert("Linnade paring")
+
+      this.$http.get("/all/atm/city")
+          .then(result => {
+            // SIIA SATUME VAID SIIS KUI, STATUS CODE ON 200
+
+          }).catch(reason => {
+           // SIIA SATUME VAID SIIS KUI, STATUS CODE EI OLE 200
+
+
+      })
+
     }
+
   },
   beforeMount() {
     this.getAllCities()
