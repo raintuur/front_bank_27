@@ -11,8 +11,6 @@
     </div>
 
 
-
-
   </div>
 </template>
 
@@ -22,7 +20,14 @@ export default {
   methods: {
 
     getAllCities: function () {
-      alert("Linnade päring")
+
+      this.$http.get("/all/atm/city")
+          .then(result => {
+            // vaid siis kui status CODE ON 200
+          }).catch(reason => {
+            // vaid siis kui status code EI OLE 200
+      })
+
     }
 
   },
