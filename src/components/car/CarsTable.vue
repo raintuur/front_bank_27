@@ -1,9 +1,6 @@
 <template>
   <div class="row justify-content-center">
-
     <div class="col col-9">
-
-      <!--  Autod   -->
       <table class="table table-hover table-dark">
         <thead>
         <tr>
@@ -13,14 +10,12 @@
         </thead>
         <tbody>
         <tr v-for="car in cars">
-          <td> {{car.carMake}}</td>
-          <td> {{car.carModel}}</td>
+          <td>{{car.carMake}}</td>
+          <td>{{car.carModel}}</td>
         </tr>
         </tbody>
       </table>
-
     </div>
-
   </div>
 </template>
 <script>

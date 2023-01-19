@@ -10,9 +10,11 @@
     <br>
 
     <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
-    <img :src="car.carImage" class="img-thumbnail">
+    <img :src="car.carImage" class="img-thumbnail" >
+
 
   </div>
 
@@ -35,6 +37,7 @@ export default {
         carModel: '',
         carImage: '',
       },
+
       cars: [
         {
           carId: 1,
@@ -44,7 +47,7 @@ export default {
         {
           carId: 2,
           carMake: 'BMW',
-          carModel: 'M5',
+          carModel: 'X5',
         },
         {
           carId: 3,
@@ -52,23 +55,20 @@ export default {
           carModel: 'CyberTruck',
         }
 
-
       ],
       companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
     addCar: function () {
-      // let carAsString = JSON.stringify(this.car)
-      // let copyOfCar = JSON.parse(carAsString)
-      // this.cars.push(copyOfCar)
-      this.cars.push(JSON.parse(JSON.stringify(this.car)))
-
-
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     },
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
+
   }
 }
 </script>
