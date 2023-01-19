@@ -16,35 +16,7 @@
 
 <script>
 export default {
-  name: "AtmsView",
-  data: function () {
-    return {
-      cities: [
-        {
-          cityId: 0,
-          cityName: ''
-        }
-      ]
-    }
-  },
-  methods: {
-
-    getAllCities: function () {
-
-      this.$http.get("/all/atm/city")
-          .then(result => {
-            this.cities = result.data
-
-          }).catch(reason => {
-        // vaid siis kui status code EI OLE 200
-      })
-
-    },
-
-  },
-  beforeMount() {
-    this.getAllCities()
-  }
+  name: "AtmsView"
 
 }
 </script>
