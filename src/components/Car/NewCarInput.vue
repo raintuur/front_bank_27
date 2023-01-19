@@ -17,7 +17,7 @@
 
     <!--      COL 4-->
     <div class="col col-3">
-      <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
+      <button v-on:click="addCar" type="button" class="btn btn-outline-dark fw-bold">Lisa auto</button>
     </div>
 
   </div>
