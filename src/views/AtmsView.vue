@@ -3,7 +3,6 @@
 
     <div class="col-2">
       <CitiesDropdown/>
-
     </div>
 
 
@@ -11,9 +10,11 @@
 </template>
 
 <script>
+import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+
 export default {
-  name: {CitiesDropdown},
   name: "AtmsView",
+  components: {CitiesDropdown}
 
 }
 </script>
