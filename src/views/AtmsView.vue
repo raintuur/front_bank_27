@@ -21,6 +21,8 @@ export default {
           .then(result => {
             //   siis kui status code 200
 
+            console.log("Olen siin " + result)
+
           }).catch(reason => {
         //   siis kui status code ei ole 200
       })
