@@ -1,26 +1,13 @@
 <template>
-  <div>
-
-    <div class="col-3">
-      <select class="form-select" aria-label="Default select example">
-        <option selected disabled value="-1">--Linn--</option>
-        <option value="0">Kõik linnad</option>
-        <option v-for="city in cities" :value="city.cityId">{{city.cityName}}</option>
-      </select>
-
-    </div>
-
-
-
-
-  </div>
+  <select class="form-select" aria-label="Default select example">
+    <option selected disabled value="-1">--Linn--</option>
+    <option value="0">Kõik linnad</option>
+    <option v-for="city in cities" :value="city.cityId">{{city.cityName}}</option>
+  </select>
 </template>
-
 <script>
-
-
 export default {
-  name: "AtmsView",
+  name: 'CitiesDropdown',
   data: function () {
     return{
       cities: [
@@ -39,7 +26,7 @@ export default {
             this.cities = result.data
             // siia satume vaid siis kui STATUS CODE on 200
           }).catch(reason => {""
-            //siia satume vaid siis kui status code EI OLE 200
+        //siia satume vaid siis kui status code EI OLE 200
       })
     }
   },
