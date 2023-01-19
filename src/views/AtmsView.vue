@@ -11,8 +11,6 @@
     </div>
 
 
-
-
   </div>
 </template>
 
@@ -23,16 +21,15 @@ export default {
 
     getAllCities: function () {
 
-      this.$http.get(url:
-      "/all/atm/city"
-    )
-    .
-      then(result => {
-        // see result vaid ss kui status code 200
-      }).catch(reason => {
-        //see result vaid ss kui status code ei ole 200
+      this.$http.get("/all/atm/city")
+          .then(result => {
+            // vaid siis kui status CODE ON 200
+          }).catch(reason => {
+            // vaid siis kui status code EI OLE 200
       })
-    },
+
+    }
+
   },
   beforeMount() {
     this.getAllCities()
