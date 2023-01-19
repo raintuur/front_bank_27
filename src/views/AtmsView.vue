@@ -16,14 +16,22 @@
 
 
 <script>
+
 export default {
   name: "AtmsView",
   methods: {
+
     getAllCities: function (){
 
-      this.$http.get()
+      this.$http.get( "/all/atm/city")
+          .then(result =>  {
+            // Siia satume vaid siis, kui status code ON 200.
+          }).catch(reason => {
+        // Siia satume vaid siis, kui status code EI OLE 200.
+      })
 
     }
+
   },
   beforeMount() {
     this.getAllCities()
