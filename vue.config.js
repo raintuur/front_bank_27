@@ -1,6 +1,6 @@
 module.exports = {
     devServer: {
         // proxy: 'http://localhost:8080'
-        proxy:    'https://stoplight.io/mocks/metafraas/projekt-vali/127967680'
+        proxy:    'https://stoplight.io/mocks/valiit/myproject/127967583'
     }
 }
