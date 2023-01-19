@@ -15,11 +15,18 @@
 </template>
 
 <script>
+
+
 export default {
   name: "AtmsView",
   methods: {
     getAllCities: function () {
-      alert("Linnade päring")
+      this.$http.get("/all/atm/city")
+          .then(result =>{
+            //   siia satume vaid siis kui status code on 200
+          }).catch(reason => {
+        //  siia satume vaid siis kui status code EI OLE 200
+      })
     }
   },
   beforeMount() {
