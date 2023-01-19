@@ -9,9 +9,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'homeRoute',
-    component: HomeView
+    path: '/cars',
+    name: 'carsRoute',
+    component: CarsView
   },
   {
     path: '/atms',
@@ -19,15 +19,14 @@ const routes = [
     component: AtmsView
   },
   {
+    path: '/',
+    name: 'homeRoute',
+    component: HomeView
+  },
+  {
     path: '/about',
     name: 'aboutRoute',
     component: AboutView
-
-  },
-  {
-    path: '/cars',
-    name: 'carsRoute',
-    component: CarsView
   }
 ]
 
