@@ -1,28 +1,29 @@
 <template>
   <div class="row justify-content-center">
 
-    <!--    COLUMN 1  -->
+    <!--  COLUMN 1    -->
     <div class="col col-3">
-      <input v-model="car.carMake" class="form-control" placeholder="Auto mark">
+      <input v-model="car.carMake" type="text" class="form-control" placeholder="Auto mark">
     </div>
 
-    <!--    COLUMN 2  -->
+    <!--  COLUMN 2    -->
     <div class="col col-3">
-      <input v-model="car.carModel" class="form-control" placeholder="Auto mudel">
+      <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
     </div>
 
-    <!--    COLUMN 3  -->
+    <!--  COLUMN 3    -->
     <div class="col col-3">
-      <image-input v-on="$listeners"/>
+      <ImageInput  v-on="$listeners"/>
+      
     </div>
 
-    <!--    COLUMN 4  -->
+    <!--  COLUMN 4    -->
     <div class="col col-3">
-      <button v-on:click="addCar" class="btn btn-outline-success">Lisa auto</button>
+      <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
     </div>
+
   </div>
 </template>
-
 <script>
 import ImageInput from "@/components/ImageInput.vue";
 
@@ -35,6 +36,9 @@ export default {
   methods: {
     addCar: function () {
       this.$emit('clickAddCarEvent')
+    },
+    setPictureData: function () {
+      
     }
   }
 }
