@@ -1,0 +1,45 @@
+<template>
+<div>
+  <div class="col-3 justify-content-center">
+  <select class="form-select" aria-label="Default select example">
+    <option selected disabled value="-1">--Linn--</option>
+    <option disabled value="0">Kõik linnad</option>
+    <option v-for="city in cities" :value="city.cityName">{{city.cityName}}</option>
+  </select>
+  </div>
+</div>
+</template>
+
+<script>
+export default {
+  name: "AtmsView",
+  data: function (){
+    return {
+      cities: [
+        {
+          cityID: 15,
+          cityName: ''
+        }
+      ]
+    }
+  },
+  methods: {
+    getAllCities: function (){
+
+      this.$http.get("all/atm/city")
+          .then(result => {
+            this.cities = result.data
+          }).catch(reason => {
+        //siia satume siis, kui status code EI OLE 200
+      })
+    }
+  },
+  beforeMount() {
+    this.getAllCities()
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
