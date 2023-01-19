@@ -1,29 +1,20 @@
 <template>
-  <div>
+  <select class="form-select" aria-label="Default select example">
+    <option selected disabled>--Linn--</option>
+    <option value="0">Kõik linnad</option>
+    <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
 
-    <div class="col-2">
-<select class="form-select" aria-label="Default select example">
-      <option selected disabled>--Linn--</option>
-      <option value="0">Kõik linnad</option>
-      <option v-for="city in cities" :value="city.cityId">{{city.cityName}}</option>
-
-    </select>
-  </div>
-
-  </div>
+  </select>
 </template>
-
 <script>
-
-
 export default {
-  name: "AtmsView",
+  name: 'CitiesDropdown',
   data: function () {
     return {
       cities: [
         {
-         cityId: 0,
-         cityName: ''
+          cityId: 0,
+          cityName: ''
         }
       ]
     }
