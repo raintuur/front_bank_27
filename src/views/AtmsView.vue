@@ -11,8 +11,6 @@
     </div>
 
 
-
-
   </div>
 </template>
 
@@ -25,14 +23,14 @@ export default {
 
       this.$http.get("/all/atm/city")
           .then(result => {
-            console.log("Olen siin")
-
+            // vaid siis kui status CODE ON 200
           }).catch(reason => {
+            // vaid siis kui status code EI OLE 200
+      })
 
-      }
+    }
 
-    })
-  }
+  },
   beforeMount() {
     this.getAllCities()
   }
