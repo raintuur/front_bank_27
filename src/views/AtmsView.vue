@@ -22,10 +22,17 @@ export default {
   methods: {
 
     getAllCities: function () {
-      alert("Linnade päring")
-    }
 
-  },
+      this.$http.get("/all/atm/city")
+          .then(result => {
+            console.log("Olen siin")
+
+          }).catch(reason => {
+
+      }
+
+    })
+  }
   beforeMount() {
     this.getAllCities()
   }
