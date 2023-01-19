@@ -10,8 +10,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(car, index) in cars">
-          <th>{{index + 1}}</th>
+        <tr v-for="car in cars">
+          <th>{{car.carId}}</th>
           <td>{{car.carMake}}</td>
           <td>{{car.carModel}}</td>
         </tr>
