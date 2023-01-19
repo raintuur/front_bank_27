@@ -1,18 +1,25 @@
 <template>
-  <div class="cars">
+  <div>
     <NewCarHeader :company-name="companyName"/>
+    <!--  ROW 1  -->
     <NewCarInput :car="car"
                  @clickAddCarEvent="addCar"
                  @pictureInputSuccess="setCarImage"
     />
+
     <br>
 
+    <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
-    <div class="col-3">
-      <img :src="car.carImage" class="img-fluid"/>
-    </div>
+
+    <img :src="car.carImage" class="img-thumbnail" >
+
+
   </div>
+
 </template>
+
 
 <script>
 import NewCarHeader from "@/components/car/NewCarHeader.vue";
@@ -21,41 +28,39 @@ import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {
-    CarsTable,
-    NewCarInput,
-    NewCarHeader
-  },
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
         carId: 0,
         carMake: '',
         carModel: '',
-        carImage: ''
+        carImage: '',
       },
+
       cars: [
         {
           carId: 1,
           carMake: 'Audi',
-          carModel: 'R8'
+          carModel: 'R8',
         },
         {
           carId: 2,
           carMake: 'BMW',
-          carModel: 'X5'
+          carModel: 'X5',
         },
         {
           carId: 3,
           carMake: 'Tesla',
-          carModel: 'CyberTruck'
+          carModel: 'CyberTruck',
         }
+
       ],
-      companyName: 'Kurvis Kraavis'
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
-    addCar: function() {
+    addCar: function () {
       let carAsString = JSON.stringify(this.car)
       let copyOfCar = JSON.parse(carAsString)
       this.cars.push(copyOfCar)
@@ -63,7 +68,7 @@ export default {
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
-  }
 
+  }
 }
 </script>
