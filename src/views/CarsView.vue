@@ -12,7 +12,9 @@
     <!--  ROW 2  -->
     <!--  Autod   -->
     <CarsTable :cars="cars"/>
-    <img src="..." class="img-thumbnail" alt="...">
+
+    <img :src="car.carImage" class="img-thumbnail" >
+
 
   </div>
 
@@ -66,6 +68,7 @@ export default {
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
+
   }
 }
 </script>
