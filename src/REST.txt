@@ -1,0 +1,9 @@
+-    tegevus   HTTP
+C    Create    Post
+R    Read      Get
+U    Update    Put (Patch)
+D    Delete    Delete
+
+
+GET serveri aadress http://localhost:8080/all/atm/city
+

@@ -37,9 +37,7 @@ export default {
     addCar: function () {
       this.$emit('clickAddCarEvent')
     },
-    setPictureData: function () {
       
     }
-  }
 }
 </script>

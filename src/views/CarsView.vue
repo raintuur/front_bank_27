@@ -59,6 +59,7 @@ export default {
       companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
+
   methods: {
     addCar: function () {
       let carAsString = JSON.stringify(this.car)
@@ -71,4 +72,6 @@ export default {
 
   }
 }
+
 </script>
+
