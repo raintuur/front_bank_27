@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import taevakehadView from "@/views/TaevakehadView.vue";
 import AboutView from "@/views/AboutView.vue";
+import AtmsView from "@/views/AtmsView.vue";
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/atms',
+    name: 'atms',
+    component: AtmsView
   },
   {
     path: '/about',
