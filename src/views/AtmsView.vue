@@ -22,9 +22,17 @@ export default {
   methods: {
 
     getAllCities: function () {
-      alert("Linnade päring")
-    }
 
+      this.$http.get(url:
+      "/all/atm/city"
+    )
+    .
+      then(result => {
+        // see result vaid ss kui status code 200
+      }).catch(reason => {
+        //see result vaid ss kui status code ei ole 200
+      })
+    },
   },
   beforeMount() {
     this.getAllCities()
