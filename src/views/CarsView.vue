@@ -55,7 +55,7 @@ export default {
   methods: {
     addCar: function () {
       alert("Auto " + this.car.carMake + " " + this.car.carModel + " lisati süsteemi")
-     let carAsString = JSON.stringify(this.car)
+      let carAsString = JSON.stringify(this.car)
       this.cars.push(JSON.parse(carAsString))
     },
     setCarImage: function (carImage) {
