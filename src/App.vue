@@ -2,9 +2,10 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/cars">Cars</router-link> |
-      <router-link to="/atms">ATMs</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/memes">Memes</router-link> |
+       <router-link to="/cars">Cars</router-link> |
+      <router-link to="/atms">ATMs</router-link>
     </nav>
     <router-view/>
   </div>
@@ -32,3 +33,6 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+<script setup>
+import MemesView from "@/views/MemesView.vue";
+</script>
