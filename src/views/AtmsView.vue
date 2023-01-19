@@ -4,7 +4,7 @@
     <select class="form-select" aria-label="Default select example">
       <option selected disabled value="-1">--linn--</option>
       <option value="0">Kõik linnad</option>
-      <option value="?">?</option>
+      <option v-for="city in cities" :value="city.cityId">{{city.cityName}}</option>
 
     </select>
     </div>
@@ -14,23 +14,34 @@
 <script>
 export default {
   name: "AtmsView",
+  data: function () {
+
+    return {cities: [
+        {
+          cityId: 0,
+          cityName: ''
+        }
+      ]}
+
+  },
   methods: {
+
     getAllCities: function () {
 
       this.$http.get("/all/atm/city")
           .then(result => {
-            //   siis kui status code 200
-
-            console.log("Olen siin " + result)
-
+            this.cities = result.data
+            // vaid siis kui status CODE ON 200
           }).catch(reason => {
-        //   siis kui status code ei ole 200
+        // vaid siis kui status code EI OLE 200
       })
-    },
+
+    }
+
   },
   beforeMount() {
     this.getAllCities()
-  },
+  }
 }
 
 </script>
