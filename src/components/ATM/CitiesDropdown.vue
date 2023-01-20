@@ -2,7 +2,7 @@
   <select class="form-select" aria-label="Default select example">
     <option selected disabled value="-1">--Linn--</option>
     <option value="0">Kõik linnad</option>
-    <!--    <option v-for="city in cities" :value="city.cityName">{{city.cityName}}</option>-->
+    <option v-for="city in cities" :value="city.cityName">{{city.cityName}}</option>
   </select>
 </template>
 <script>
