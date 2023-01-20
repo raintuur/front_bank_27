@@ -3,14 +3,14 @@
     <!--  ROW 1 -->
     <div class="row justify-content-center">
 
-
+      <!-- Col 1 -->
       <div class="col-2">
-        <CitiesDropdown/>
+        <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
       </div>
 
 
-      <!-- TABEL -->
-      <AtmLocationsTable/>
+      <!-- Col 2 -->
+      <AtmLocationsTable :selected-city-id="selectedCityId"/>
     </div>
   </div>
 </template>
@@ -24,9 +24,17 @@ import AtmLocationsTable from "@/components/atm/AtmLocationsTable.vue";
 export default {
   name: "AtmsView",
   components: {AtmLocationsTable, CitiesDropdown},
-
+  data: function () {
+    return {
+      selectedCityId: 0
+    }
+  },
+  methods: {
+    setSelectedCityId: function (cityId) {
+      this.selectedCityId = cityId
+    }
+  }
 }
-
 
 
 </script>

@@ -11,11 +11,11 @@
       <tbody>
 
       <!--Allolevame elementi soovime JSOn massiivi for loopiga genereerida-->
-      <tr v-for="atmLocation in atmLocations">
+      <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
         <td>{{atmLocation.cityName}}</td>
         <td>{{atmLocation.locationName}}</td>
         <td>
-          <div v-for="transactionType in atmLocation.transactionTypes">
+          <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
             {{transactionType.typeName}}
           </div>
         </td>
@@ -27,6 +27,9 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
+  props: {
+    selectedCityId: 0
+  },
   data: function () {
     return {
       atmLocations: [
@@ -56,7 +59,7 @@ export default {
     },
   },
   beforeMount() {
-    console.log("OLEN SIIN")
+    alert("CID" + this.selectedCityId)
     this.getAllAtmLocations()
   }
 }
