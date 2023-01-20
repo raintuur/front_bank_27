@@ -1,13 +1,16 @@
 <template>
   <div>
-
+    <!-- ROW 1   -->
     <div class="row justify-content-center">
 
+      <!-- COL 1   -->
       <div class="col-2">
         <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
       </div>
+
+      <!-- COL 2   -->
       <div class="col-5">
-        <AtmLocationsTable ref="atmLocations"/>
+        <AtmLocationsTable :selected-city-id="selectedCityId"/>
       </div>
 
     </div>
@@ -29,8 +32,10 @@ export default {
   },
   methods: {
     setSelectedCityId: function (cityId) {
-      this.$refs.atmLocations.getAtmLocations(cityId)
+      this.selectedCityId = cityId
     }
   }
+
+
 }
 </script>

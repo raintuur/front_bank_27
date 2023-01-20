@@ -16,34 +16,30 @@ export default {
           cityName: ''
         }
       ],
-
       cityId: 0
-
     }
-
   },
   methods: {
 
     getAllCities: function () {
-
       this.$http.get("/all/atm/city")
           .then(result => {
             this.cities = result.data
-            // alert(JSON.stringify(result.data[2].cityName))
-            // vaid siis kui status CODE ON 200
+
           }).catch(reason => {
         // vaid siis kui status code EI OLE 200
       })
-
     },
 
     citiesDropdownOnChangeEvent: function () {
       this.$emit('citiesDropdownOnChangeEvent', this.cityId)
     }
 
+
   },
   beforeMount() {
     this.getAllCities()
   }
+
 }
 </script>
