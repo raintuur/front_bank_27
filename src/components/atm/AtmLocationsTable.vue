@@ -25,6 +25,9 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
+  props: {
+    selectedCityId: 0
+  },
   data: function () {
     return {
       atmLocations: [
@@ -57,6 +60,7 @@ export default {
 
   },
   beforeMount() {
+    alert("CID: " + this.selectedCityId)
     this.getAllAtmLocations()
   }
 
