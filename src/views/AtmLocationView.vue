@@ -1,19 +1,21 @@
 <template>
-  <div>
+<div>
 
 
-    <!--  ROW 1  -->
-    <div class="row justify-content-center">
-      <div class="col-2">
+  <!--  ROW 1  -->
+  <div class="row justify-content-center">
+    <div class="col-2">
 
-        <TransactionTypeCheckBox/>
-
-      </div>
+      <TransactionTypeCheckBox/>
 
     </div>
-
-
   </div>
+
+
+
+
+
+</div>
 </template>
 
 <script>
@@ -24,7 +26,6 @@ export default {
   components: {TransactionTypeCheckBox},
   data: function () {
     return {
-    {
       transactionTypes: [
         {
           typeId: 0,
@@ -33,6 +34,9 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+
   }
 }
 </script>
