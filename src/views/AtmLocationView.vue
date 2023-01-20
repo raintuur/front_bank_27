@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div class="col-2">
+      <div class="col-2 checkboxLabel">
         <TransactionTypeCheckBox/>
       </div>
 
@@ -26,4 +26,10 @@ export default {
 
 }
 </script>
+
+<style>
+.checkboxLabel{
+  text-align: justify;
+}
+</style>
 
