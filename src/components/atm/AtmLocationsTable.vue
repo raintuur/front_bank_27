@@ -26,9 +26,6 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
-  props: {
-    selectedCityId: 0
-  },
   data: function () {
     return {
       atmLocations: [
@@ -55,6 +52,10 @@ export default {
           .catch(error => {
             console.log(error)
           })
+    },
+
+    demo: function (cityId) {
+      alert(cityId)
     }
 
   },
