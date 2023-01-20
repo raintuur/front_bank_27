@@ -9,13 +9,12 @@
     </thead>
     <tbody>
 
-    <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
-      <td>{{atmLocation.cityName}}</td>
-      <td>{{atmLocation.locationName}}</td>
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
-          {{transactionType.typeName}}
+          {{ transactionType.typeName }}
         </div>
       </td>
     </tr>
@@ -25,9 +24,6 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
-  props: {
-    selectedCityId: 0
-  },
   data: function () {
     return {
       atmLocations: [
@@ -46,23 +42,26 @@ export default {
   },
   methods: {
 
-    getAllAtmLocations: function () {
+    getAtmLocations: function (cityId) {
+      this.$http.get("/atm/locations", {
+            params: {
+              cityId: cityId
+            },
+            headers: {
+              Prefer: 'code=200, example=' + cityId
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
 
-      this.$http.get("/all/atm/locations")
-          .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
-            this.atmLocations = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    },
+    }
 
   },
   beforeMount() {
-    alert("CID: " + this.selectedCityId)
-
-    this.getAllAtmLocations()
+    this.getAtmLocations(0)
   }
 
 
