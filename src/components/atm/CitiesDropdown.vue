@@ -4,6 +4,7 @@
     <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
   </select>
 </template>
+
 <script>
 export default {
   name: 'CitiesDropdown',
@@ -15,14 +16,12 @@ export default {
           cityName: ''
         }
       ],
-
       cityId: 0
     }
   },
   methods: {
 
     getAllCities: function () {
-
       this.$http.get("/all/atm/city")
           .then(result => {
             this.cities = result.data
@@ -35,6 +34,7 @@ export default {
     citiesDropdownOnChangeEvent: function () {
       this.$emit('citiesDropdownOnChangeEvent', this.cityId)
     }
+
 
   },
   beforeMount() {

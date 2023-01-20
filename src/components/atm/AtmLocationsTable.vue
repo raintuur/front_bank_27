@@ -60,7 +60,7 @@ export default {
 
   },
   beforeMount() {
-    alert("CID:" + this.selectedCityId)
+    alert("CID: " + this.selectedCityId)
 
     this.getAllAtmLocations()
   }
