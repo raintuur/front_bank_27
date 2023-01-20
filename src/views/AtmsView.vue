@@ -1,12 +1,17 @@
 <template>
 <div>
+
+<!--  ROW 1-->
   <div class="row justify-content-center">
+
+    <!--    COLUMN 1-->
     <div class="col-2">
-      <CitiesDropdown/>
+      <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
     </div>
-    <br>
+
+    <!--    COLUMN 2-->
     <div class="col-5">
-      <AtmLocationsTable/>
+      <AtmLocationsTable ref="atmLocations"/>
     </div>
   </div>
 </div>
@@ -15,9 +20,18 @@
 <script>
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import AtmLocationsTable from "@/components/atm/AtmLocationsTable.vue";
-
 export default {
   name: "AtmsView",
   components: {AtmLocationsTable, CitiesDropdown},
+  data: function (){
+    return {
+
+    }
+  },
+  methods: {
+    setSelectedCityId: function (cityId){
+      this.$refs.atmLocations.getAtmLocations(cityId)
+    }
+  }
 }
 </script>
