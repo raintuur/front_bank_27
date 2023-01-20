@@ -27,7 +27,7 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
-      selectedCityId: 0
+
     }
   },
   methods: {

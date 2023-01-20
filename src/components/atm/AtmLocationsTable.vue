@@ -54,9 +54,12 @@ export default {
             console.log(error)
           })
     },
+
     demo: function (cityId) {
-      alert("locations child komponent cityId " + cityId)
+      alert("locations child komponent cityId: " + cityId)
+
     }
+
   },
   beforeMount() {
 
