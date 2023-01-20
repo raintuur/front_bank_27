@@ -1,19 +1,25 @@
 <template>
   <div>
     <NewCarHeader :company-name="companyName"/>
-    <!-- ROW 1 -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"
-                            @pictureInputSuccess="setCarImage"/>
+    <!--  ROW 1  -->
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
+    />
+
     <br>
-    <!-- ROW 2 -->
-    <!-- Autod -->
+
+    <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
-    <img :src="car.carImage" class="img-thumbnail">
+    <img :src="car.carImage" class="img-thumbnail" >
+
 
   </div>
 
 </template>
+
 
 <script>
 import NewCarHeader from "@/components/car/NewCarHeader.vue";
@@ -31,11 +37,12 @@ export default {
         carModel: '',
         carImage: '',
       },
+
       cars: [
         {
           carId: 1,
           carMake: 'Audi',
-          carModel: 'Q7',
+          carModel: 'R8',
         },
         {
           carId: 2,
@@ -46,9 +53,10 @@ export default {
           carId: 3,
           carMake: 'Tesla',
           carModel: 'CyberTruck',
-        },
+        }
+
       ],
-      companyName: 'Kurvis Kraavis'
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
@@ -59,8 +67,8 @@ export default {
     },
     setCarImage: function (carImage) {
       this.car.carImage = carImage
-
     }
+
   }
 }
 </script>
