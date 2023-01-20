@@ -14,7 +14,7 @@
       <td>{{atmLocation.cityName}}</td>
       <td>{{atmLocation.locationName}}</td>
       <td>
-        <div class="row" v-for="transactionType in atmLocation.transactionTypes">
+        <div v-for="transactionType in atmLocation.transactionTypes">
           {{transactionType.typeName}}
         </div>
       </td>
