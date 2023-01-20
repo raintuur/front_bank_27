@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     setSelectedCityId: function (cityId) {
-      this.$refs.atmLocations.demo(cityId)
+      this.$refs.atmLocations.getAtmLocations(cityId)
     }
   }
 
