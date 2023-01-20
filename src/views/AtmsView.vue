@@ -1,40 +1,14 @@
 <template>
   <div>
 
-    <div class="col-2">
-      <CitiesDropdown/>
+    <div class="row justify-content-center">
 
-    </div>
-    <div class="col-5">
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="col-2">
+        <CitiesDropdown/>
+      </div>
+      <div class="col-5">
+        <AtmLocationsTable/>
+      </div>
 
     </div>
 
@@ -43,9 +17,11 @@
 
 <script>
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+import AtmLocationsTable from "@/components/atm/AtmLocationsTable.vue";
 
 export default {
   name: "AtmsView",
-  components: {CitiesDropdown}
+  components: {AtmLocationsTable, CitiesDropdown},
+
 }
 </script>
