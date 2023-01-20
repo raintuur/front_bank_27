@@ -25,9 +25,6 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
-  props: {
-    selectedCityId: 0
-  },
   data: function () {
     return {
       atmLocations: [
@@ -46,21 +43,27 @@ export default {
   },
   methods: {
 
-    getAllAtmLocations: function () {
 
-      this.$http.get("/all/atm/locations")
-          .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
-            this.atmLocations = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    },
+    getAtmLocations: function (cityId) {
+      this.$http.get("/atm/locations", {
+            params: {
+              cityId: cityId
+            },
+        headers: {
+          Prefer: 'code=200, example=' + cityId
+        }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+
+    }
 
   },
   beforeMount() {
-    alert("CID: " + this.selectedCityId)
 
     this.getAllAtmLocations()
   }
