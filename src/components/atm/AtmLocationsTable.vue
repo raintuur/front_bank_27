@@ -50,7 +50,7 @@ export default {
 
       this.$http.get("/all/atm/locations")
           .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
+            // soovime andmeid kuhugi muutujasse panna
             this.atmLocations = response.data
           })
           .catch(error => {
