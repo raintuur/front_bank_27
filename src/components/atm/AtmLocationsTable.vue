@@ -42,27 +42,7 @@ export default {
   },
   methods: {
 
-    someMethodName: function () {
-
-
-    },
-
-
-    getAllAtmLocations: function () {
-
-      this.$http.get("/all/atm/locations")
-          .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
-            this.atmLocations = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    },
-
-
     getAtmLocations: function (cityId) {
-
       this.$http.get("/atm/locations", {
             params: {
               cityId: cityId
