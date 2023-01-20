@@ -3,13 +3,11 @@
     <option selected disabled value="-1">--Linn--</option>
     <option value="0">Kõik linnad</option>
     <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
-    -->
   </select>
 </template>
 <script>
 export default {
-  name: 'CitiesDropdown'
-  ,
+  name: 'CitiesDropdown',
   data: function () {
     return {
       cities: [
@@ -28,18 +26,16 @@ export default {
           .then(result => {
             this.cities = result.data
 
-            alert(json.stringify(result.data[2].cityName))
-            console.log(Json.stringify)
-            // vaid siis kui status CODE ON 200
           }).catch(reason => {
         // vaid siis kui status code EI OLE 200
       })
 
-    }
+    },
 
   },
   beforeMount() {
     this.getAllCities()
   }
+
 }
 </script>
