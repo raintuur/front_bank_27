@@ -11,11 +11,11 @@
 
     <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
     <tr v-for="atmLocation in atmLocations">
-      <td>{{atmLocation.cityName}}</td>
-      <td>{{atmLocation.locationName}}</td>
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
-        <div class="row" v-for="transactionType in atmLocation.transactionTypes">
-          {{transactionType.typeName}}
+        <div v-for="transactionType in atmLocation.transactionTypes">
+          {{ transactionType.typeName }}
         </div>
       </td>
     </tr>
@@ -54,12 +54,9 @@ export default {
             console.log(error)
           })
     },
-
   },
   beforeMount() {
     this.getAllAtmLocations()
   }
-
-
 }
 </script>

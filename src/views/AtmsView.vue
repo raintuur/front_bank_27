@@ -1,10 +1,13 @@
 <template>
 <div>
-  <div class="col-3 justify-content-center">
-    <CitiesDropdown/>
-  </div>
-  <div>
-    <AtmLocationsTable/>
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <CitiesDropdown/>
+    </div>
+    <br>
+    <div class="col-5">
+      <AtmLocationsTable/>
+    </div>
   </div>
 </div>
 </template>
