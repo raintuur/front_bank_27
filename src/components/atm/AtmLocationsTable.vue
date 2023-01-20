@@ -9,7 +9,7 @@
     </thead>
     <tbody>
 
-    <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
+    <!--  Allolevat elementi soovime JSON massivi for loopiga genereerida  -->
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{atmLocation.cityName}}</td>
       <td>{{atmLocation.locationName}}</td>
@@ -43,29 +43,44 @@ export default {
   },
   methods: {
 
-    getAllAtmLocations: function () {
+    someMethodName: function () {
+
+
+    },
+
+    getAllAtmLocations: function ()
 
       this.$http.get("/all/atm/locations")
           .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
+            // soovime andmeid kuhugi muutujasse panna
             this.atmLocations = response.data
           })
           .catch(error => {
             console.log(error)
           })
+
     },
 
-    demo: function (cityId) {
-      alert("locations child komponent cityId: " + cityId)
+  beforeMount() {
+
+    getAtmLocations: function (cityId) {
+
+      this.$http.get(url: "/atm/locations", config {
+          params: {
+            cityId: cityId
+          },
+        headers: {
+          Prefer: 'code=200, example=' + cityId
+          }
+      }
+    ).then(response => {
+      this.atmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
 
     }
 
   },
-  beforeMount() {
 
-    this.getAllAtmLocations()
-  }
-
-
-}
 </script>
