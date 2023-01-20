@@ -10,10 +10,14 @@
     <tbody>
 
     <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
-    <tr>
-      <td>?</td>
-      <td>?</td>
-      <td>?</td>
+    <tr v-for="atmLocation in atmLocations">
+      <td>{{atmLocation.cityName}}</td>
+      <td>{{atmLocation.locationName}}</td>
+      <td>
+        <div v-for="transactionType in atmLocation.transactionTypes">
+          {{transactionType.typeName}}
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
