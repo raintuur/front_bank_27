@@ -9,13 +9,12 @@
     </thead>
     <tbody>
 
-    <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
-      <td>{{atmLocation.cityName}}</td>
-      <td>{{atmLocation.locationName}}</td>
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
-          {{transactionType.typeName}}
+          {{ transactionType.typeName }}
         </div>
       </td>
     </tr>
@@ -43,6 +42,12 @@ export default {
   },
   methods: {
 
+    someMethodName: function () {
+
+
+    },
+
+
     getAllAtmLocations: function () {
 
       this.$http.get("/all/atm/locations")
@@ -55,15 +60,28 @@ export default {
           })
     },
 
-    demo: function (cityId) {
-      alert("locations child komponent cityId: " + cityId)
+
+    getAtmLocations: function (cityId) {
+
+      this.$http.get("/atm/locations", {
+            params: {
+              cityId: cityId
+            },
+            headers: {
+              Prefer: 'code=200, example=' + cityId
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
 
     }
 
   },
   beforeMount() {
-
-    this.getAllAtmLocations()
+    this.getAtmLocations(0)
   }
 
 
