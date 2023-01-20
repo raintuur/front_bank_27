@@ -1,39 +1,42 @@
 <template>
-  <div>
+<div>
 
 
-    <!--  ROW 1  -->
-    <div class="row justify-content-center">
-      <div class="col-2">
+  <!--  ROW 1  -->
+  <div class="row justify-content-center">
+    <div class="col-2">
 
-        <TransactionTypeCheckBox/>
+      <TransactionTypeCheckBox/>
 
-      </div>
     </div>
-
-
   </div>
+
+
+
+
+
+</div>
 </template>
 
 <script>
 import TransactionTypeCheckBox from "@/views/TransactionTypeCheckBox.vue";
 
 export default {
-  name: "AtmLocationView"
+  name: "AtmLocationView",
+  components: {TransactionTypeCheckBox},
   data: function () {
     return {
       transactionTypes: [
         {
-          "typeId": 0,
-          "typeName": '',
-          "isSelected": false
+          typeId: 0,
+          typeName: '',
+          isSelected: false
         }
       ]
     }
   },
-  components: {TransactionTypeCheckBox},
-  methods:{
+  methods: {
 
-}
+  }
 }
 </script>

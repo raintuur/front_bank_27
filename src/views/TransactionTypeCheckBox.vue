@@ -1,7 +1,7 @@
 <template>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox"
-    <label class="form-check-label" for="flexCheckDefault">
+    <input class="form-check-input" type="checkbox">
+    <label class="form-check-label">
       ?
     </label>
   </div>
