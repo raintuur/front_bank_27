@@ -1,10 +1,10 @@
 <template>
-  <select class="form-select" aria-label="Default select example">
-    <option selected disabled value="-1">--Linn--</option>
+  <select v-model="cityId" v-on:change="citiesDropdownOnChangeEvent" class="form-select" aria-label="Default select example">
     <option value="0">Kõik linnad</option>
     <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
   </select>
 </template>
+
 <script>
 export default {
   name: 'CitiesDropdown',
@@ -15,13 +15,13 @@ export default {
           cityId: 0,
           cityName: ''
         }
-      ]
+      ],
+      cityId: 0
     }
   },
   methods: {
 
     getAllCities: function () {
-
       this.$http.get("/all/atm/city")
           .then(result => {
             this.cities = result.data
@@ -29,8 +29,12 @@ export default {
           }).catch(reason => {
         // vaid siis kui status code EI OLE 200
       })
-
     },
+
+    citiesDropdownOnChangeEvent: function () {
+      this.$emit('citiesDropdownOnChangeEvent', this.cityId)
+    }
+
 
   },
   beforeMount() {
