@@ -9,10 +9,14 @@
     </thead>
     <tbody>
     <!--          all olevat elementi soovime JSON for loopiga genereerida          -->
-    <tr>
-      <td>?</td>
-      <td>?</td>
-      <td>?</td>
+    <tr v-for="atmlocation in atmLocations">
+      <td>{{atmlocation.cityName}}</td>
+      <td>{{atmlocation.locationName}}</td>
+      <td>
+        <div class="row" v-for="transactionType in atmlocation.transactionTypes">
+          {{transactionType.typeName}}
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
