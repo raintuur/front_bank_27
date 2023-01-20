@@ -56,13 +56,12 @@ export default {
     },
 
     demo: function (cityId) {
+      alert("locations child komponent cityId: " + cityId)
 
     }
 
-
   },
   beforeMount() {
-    alert("CID: " + this.selectedCityId)
 
     this.getAllAtmLocations()
   }
