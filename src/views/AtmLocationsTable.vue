@@ -9,7 +9,7 @@
     </thead>
     <tbody>
 
-    <!--  Allolevat elementi soovime JSON massiivi for loopiga genereerida      -->
+    <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
     <tr>
       <td>?</td>
       <td>?</td>
@@ -21,5 +21,35 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
+  data: function () {
+    return {
+      atmLocations: [
+        {
+          locationId: 0,
+          locationName: '',
+          cityName: '',
+          transactionTypes: [
+            {
+              typeName: ''
+            }
+          ]
+        }
+      ]
+    }
+  },
+  methods: {
+
+    getAllAtmLocations: function () {
+      this.$http.get("/all/atm/locations")
+          .then(response => {
+            // soobvime andmeid kuhugi muutujasse panna
+            this.atmLocations = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+
+  }
 }
 </script>
