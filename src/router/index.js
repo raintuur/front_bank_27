@@ -14,6 +14,11 @@ const routes = [
     component: CarsView
   },
   {
+    path: '/atm/location',
+    name: 'atmLocationRoute',
+    component: AtmLocationView
+  },
+  {
     path: '/atms',
     name: 'atmsRoute',
     component: AtmsView
