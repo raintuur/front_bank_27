@@ -9,11 +9,11 @@
     </thead>
     <tbody>
     <!--          all olevat elementi soovime JSON for loopiga genereerida          -->
-    <tr v-for="atmlocation in atmLocations">
+    <tr v-for="atmlocation in atmLocations" :key="atmLocation.locationId">
       <td>{{atmlocation.cityName}}</td>
       <td>{{atmlocation.locationName}}</td>
       <td>
-        <div class="row" v-for="transactionType in atmlocation.transactionTypes">
+        <div class="row" v-for="transactionType in atmlocation.transactionTypes" :key="transactionType.typeName">
           {{transactionType.typeName}}
         </div>
       </td>
@@ -24,6 +24,9 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
+  props: {
+    selectedCityId: 0
+  },
   data: function () {
     return {
       atmLocations: [
@@ -55,6 +58,7 @@ export default {
 
   },
   beforeMount() {
+    alert("cityId: " + this.selectedCityId)
     this.getAllAtmLocations()
   }
 }
