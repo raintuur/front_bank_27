@@ -42,28 +42,31 @@ export default {
     }
   },
   methods: {
+    someMethodName: function () {
 
-    getAllAtmLocations: function () {
-
-      this.$http.get("/all/atm/locations")
-          .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
-            this.atmLocations = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
     },
 
-    demo: function (cityId) {
-      alert("locations child komponent cityId: " + cityId)
+    getAtmLocations: function (cityId) {
+      this.$http.get("/atm/locations", {
+            params: {
+              someRequestParam1: this.cityId
+            },
+        headers: {
+          Prefer: 'code=200, example=' + cityId
+        }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
 
     }
 
   },
   beforeMount() {
 
-    this.getAllAtmLocations()
+    this.getAtmLocations(0)
   }
 
 
