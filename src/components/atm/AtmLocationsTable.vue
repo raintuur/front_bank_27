@@ -43,20 +43,24 @@ export default {
   },
   methods: {
 
-    getAllAtmLocations: function () {
-      this.$http.get("/all/atm/location")
-          .then(response => {
-            // soovime andmeid kuhugi muutujasse panna
-            this.atmLocations = response.data
 
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    },
+    getAtmLocations: function (cityId){
+      this.$http.get("/atm/locations", {
+            params: {
+              cityId: cityId
+            },
+            headers: 'code=200, example= ' + cityId
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+
   },
   beforeMount() {
-    this.getAllAtmLocations()
+    this.getAtmLocations(0)
   }
 
 }
