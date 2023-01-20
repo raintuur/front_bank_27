@@ -40,6 +40,7 @@ export default {
   methods: {
 
     getAllAtmLocations: function () {
+
       this.$http.get("/all/atm/locations")
           .then(response => {
             // soobvime andmeid kuhugi muutujasse panna
@@ -50,6 +51,11 @@ export default {
           })
     },
 
+  },
+  beforeMount() {
+    this.getAllAtmLocations()
   }
+
+
 }
 </script>

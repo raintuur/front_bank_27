@@ -25,7 +25,7 @@
 
 <script>
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
-import AtmLocationsTable from "@/views/AtmLocationsTable.vue";
+import AtmLocationsTable from "@/components/atm/AtmLocationsTable.vue";
 
 export default {
   name: "AtmsView",
