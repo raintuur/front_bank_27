@@ -1,65 +1,64 @@
 <template>
-  <!--siia käib lehekülje struktuur HTML'na-->
   <div>
     <NewCarHeader :company-name="companyName"/>
-    <!--  row 1-->
+    <!--  ROW 1  -->
     <NewCarInput :car="car"
                  @clickAddCarEvent="addCar"
                  @pictureInputSuccess="setCarImage"
     />
 
-    <!--  row 1-->
+    <br>
+
+    <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
-    <img src="car.carImage" class="img-thumbnail">
+
+    <img :src="car.carImage" class="img-thumbnail" >
+
+
   </div>
 
 </template>
 
-<script>
 
-import NewCarHeader from "@/components/Car/NewCarHeader.vue";
-import NewCarInput from "@/components/Car/NewCarInput.vue";
-import CarsTable from "@/components/Car/CarsTable.vue";
+<script>
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
   components: {CarsTable, NewCarInput, NewCarHeader},
-
-
   data: function () {
     return {
-
       car: {
-        carId: '',
+        carId: 0,
         carMake: '',
         carModel: '',
-        carImage: ''
+        carImage: '',
       },
 
       cars: [
         {
-          carId: '1',
+          carId: 1,
+          carMake: 'Audi',
+          carModel: 'R8',
+        },
+        {
+          carId: 2,
+          carMake: 'BMW',
+          carModel: 'X5',
+        },
+        {
+          carId: 3,
           carMake: 'Tesla',
           carModel: 'CyberTruck',
-          carImage: ''
-        },
-        {
-          carId: '2',
-          carMake: 'BMW',
-          carModel: 'X6',
-          carImage: ''
-        },
-        {
-          carId: '3',
-          carMake: 'Audi',
-          carModel: 'A4',
-          carImage: ''
         }
+
       ],
-      companyName: 'Kurvis Kalluta'
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
-
   methods: {
     addCar: function () {
       let carAsString = JSON.stringify(this.car)
@@ -69,6 +68,7 @@ export default {
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
+
   }
 }
 </script>

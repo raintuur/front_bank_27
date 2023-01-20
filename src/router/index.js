@@ -9,9 +9,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'homeRoute',
-    component: HomeView
+    path: '/cars',
+    name: 'carsRoute',
+    component: CarsView
   },
   {
     path: '/atms',
@@ -19,17 +19,14 @@ const routes = [
     component: AtmsView
   },
   {
-    path: '/about',
-    name: 'aboutRoute',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: AboutView
+    path: '/',
+    name: 'homeRoute',
+    component: HomeView
   },
   {
-    path: '/cars',
-    name: 'carsRoute',
-    component: CarsView
+    path: '/about',
+    name: 'aboutRoute',
+    component: AboutView
   }
 ]
 
