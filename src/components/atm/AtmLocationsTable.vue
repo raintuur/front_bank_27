@@ -23,11 +23,10 @@
   </table>
 </template>
 <script>
+import {config} from "@fortawesome/fontawesome-svg-core";
+
 export default {
   name: 'AtmLocationsTable',
-  props: {
-    selectedCityId: 0
-  },
   data: function () {
     return {
       atmLocations: [
@@ -46,6 +45,10 @@ export default {
   },
   methods: {
 
+    someMethodName: function () {
+
+    },
+
     getAllAtmLocations: function () {
 
       this.$http.get("/all/atm/locations")
@@ -57,6 +60,21 @@ export default {
             console.log(error)
           })
     },
+
+
+
+
+    getAtmLocations: function (cityId) {
+
+      this.$http.get("atm/locations"), config
+           params: {
+        cityId: cityId
+           }
+          }
+          
+
+
+    }
 
   },
   beforeMount() {
