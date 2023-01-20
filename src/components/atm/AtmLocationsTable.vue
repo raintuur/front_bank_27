@@ -10,10 +10,14 @@
     <tbody>
 
     <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
-    <tr>
-      <td>?</td>
-      <td>?</td>
-      <td>?</td>
+    <tr v-for="atmLocation in atmLocations">
+      <td>{{atmLocation.cityName}}</td>
+      <td>{{atmLocation.locationName}}</td>
+      <td>
+        <div v-for="transactionType in atmLocation.transactionTypes">
+          {{transactionType.typeName}}
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -42,14 +46,17 @@ export default {
     getAllAtmLocations: function () {
       this.$http.get("/all/atm/locations")
           .then(response => {
-            // soobvime andmeid kuhugi muutujasse panna
+            // soovime andmeid kuhugi muutujasse panna
             this.atmLocations = response.data
           })
           .catch(error => {
             console.log(error)
           })
     },
+  },
 
+  beforeMount() {
+    this.getAllAtmLocations()
   }
 }
 </script>
