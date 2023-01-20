@@ -1,14 +1,11 @@
 <template>
   <div class="row justify-content-center">
-
     <div class="col col-9">
-
-      <!--autod-->
-      <table class="table table-success table-striped table-hover">
+      <table class="table table-hover table-dark">
         <thead>
         <tr>
-          <th scope="col">Auto mark</th>
-          <th scope="col">Auto mudel</th>
+          <th>Auto mark</th>
+          <th>Auto mudel</th>
         </tr>
         </thead>
         <tbody>
@@ -18,9 +15,7 @@
         </tr>
         </tbody>
       </table>
-
     </div>
-
   </div>
 </template>
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ companyName }} - Autode lisamine</h1>
+  <h1>{{companyName}} - Autode lisamine</h1>
 </template>
 
 <script>
