@@ -12,8 +12,9 @@
       <td>{{ AtmLocation.cityName }}</td>
       <td>{{ AtmLocation.locationName }}</td>
       <td>
-        <div v-for="transactionType in AtmLocation.transactionTypes" class="row justify-content-center" :key="transactionType.typeName">
-          {{transactionType.typeName}}
+        <div v-for="transactionType in AtmLocation.transactionTypes" class="row justify-content-center"
+             :key="transactionType.typeName">
+          {{ transactionType.typeName }}
         </div>
       </td>
     </tr>
@@ -23,9 +24,6 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
-  props: {
-    selectedCityId: 0
-  },
   data: function () {
     return {
       AtmLocations: [
@@ -35,7 +33,7 @@ export default {
           cityName: "",
           transactionTypes: [
             {
-              typeName: ""
+              typeName: ''
             }
           ]
         }
@@ -43,18 +41,24 @@ export default {
     }
   },
   methods: {
-    getLocationsByCity: function () {
-      this.$http.get("/all/atm/locations")
-          .then(response => {
-            this.AtmLocations = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
+    getAtmLocations: function (cityId) {
+      this.$http.get("/atm/locations", {
+            params: {
+              cityId: cityId
+            },
+            headers: {
+              Prefer: 'code=200, example=' + cityId
+            }
+          }
+      ).then(response => {
+        this.AtmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
     }
   },
   beforeMount() {
-    this.getLocationsByCity()
+    this.getAtmLocations(0)
   }
 }
 </script>

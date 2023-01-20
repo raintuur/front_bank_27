@@ -4,7 +4,7 @@
       <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
     </div>
     <div class="col col-6 tablediv">
-      <AtmLocationsTable :selectedCityId="seltectedCityId"/>
+      <AtmLocationsTable ref="atmLocations"/>
     </div>
   </div>
 </template>
@@ -18,12 +18,12 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
-      seltectedCityId: 0
+      selectedCityId: 0
     }
   },
   methods: {
     setSelectedCityId: function (cityId) {
-      this.seltectedCityId = cityId
+      this.$refs.atmLocations.getAtmLocations(cityId)
     }
   }
 }
