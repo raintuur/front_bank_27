@@ -44,19 +44,22 @@ export default {
   methods: {
 
     getAllAtmLocations: function () {
+
       this.$http.get("/all/atm/locations")
           .then(response => {
-            // soovime andmeid kuhugi muutujasse panna
+            // soobvime andmeid kuhugi muutujasse panna
             this.atmLocations = response.data
           })
           .catch(error => {
             console.log(error)
           })
     },
-  },
 
+  },
   beforeMount() {
     this.getAllAtmLocations()
   }
+
+
 }
 </script>
