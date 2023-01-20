@@ -20,6 +20,11 @@ const routes = [
 },
 
   {
+    path: '/atm/location',
+    name: 'atmLocationRoute',
+    component: AtmLocationView
+  },
+    {
     path: '/cars',
     name: 'carsRoute',
     component: CarsView

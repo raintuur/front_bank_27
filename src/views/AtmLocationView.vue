@@ -1,14 +1,25 @@
 <template>
-  <div>
-    <div class="input-group mb-3">
-      <div class="input-group-text">
-        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+<div>
+
+
+  <!--  ROW 1  -->
+  <div class="row justify-content-center">
+    <div class="col-2">
+
+      <div class="input-group mb-3">
+        <div class="input-group-text">
+          <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+        </div>
+        <input type="text" disabled class="form-control" aria-label="Text input with checkbox">
       </div>
-      <input type="text" class="form-control" aria-label="Text input with checkbox">
+
     </div>
 
-
   </div>
+
+
+
+
 
 </div>
 </template>
