@@ -3,8 +3,8 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/atms">ATMs</router-link> |
-      <router-link to="/cars">Cars</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/atm/location">Lisa uus ATM asukoht</router-link> |
+      <router-link to="/cars">Cars</router-link>
     </nav>
     <router-view/>
   </div>
