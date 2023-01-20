@@ -8,13 +8,14 @@
     </tr>
     </thead>
     <tbody>
-    <!--          all olevat elementi soovime JSON for loopiga genereerida          -->
-    <tr v-for="atmlocation in atmLocations" :key="atmLocation.locationId">
-      <td>{{atmlocation.cityName}}</td>
-      <td>{{atmlocation.locationName}}</td>
+
+    <!--  Allolevat elemnti soovime JSON massivi for loopiga genereerida  -->
+    <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
-        <div class="row" v-for="transactionType in atmlocation.transactionTypes" :key="transactionType.typeName">
-          {{transactionType.typeName}}
+        <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
+          {{ transactionType.typeName }}
         </div>
       </td>
     </tr>
@@ -24,9 +25,6 @@
 <script>
 export default {
   name: 'AtmLocationsTable',
-  props: {
-    selectedCityId: 0
-  },
   data: function () {
     return {
       atmLocations: [
@@ -45,6 +43,10 @@ export default {
   },
   methods: {
 
+    someMethodName: function () {
+
+    },
+
     getAllAtmLocations: function () {
       this.$http.get("/all/atm/locations")
           .then(response => {
@@ -56,10 +58,27 @@ export default {
           })
     },
 
+    getAtmLocations: function (cityId) {
+      this.$http.get("/atm/locations", {
+            params: {
+              cityId: cityId
+            },
+            headers: {
+              Prefer: 'code=200, example=' + cityId
+            }
+          }
+      ).then(response => {
+        this.atmLocations = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+      alert("location child komonent city" + cityId)
+    }
+
   },
   beforeMount() {
-    alert("cityId: " + this.selectedCityId)
-    this.getAllAtmLocations()
+
+    this.getAllAtmLocations(0)
   }
 }
 </script>
