@@ -1,25 +1,38 @@
 <template>
   <div>
-<!-- ROW 1 -->
+    <!-- ROW 1 -->
     <div class="row justify-content-center">
       <div class="col-3">
-        <div class="input-group mb-3">
-          <div class="input-group-text">
-            <input class="form-check-input mt-0" type="checkbox" value=""
-                   aria-label="Checkbox for following text input">
-          </div>
-          <input type="text" disabled class="form-control" aria-label="Text input with checkbox">
-        </div>
+
+        <TransactionTypesCheckBox/>
 
       </div>
-
     </div>
+
+
   </div>
 </template>
 
 <script>
+import TransactionTypesCheckBox from "@/views/TransactionTypesCheckBox.vue";
+
 export default {
-  name: "AtmLocationView"
+  name: "AtmLocationView",
+  components: {TransactionTypesCheckBox},
+  data: function () {
+    return {
+      transactionTypes: [
+        {
+          typeId: 1,
+          typeName: '',
+          isSelected: false
+        }
+      ]
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 
