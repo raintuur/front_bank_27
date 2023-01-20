@@ -3,6 +3,22 @@
     <div class="col col-2 dropdown2">
       <CitiesDropdown/>
     </div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <td>Linn</td>
+          <td>Asukoht</td>
+          <td>Teenused</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
