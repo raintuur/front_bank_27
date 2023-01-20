@@ -21,13 +21,7 @@ export default {
   components: {TransactionTypesCheckBox},
   data: function () {
     return {
-      transactionTypes: [
-        {
-          typeId: 1,
-          typeName: '',
-          isSelected: false
-        }
-      ]
+
     }
   },
   methods: {
