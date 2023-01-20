@@ -10,11 +10,13 @@
 
 
       <!-- Col 2 -->
-      <AtmLocationsTable :selected-city-id="selectedCityId"/>
+      <div class="col-5">
+        <AtmLocationsTable ref="atmLocations"/>
+      </div>
     </div>
   </div>
 </template>
-
+r
 <script>
 
 
@@ -31,7 +33,7 @@ export default {
   },
   methods: {
     setSelectedCityId: function (cityId) {
-      this.selectedCityId = cityId
+      this.$refs.atmLocations.demo(cityId)
     }
   }
 }
