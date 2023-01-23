@@ -11,16 +11,15 @@
       <!--  COLUMN 2  -->
       <!--  LOCATION NAME  -->
       <div class="col-2">
+
         <div class="input-group mb-3">
           <span class="input-group-text">Asukoht</span>
-          <input v-model="locationName" type="text" class="form-control"></div>
-      </div>
+          <input v-model="locationName" type="text" class="form-control">
+        </div>
 
-        <div v-if="Number(numberOfAtms) === 0">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Automaatide arv</span>
-            <input v-model="numberOfAtms" type="number" min="10" class="form-control">
-          </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">Automaatide arv</span>
+          <input v-model="numberOfAtms" type="number" min="10" class="form-control">
         </div>
 
 
@@ -37,6 +36,7 @@
     </div>
 
 
+  </div>
 </template>
 
 <script>
