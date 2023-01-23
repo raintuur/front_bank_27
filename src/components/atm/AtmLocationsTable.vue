@@ -10,11 +10,11 @@
     <tbody>
 
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
-      <td>{{atmLocation.cityName}}</td>
-      <td>{{atmLocation.locationName}}</td>
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
-          {{transactionType.typeName}}
+          {{ transactionType.typeName }}
         </div>
       </td>
     </tr>
@@ -46,11 +46,12 @@ export default {
             params: {
               cityId: cityId
             },
-        headers: {
-              Prefer:'code=200, example=' + cityId}
+            headers: {
+              Prefer: 'code=200, example=' + cityId
+            }
           }
       ).then(response => {
-        this.atmLocations = response.data
+        this.atmLocations = response.data.value
       }).catch(error => {
         console.log(error)
       })
