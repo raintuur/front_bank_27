@@ -1,3 +1,7 @@
-.input-filled {
+.input-success {
     background-color: darkseagreen !important;
+}
+
+.input-danger {
+    background-color: palevioletred !important;
 }

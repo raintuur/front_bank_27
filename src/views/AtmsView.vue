@@ -20,16 +20,17 @@
 <script>
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import AtmLocationsTable from "@/components/atm/AtmLocationsTable.vue";
+
 export default {
   name: "AtmsView",
   components: {AtmLocationsTable, CitiesDropdown},
-  data: function (){
+  data: function () {
     return {
 
     }
   },
   methods: {
-    setSelectedCityId: function (cityId){
+    setSelectedCityId: function (cityId) {
       this.$refs.atmLocations.getAtmLocations(cityId)
     }
   }
