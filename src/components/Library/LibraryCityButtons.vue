@@ -24,8 +24,8 @@
 export default {
   name: 'LibraryCityButtons',
   data: function () {
-    return{
-      cities:[
+    return {
+      cities: [
         {
           cityId: 0,
           cityName: ""
@@ -34,18 +34,21 @@ export default {
     }
 
   },
-  getCitiesNames: function () {
-    this.$http.get("/library/cities")
-        .then(response => {
-          this.cities (response.data)
-          // console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+  method: {
+    getCitiesNames: function () {
+      this.$http.get("/library/cities")
+          .then(response => {
+            this.cities(response.data)
+            // console.log(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+
   },
   beforeMount() {
     this.getCitiesNames()
-  }
+  },
 }
 </script>
