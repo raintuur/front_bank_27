@@ -4,12 +4,7 @@
   <div class="row justify-content-center">
     <div class="col-2">
 
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox">
-        <label class="form-check-label">
-          Default checkbox
-        </label>
-      </div>
+      <TransactionTypeCheckBox/>
 
 
     </div>
@@ -21,19 +16,17 @@
 </template>
 
 <script>
+import TransactionTypeCheckBox from "@/views/TransactionTypeCheckBox.vue";
+
 export default {
   name: "AtmLocationView",
+  components: {TransactionTypeCheckBox},
   data: function () {
     return {
-      transactionTypes: [
-          {
-            typeId: 1,
-            typeName: '',
-            isSelected: false
-          },
-        ]
     }
   },
-  methods:
+  methods: {
+
+  }
 }
 </script>
