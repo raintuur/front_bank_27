@@ -1,21 +1,27 @@
 <template>
 
   <div v-if="Number(numberOfAtms) === 0">
+
     <div class="input-group mb-3">
       <span class="input-group-text">Automaatide arv</span>
-      <input v-model="numberOfAtms" class="form-control">
+      <input v-model="numberOfAtms" type="number" class="form-control">
     </div>
 
-  </div>
 
+  </div>
   <div v-else>
 
     <div class="input-group mb-3">
       <span class="input-group-text input-filled">Automaatide arv</span>
-      <input v-model="numberOfAtms" class="form-control">
+      <input v-model="numberOfAtms" type="number" class="form-control">
     </div>
 
+
+
   </div>
+
+
+
 
 </template>
 <script>
