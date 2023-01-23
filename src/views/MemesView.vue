@@ -25,8 +25,8 @@
 
 <script>
 import NewMemeHeader from "@/components/NewMemeHeader.vue";
-import NewMemeInput from "@/views/NewMemeInput.vue";
-import MemeTable from "@/views/MemeTable.vue";
+import NewMemeInput from "@/components/meme/NewMemeInput.vue";
+import MemeTable from "@/components/meme/MemeTable.vue";
 
 export default {
   name: 'MemesView',

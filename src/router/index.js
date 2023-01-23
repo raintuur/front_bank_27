@@ -20,7 +20,7 @@ const routes = [
     component: AtmsView
   },
   {
-    path: '/atm/loction',
+    path: '/atm/location',
     name: 'atmLocationRoute',
     component: AtmLocationView
   },
