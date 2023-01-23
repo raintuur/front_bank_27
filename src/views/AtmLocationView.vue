@@ -4,16 +4,16 @@
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
+      <!--  COLUMN 1  -->
       <div class="col-2">
         <CitiesDropdown/>
       </div>
 
       <!--  COLUMN 2  -->
-      <!--  LOCATION NAME  -->
       <div class="col-2">
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Asukoht</span>
+          <span class="input-group-text" :class="{}">Asukoht</span>
           <input v-model="locationName" type="text" class="form-control">
         </div>
 
