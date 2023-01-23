@@ -10,9 +10,11 @@
     <div class="col col-3">
       <input v-model="car.carModel" type="text" class="form-control" placeholder="Auto mudel">
     </div>
+
     <!--  COLUMN 3    -->
     <div class="col col-3">
-      <ImageInput v-on="$listeners"/>
+      <ImageInput  v-on="$listeners"/>
+      
     </div>
 
     <!--  COLUMN 4    -->
@@ -35,8 +37,8 @@ export default {
     addCar: function () {
       this.$emit('clickAddCarEvent')
     },
-    setCarImage: function () {
-
+    setPictureData: function () {
+      
     }
   }
 }

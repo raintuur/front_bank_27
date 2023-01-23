@@ -1,9 +1,6 @@
 <template>
   <div class="row justify-content-center">
-
     <div class="col col-9">
-
-      <!--Autode tabel-->
       <table class="table table-hover table-dark">
         <thead>
         <tr>
