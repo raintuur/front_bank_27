@@ -26,15 +26,15 @@
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
-      </div>
+        <button type = "button" class="btn btn-outline-success">
+      <div class="row justify-content-center">
 
       <!--  COLUMN 3  -->
-      <div class="col-2">
+      <div class="col-3">
         <img :src="pictureData" class="img-thumbnail" alt="...">
 
       </div>
     </div>
-
 
   </div>
 </template>
