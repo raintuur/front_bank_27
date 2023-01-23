@@ -18,7 +18,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Automaatide arv</span>
+          <span class="input-group-text" :class="{'input-success' : Number(numberOfAtms) > 0}">Automaatide arv</span>
           <input v-model="numberOfAtms" type="number" min="0" class="form-control">
         </div>
 
@@ -26,14 +26,11 @@
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
-
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-2">
         <img :src="pictureData" class="img-thumbnail" alt="...">
-
-
 
       </div>
     </div>
@@ -63,7 +60,7 @@ export default {
   },
   methods: {
     setPictureBase64Data: function (pictureBase64Data) {
-      this.pictureData = pictureData
+      this.pictureData = pictureBase64Data
     }
   }
 }
