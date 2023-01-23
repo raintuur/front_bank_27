@@ -13,13 +13,13 @@
       <div class="col-3">
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' :locationName !== ''}">Asukoht</span>
-          <input v-model="locationName" type="text" class="form-control">
+          <span class="input-group-text" :class="{'input-success' :atmRequest.locationName !== ''}">Asukoht</span>
+          <input v-model="atmRequest.locationName" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' : Number(numberOfAtms) > 0}">Automaatide arv</span>
-          <input v-model="numberOfAtms" type="number" min="0" class="form-control">
+          <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
+          <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
         </div>
 
 
@@ -56,10 +56,6 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-      locationName: '',
-      numberOfAtms: 0,
-      pictureData: '',
-
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -77,11 +73,13 @@ export default {
     }
   },
   methods: {
+
     setPictureBase64Data: function (pictureBase64Data) {
-      this.pictureData = pictureBase64Data
+      this.atmRequest.picture = pictureBase64Data
     },
 
     addAtmLocation: function () {
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
@@ -89,6 +87,10 @@ export default {
         console.log(error)
       })
     },
+
+    setCityId: function (cityId) {
+      this.atmRequest.cityId = cityId
+    }
 
 
   }
