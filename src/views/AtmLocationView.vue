@@ -18,18 +18,19 @@
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' :Number(numberOfAtms> 0}">Automaatide arv</span>
-          <input v-model="numberOfAtms" :class= type="number" min="0" class="form-control">
+          <span class="input-group-text" :class="{'input-success' : Number(numberOfAtms) > 0}">Automaatide arv</span>
+          <input v-model="numberOfAtms" type="number" min="0" class="form-control">
         </div>
 
 
         <TransactionTypeCheckBox/>
+        <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-2">
-
+        <img :src="pictureData" class="img-thumbnail" alt="...">
 
       </div>
     </div>
@@ -44,20 +45,23 @@ import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
+import ImageInput from "@/components/ImageInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+  components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
       locationName: '',
       numberOfAtms: 0,
+      pictureData: ''
 
     }
   },
   methods: {
-
-
+    setPictureBase64Data: function (pictureBase64Data) {
+      this.pictureData = pictureBase64Data
+    }
   }
 }
 </script>
