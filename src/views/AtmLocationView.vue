@@ -36,7 +36,7 @@
 import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import AtmLocationNameInput from "@/components/atm/AtmLocationNameInput.vue";
-import NumberOfAtmsInput from "@/views/NumberOfAtmsInput.vue";
+import NumberOfAtmsInput from "@/components/atm/NumberOfAtmsInput.vue";
 
 export default {
   name: "AtmLocationView",
