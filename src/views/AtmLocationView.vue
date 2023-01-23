@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import TransactionTypeCheckBox from "@/views/TransactionTypeCheckBox.vue";
+import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
-import AtmLocationNameInput from "@/views/AtmLocationNameInput.vue";
+import AtmLocationNameInput from "@/components/atm/AtmLocationNameInput.vue";
 
 export default {
   name: "AtmLocationView",
