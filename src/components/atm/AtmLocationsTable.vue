@@ -23,7 +23,9 @@
 </template>
 <script>
 export default {
+
   name: 'AtmLocationsTable',
+
   data: function () {
     return {
       atmLocations: [
@@ -40,6 +42,7 @@ export default {
       ]
     }
   },
+
   methods: {
 
     getAtmLocations: function (cityId) {
@@ -56,14 +59,12 @@ export default {
       }).catch(error => {
         console.log(error)
       })
-
     }
-
   },
+
   beforeMount() {
     this.getAtmLocations(0)
   }
-
 
 }
 </script>
