@@ -5,10 +5,24 @@
   <!--  ROW 1  -->
   <div class="row justify-content-center">
     <div class="col-2">
-
-      <TransactionTypeCheckBox/>
+      <cities-dropdown/>
 
     </div>
+
+    <div class="col-2">
+
+      <AtmLocationNameInput :location-name="locationName"/>
+
+      <NumberOfAtmsInput :number-of-atms="numberOfAtms"/>
+      <div>
+
+        <TransactionTypeCheckBox/>
+
+      </div>
+    </div>
+
+<!--    Column 3    -->
+
   </div>
 
 
@@ -19,13 +33,18 @@
 </template>
 
 <script>
-import TransactionTypeCheckBox from "@/views/TransactionTypeCheckBox.vue";
+import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
+import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+import AtmLocationNameInput from "@/components/atm/AtmLocationNameInput.vue";
+import NumberOfAtmsInput from "@/views/NumberOfAtmsInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {TransactionTypeCheckBox},
+  components: {NumberOfAtmsInput, AtmLocationNameInput, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      locationName: '',
+      numberOfAtms: 0,
 
     }
   },
