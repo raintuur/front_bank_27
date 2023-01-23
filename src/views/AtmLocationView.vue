@@ -33,7 +33,7 @@
 
       <!--  COLUMN 3  -->
       <div class="col-2">
-        <img :src="pictureData" alt="..." class="img-thumbnail">
+        <img :src="pictureData" class="img-thumbnail">
 
       </div>
     </div>
@@ -57,13 +57,27 @@ export default {
     return {
       locationName: '',
       numberOfAtms: 0,
-      pictureData: ''
+      pictureData: '',
+      
+      atmRequest: {
+      cityId: 0,
+        locationName: "",
+        numberOfAtms: 0,
+        picture: "",
+        transactionTypes: [
+      {
+        typeId: 0,
+        typeName: "",
+        isSelected: false
+      }
+    ]
+      }
     }
   },
   methods: {
     setPictureBase64Data: function (pictureBase64Data) {
       this.pictureData = pictureBase64Data
-    }
+    },
   }
 }
 </script>
