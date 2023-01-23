@@ -6,31 +6,35 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown/>
+        <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
-      <div class="col-2">
+      <div class="col-3">
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' :locationName !== ''}">Asukoht</span>
-          <input v-model="locationName" type="text" class="form-control">
+          <span class="input-group-text" :class="{'input-success' :atmRequest.locationName !== ''}">Asukoht</span>
+          <input v-model="atmRequest.locationName" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' : Number(numberOfAtms) > 0}">Automaatide arv</span>
-          <input v-model="numberOfAtms" type="number" min="0" class="form-control">
+          <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
+          <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
         </div>
 
 
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
+        <div>
+
+          <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
+        </div>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-2">
-        <img :src="pictureData" class="img-thumbnail" alt="...">
+        <img :src="pictureData" class="img-thumbnail" >
 
       </div>
     </div>
@@ -54,14 +58,43 @@ export default {
     return {
       locationName: '',
       numberOfAtms: 0,
-      pictureData: ''
+      pictureData: '',
+
+      atmRequest:{
+        cityId: 0,
+        locationName: '',
+        numberOfAtms: 0,
+        picture: '',
+        transactionTypes: [
+          {
+            typeId: 0,
+            typeName: '',
+            isSelected: true
+          }
+        ]
+      }
 
     }
   },
   methods: {
     setPictureBase64Data: function (pictureBase64Data) {
-      this.pictureData = pictureBase64Data
+      this.atmRequest.picture = pictureBase64Data
+    },
+
+    addAtmLocation: function () {
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+      this.$http.post("/atm/location", this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    setCityId: function (cityId){
+      this.atmRequest.cityId = cityId
     }
+
   }
 }
 </script>
