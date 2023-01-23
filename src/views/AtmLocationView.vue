@@ -9,7 +9,6 @@
       </div>
 
       <!--  COLUMN 2  -->
-      <!--  LOCATION NAME  -->
       <div class="col-2">
 
         <div class="input-group mb-3">
