@@ -1,6 +1,6 @@
 <template>
 
-  <div v-if="locationName == ''">
+  <div v-if="locationName === ''">
 
     <div class="input-group mb-3">
       <span class="input-group-text">Asukoht</span>

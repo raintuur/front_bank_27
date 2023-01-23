@@ -12,10 +12,7 @@
       <div class="col-2">
         <AtmLocationNameInput :location-name="locationName"/>
 
-        <div class="input-group mb-3">
-          <span class="input-group-text">Automaatide arv</span>
-          <input type="number" class="form-control">
-        </div>
+        <NumberOfAtmsInput :number-of-atms="numberOfAtms"/>
         <TransactionTypeCheckBox/>
 
 
@@ -36,13 +33,15 @@
 import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import AtmLocationNameInput from "@/components/atm/AtmLocationNameInput.vue";
+import NumberOfAtmsInput from "@/views/NumberOfAtmsInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {AtmLocationNameInput, CitiesDropdown, TransactionTypeCheckBox},
+  components: {NumberOfAtmsInput, AtmLocationNameInput, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-      locationName: ''
+      locationName: '',
+      numberOfAtms: 0,
 
     }
   },
