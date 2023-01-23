@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div class="col-2">
+  <div class="d-grid gap-2 col-2">
+    <div >
       <button type="button" class="btn btn-success">Kõik</button>
     </div>
-    <div v-for="cityList in citiesList" class="col-2">
+    <div v-for="cityList in citiesList" >
       <button type="button" class="btn btn-danger">{{cityList.cityName}}</button>
     </div>
   </div>
