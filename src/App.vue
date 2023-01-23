@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/atms">ATMs</router-link> |
       <router-link to="/atm/location">Lisa uus asukoht</router-link> |
-      <router-link to="/cars">Cars</router-link> |
+      <router-link to="/cars">Cars</router-link>
     </nav>
     <router-view/>
   </div>
