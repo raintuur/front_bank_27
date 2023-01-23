@@ -1,3 +1,7 @@
-.input-filled{
+.input-filled {
     background-color: #42b983 !important;
+}
+.input-danger {
+    background-color: red !important;
+    color: white;
 }

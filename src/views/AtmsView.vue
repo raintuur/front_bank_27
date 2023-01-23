@@ -1,15 +1,13 @@
 <template>
   <div>
-    <!-- ROW 1   -->
+<!--Row 1-->
     <div class="row justify-content-center">
 
-      <!-- COL 1   -->
-      <div class="col-2">
+      <!--TABEL-->
+      <div class="col-3">
         <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
       </div>
-
-      <!-- COL 2   -->
-      <div class="col-5">
+      <div class = "col-5">
         <AtmLocationsTable ref="atmLocations"/>
       </div>
 
@@ -27,7 +25,7 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
-
+      selectedCityId: 0
     }
   },
   methods: {
@@ -35,7 +33,5 @@ export default {
       this.$refs.atmLocations.getAtmLocations(cityId)
     }
   }
-
-
 }
 </script>
