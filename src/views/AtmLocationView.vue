@@ -13,18 +13,17 @@
       <div class="col-2">
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Asukoht</span>
+          <span class="input-group-text" :class="{'input-success' :locationName !== ''}">Asukoht</span>
           <input v-model="locationName" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Automaatide arv</span>
-          <input v-model="numberOfAtms" type="number" min="10" class="form-control">
+          <span class="input-group-text" :class="{'input-success' :Number(numberOfAtms> 0}">Automaatide arv</span>
+          <input v-model="numberOfAtms" :class= type="number" min="0" class="form-control">
         </div>
 
 
         <TransactionTypeCheckBox/>
-
 
       </div>
 
@@ -58,16 +57,7 @@ export default {
   },
   methods: {
 
-    someMethodName: function () {
 
-      this.$http.get("/some/path")
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    },
   }
 }
 </script>
