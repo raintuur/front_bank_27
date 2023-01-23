@@ -4,9 +4,27 @@
 
   <!--  ROW 1  -->
   <div class="row justify-content-center">
+
     <div class="col-2">
+         <CitiesDropdown/>
+    </div>
+
+    <!--      COLUMN 2    -->
+    <div class="col-2">
+      <AtmLocationNameInput :location-name="locationName"/>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" >Automaatide arv</span>
+      <input type="number" class="form-control">
+    </div>
 
       <TransactionTypeCheckBox/>
+    </div>
+
+
+
+    <div class="col-2">
+
 
     </div>
   </div>
@@ -20,12 +38,15 @@
 
 <script>
 import TransactionTypeCheckBox from "@/views/TransactionTypeCheckBox.vue";
+import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+import AtmLocationNameInput from "@/views/AtmLocationNameInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {TransactionTypeCheckBox},
+  components: {AtmLocationNameInput, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      locationName: {}
 
     }
   },
