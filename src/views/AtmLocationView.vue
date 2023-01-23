@@ -9,10 +9,41 @@
       </div>
 
       <!--  COLUMN 2  -->
+      <!--  LOCATION NAME  -->
       <div class="col-2">
-        <LocationName :location-name="locationName"/>
+        <div v-if="locationName === ''">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Asukoht</span>
+            <input v-model="locationName" type="text" class="form-control">          </div>
+        </div>
+        <div v-else>
+          <div class="input-group mb-3">
+            <span class="input-group-text input-success">Asukoht</span>
+            <input v-model="locationName" type="text" class="form-control">
+          </div>
+        </div>
 
-        <NumberOfAtms :number-of-atms="numberOfAtms"/>
+        <div v-if="Number(numberOfAtms) === 0">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Automaatide arv</span>
+            <input v-model="numberOfAtms" type="number" min="10" class="form-control">
+          </div>
+        </div>
+        <div v-else-if="Number(numberOfAtms) < 0">
+          <AlertDanger message="Negatiivne arv ei ole lubatud"/>
+          <div class="input-group mb-3">
+            <span class="input-group-text input-danger">Automaatide arv</span>
+            <input v-model="numberOfAtms" type="number" class="form-control">
+          </div>
+        </div>
+        <div v-else>
+          <div class="input-group mb-3">
+            <span class="input-group-text input-success">Automaatide arv</span>
+            <input v-model="numberOfAtms" type="number" class="form-control">
+          </div>
+        </div>
+
+
         <TransactionTypeCheckBox/>
 
 
@@ -34,10 +65,11 @@ import TransactionTypeCheckBox from "@/components/atm/new/TransactionTypeCheckBo
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
+import AlertDanger from "@/components/alert/AlertDanger.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+  components: {AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
       locationName: '',
@@ -45,6 +77,18 @@ export default {
 
     }
   },
-  methods: {}
+  methods: {
+
+    someMethodName: function () {
+
+      this.$http.get("/some/path")
+          .then(response => {
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+  }
 }
 </script>

@@ -16,7 +16,7 @@ export default {
   name: 'LocationName',
   components: {LocationNameSuccess, LocationNameDefault},
   props: {
-    locationName: {}
+    locationName: String
   }
 }
 </script>
