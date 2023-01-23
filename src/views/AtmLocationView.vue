@@ -26,6 +26,8 @@
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button type="button" class="btn btn-success">Salvesta</button>
+
       </div>
 
       <!--  COLUMN 3  -->
@@ -33,6 +35,11 @@
         <img :src="pictureData" class="img-thumbnail" alt="...">
 
       </div>
+    </div>
+
+    <div class="col-3 justify-content-end">
+
+
     </div>
 
 
