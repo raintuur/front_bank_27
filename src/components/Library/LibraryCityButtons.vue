@@ -34,7 +34,7 @@ export default {
     }
 
   },
-  method: {
+  methods: {
     getCitiesNames: function () {
       this.$http.get("/library/cities")
           .then(response => {
