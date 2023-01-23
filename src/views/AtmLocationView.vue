@@ -12,12 +12,12 @@
       <div class="col-2">
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Asukoht</span>
-          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+          <input type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon3">Automaatide arv</span>
-          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+          <input type="number" class="form-control">
         </div>
         <TransactionTypeCheckBox/>
 
