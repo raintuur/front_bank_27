@@ -1,7 +1,8 @@
 <template>
 
-  <div v-if="locationName == ''>
-      <div class ="input-group mb-3">
+  <div v-if="locationName === ''">
+
+    <div class="input-group mb-3">
       <span class="input-group-text">Asukoht</span>
       <input v-model="locationName" type="text" class="form-control">
     </div>
