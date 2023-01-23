@@ -6,7 +6,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown/>
+        <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -26,13 +26,13 @@
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
-        <button type="button" class="btn btn-outline-success">Salvesta</button>
+        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="pictureData" class="img-thumbnail" alt="...">
+        <img :src="pictureData" class="img-thumbnail">
 
       </div>
     </div>
@@ -58,14 +58,39 @@ export default {
     return {
       locationName: '',
       numberOfAtms: 0,
-      pictureData: ''
+      pictureData: '',
+
+      atmRequest: {
+        cityId: 0,
+        locationName: '',
+        numberOfAtms: 0,
+        picture: '',
+        transactionTypes: [
+          {
+            typeId: 0,
+            typeName: '',
+            isSelected: true
+          }
+        ]
+      }
 
     }
   },
   methods: {
     setPictureBase64Data: function (pictureBase64Data) {
       this.pictureData = pictureBase64Data
-    }
+    },
+
+    addAtmLocation: function () {
+      this.$http.post("/atm/location", this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+
   }
 }
 </script>
