@@ -40,8 +40,7 @@
 
 
 
-
-</div>
+  </div>
 </template>
 
 <script>
@@ -74,6 +73,7 @@ export default {
     }
   },
   methods: {
+
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
