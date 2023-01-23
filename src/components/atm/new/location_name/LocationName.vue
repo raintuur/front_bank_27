@@ -1,11 +1,17 @@
 <template>
 
   <div v-if="locationName == ''">
-    <LocationNameDefault :location-name="locationName"/>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Asukoht</span>
+      <input v-model="locationName" type="text" class="form-control">
+    </div>
   </div>
 
   <div v-else>
-    <LocationNameSuccess :location-name="locationName"/>
+    <div class="input-group mb-3">
+      <span class="input-group-text input-filled">Asukoht</span>
+      <input v-model="locationName" type="text" class="form-control">
+    </div>
   </div>
 
 </template>

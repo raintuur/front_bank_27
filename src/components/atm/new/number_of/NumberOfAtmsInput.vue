@@ -4,18 +4,29 @@
   <AlertError :message="message"/>
 
   <div v-if="Number(numberOfAtms) == 0">
-    <NumberOfAtmsDefault :number-of-atms="numberOfAtms"/>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Automaatide arv</span>
+      <input v-model="numberOfAtms" type="number" class="form-control">
+    </div>
   </div>
 
   <div v-else-if="Number(numberOfAtms) < 0" >
 
+    <div class="input-group mb-3">
+      <span class="input-group-text input-danger">Automaatide arv</span>
+      <input v-model="numberOfAtms" type="number" class="form-control">
+    </div>
+
     <AlertDanger message="Negatiivne arv ei ole lubatud"/>
 
-    <NumberOfAtmsDanger :number-of-atms="numberOfAtms"/>
+
   </div>
 
   <div v-else>
-    <NumberOfAtmsSuccess :number-of-atms="numberOfAtms"/>
+    <div class="input-group mb-3">
+      <span class="input-group-text input-filled">Automaatide arv</span>
+      <input v-model="numberOfAtms" type="number" class="form-control">
+    </div>
   </div>
 
 </div>
