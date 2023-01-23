@@ -4,6 +4,7 @@
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
+      <!--  COLUMN 1  -->
       <div class="col-2">
         <CitiesDropdown/>
       </div>
