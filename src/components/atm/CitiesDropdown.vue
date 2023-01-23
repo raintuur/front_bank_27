@@ -21,9 +21,7 @@ export default {
   },
   methods: {
 
-
     getAllCities: function () {
-
       this.$http.get("/all/atm/city")
           .then(result => {
             this.cities = result.data
@@ -31,14 +29,12 @@ export default {
           }).catch(reason => {
         // vaid siis kui status code EI OLE 200
       })
-
     },
 
     citiesDropdownOnChangeEvent: function () {
       this.$emit('citiesDropdownOnChangeEvent', this.cityId)
-
-
     }
+
 
   },
   beforeMount() {

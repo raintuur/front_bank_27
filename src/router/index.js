@@ -11,11 +11,16 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/libraries',
+    name: 'librariesRoute',
+    component: LibrariesView
+  },
+  {
     path: '/atm/location',
     name: 'atmLocationRoute',
     component: AtmLocationView
   },
-  {
+    {
     path: '/cars',
     name: 'carsRoute',
     component: CarsView
@@ -29,11 +34,6 @@ const routes = [
     path: '/',
     name: 'homeRoute',
     component: HomeView
-  },
-  {
-    path: '/libraries',
-    name: 'librariesRoute',
-    component: LibrariesView
   },
   {
     path: '/about',

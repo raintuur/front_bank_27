@@ -2,10 +2,10 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
+      <router-link to="/libraries">Raamatukogud</router-link> |
       <router-link to="/atms">ATMs</router-link> |
       <router-link to="/atm/location">Lisa uus asukoht</router-link> |
       <router-link to="/cars">Cars</router-link> |
-      <router-link to="/libraries">Raamatukogud</router-link>
     </nav>
     <router-view/>
   </div>

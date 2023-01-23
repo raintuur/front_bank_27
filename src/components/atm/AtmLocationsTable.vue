@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-hover text-bg-dark">
+  <table class="table table-hover table-dark">
     <thead>
     <tr>
       <th scope="col">Linn</th>
@@ -41,6 +41,7 @@ export default {
     }
   },
   methods: {
+
     getAtmLocations: function (cityId) {
       this.$http.get("/atm/locations", {
             params: {
@@ -51,17 +52,18 @@ export default {
             }
           }
       ).then(response => {
-        this.atmLocations = response.data.value
+        this.atmLocations = response.data
       }).catch(error => {
         console.log(error)
       })
+
     }
+
   },
-
   beforeMount() {
-
     this.getAtmLocations(0)
   }
+
 
 }
 </script>
