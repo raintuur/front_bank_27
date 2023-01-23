@@ -9,14 +9,12 @@
       </div>
 
       <!-- COLUMN 2-->
-      <div class="col-2">
+      <div class="col-3">
+        <LocationNameInput :location-name="locationName"/>
+
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">Asukoht</span>
-          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">Automaatide arv</span>
-          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+          <span class="input-group-text">Automaatide arv</span>
+          <input type="number" class="form-control">
         </div>
 
         <div>
@@ -40,12 +38,15 @@
 <script>
 import TransactionTypesCheckBox from "@/views/TransactionTypesCheckBox.vue";
 import CitiesDropdown from "@/views/CitiesDropdown.vue";
+import LocationNameInput from "@/views/AtmLocationNameInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {CitiesDropdown, TransactionTypesCheckBox},
+  components: {LocationNameInput, CitiesDropdown, TransactionTypesCheckBox},
   data: function () {
-    return {}
+    return {
+      locationName: ''
+    }
   },
   methods: {}
 }
