@@ -1,20 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <button type="button" class="btn btn-secondary">Kõik</button>
+      <button type="button" class="btn btn-success">Kõik</button>
 
     </div>
     <div class="row">
       <button v-for="city in cities" type="button" class="btn btn-secondary" :value="city.cityId">{{city.cityName}}</button>
-
-    </div>
-    <div class="row">
-      <button v-for="city in cities" type="button" class="btn btn-secondary" :value="city.cityId">{{city.cityName}}</button>
-
-    </div>
-    <div class="row">
-      <button v-for="city in cities" type="button" class="btn btn-secondary" :value="city.cityId">{{city.cityName}}</button>
-
     </div>
 
 
@@ -38,7 +29,7 @@ export default {
     getCitiesNames: function () {
       this.$http.get("/library/cities")
           .then(response => {
-            this.cities(response.data)
+            this.cities = response.data
             // console.log(response.data)
           })
           .catch(error => {
