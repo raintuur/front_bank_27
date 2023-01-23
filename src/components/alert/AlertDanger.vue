@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'AlertError',
+  name: 'AlertDanger',
   props: {
     message: {}
   }

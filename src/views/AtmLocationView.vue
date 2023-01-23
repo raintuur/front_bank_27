@@ -10,9 +10,9 @@
 
       <!--  COLUMN 2  -->
       <div class="col-2">
-        <AtmLocationNameInput :location-name="locationName"/>
+        <LocationName :location-name="locationName"/>
 
-        <NumberOfAtmsInput :number-of-atms="numberOfAtms"/>
+        <NumberOfAtms :number-of-atms="numberOfAtms"/>
         <TransactionTypeCheckBox/>
 
 
@@ -32,12 +32,12 @@
 <script>
 import TransactionTypeCheckBox from "@/components/atm/new/TransactionTypeCheckBox.vue";
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
-import AtmLocationNameInput from "@/components/atm/new/location_name/AtmLocationNameInput.vue";
-import NumberOfAtmsInput from "@/views/NumberOfAtmsInput.vue";
+import LocationName from "@/components/atm/new/location_name/LocationName.vue";
+import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {NumberOfAtmsInput, AtmLocationNameInput, CitiesDropdown, TransactionTypeCheckBox},
+  components: {NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
       locationName: '',
