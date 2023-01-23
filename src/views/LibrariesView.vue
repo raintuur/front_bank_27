@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CityButtons from "@/views/CityButtons.vue";
+import CityButtons from "@/components/library/CityButtons.vue";
 
 export default {
   name: "LibrariesView",
