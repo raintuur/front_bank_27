@@ -13,8 +13,6 @@
 
 
     </div>
-
-
   </div>
 </template>
 
@@ -27,7 +25,6 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
-
     }
   },
   methods: {
