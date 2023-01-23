@@ -25,19 +25,19 @@
 
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
-        <div>
 
-          <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
-        </div>
+        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
 
       <!--  COLUMN 3  -->
-      <div class="col-2">
-        <img :src="pictureData" class="img-thumbnail" >
+      <div class="col-3">
+        <img :src="pictureData" class="img-thumbnail">
 
       </div>
     </div>
+
+
 
 
   </div>
@@ -56,11 +56,7 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-      locationName: '',
-      numberOfAtms: 0,
-      pictureData: '',
-
-      atmRequest:{
+      atmRequest: {
         cityId: 0,
         locationName: '',
         numberOfAtms: 0,
@@ -77,6 +73,7 @@ export default {
     }
   },
   methods: {
+
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
@@ -91,9 +88,10 @@ export default {
       })
     },
 
-    setCityId: function (cityId){
+    setCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
+
 
   }
 }
