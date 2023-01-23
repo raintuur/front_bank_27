@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import CarsView from "@/views/CarsView.vue";
 import AboutView from "@/views/AboutView.vue";
 import AtmsView from "@/views/AtmsView.vue";
-import AtmLocationView from "@/views/AtmLocationView.vue";
+import AtmLocationView from "@/components/atm/AtmLocationView.vue";
 
 Vue.use(VueRouter)
 
