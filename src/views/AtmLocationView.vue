@@ -10,7 +10,7 @@
       </div>
 
       <!--  COLUMN 2  -->
-      <div class="col-2">
+      <div class="col-3">
 
         <div class="input-group mb-3">
           <span class="input-group-text" :class="{'input-success' :locationName !== ''}">Asukoht</span>
@@ -26,14 +26,18 @@
         <TransactionTypeCheckBox/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button type="button" class="btn btn-outline-success">Salvesta</button>
+
       </div>
 
       <!--  COLUMN 3  -->
-      <div class="col-2">
+      <div class="col-3">
         <img :src="pictureData" class="img-thumbnail" alt="...">
 
       </div>
     </div>
+
+
 
 
   </div>
