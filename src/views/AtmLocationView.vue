@@ -4,16 +4,17 @@
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
+      <!--   COLUMN 1      -->
+
       <div class="col-2">
         <CitiesDropdown/>
       </div>
 
       <!--  COLUMN 2  -->
-      <!--  LOCATION NAME  -->
       <div class="col-2">
 
         <div class="input-group mb-3">
-          <span class="input-group-text">Asukoht</span>
+          <span class="input-group-text" :class="{}">Asukoht</span>
           <input v-model="locationName" type="text" class="form-control">
         </div>
 
@@ -25,13 +26,16 @@
 
         <TransactionTypeCheckBox/>
 
+        <ImageInput @pictureInputSuccess="setPictureBase64Data" />
+
+
+
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-2">
-
-
+        <img :src="pictureData" class="img-thumbnail" alt="...">
       </div>
     </div>
 
@@ -45,10 +49,11 @@ import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
+import ImageInput from "@/components/ImageInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+  components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
       locationName: '',
@@ -57,17 +62,11 @@ export default {
     }
   },
   methods: {
+    setPictureBase64Data: function (pictureData) {
+      this.pictureData = this.PictureBase64Data
 
-    someMethodName: function () {
+    }
 
-      this.$http.get("/some/path")
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch(error => {
-            console.log(error)
-          })
-    },
   }
 }
 </script>
