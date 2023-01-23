@@ -4,17 +4,23 @@ import HomeView from '../views/HomeView.vue'
 import CarsView from "@/views/CarsView.vue";
 import AboutView from "@/views/AboutView.vue";
 import AtmsView from "@/views/AtmsView.vue";
-import LocationView from "@/views/AtmLocationView.vue";
+import AtmLocationView from "@/views/AtmLocationView.vue";
 import LibrariesView from "@/views/LibrariesView.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/libraries',
+    name: 'librariesRoute',
+    component: LibrariesView
+  },
+  {
     path: '/atm/location',
     name: 'atmLocationRoute',
-    component: LocationView
-  },  {
+    component: AtmLocationView
+  },
+    {
     path: '/cars',
     name: 'carsRoute',
     component: CarsView
@@ -33,11 +39,6 @@ const routes = [
     path: '/about',
     name: 'aboutRoute',
     component: AboutView
-  },
-  {
-    path: '/libraries',
-    name: 'librariesRoute',
-    component: LibrariesView
   }
 ]
 

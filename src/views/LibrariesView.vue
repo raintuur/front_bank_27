@@ -1,23 +1,22 @@
 <template>
-  <div>
-    <div class="row">
+<div>
 
-      <div class="col-2">
-        <LibraryCityButtons/>
+  <div class="row">
 
-      </div>
 
-    </div>
+    <CityButtons/>
+
 
   </div>
 
+</div>
 </template>
 
 <script>
-import LibraryCityButtons from "@/components/Library/LibraryCityButtons.vue";
+import CityButtons from "@/components/library/CityButtons.vue";
 
 export default {
   name: "LibrariesView",
-  components: {LibraryCityButtons},
+  components: {CityButtons}
 }
 </script>

@@ -1,5 +1,4 @@
 <template>
-
   <div>
 
     <div v-for="transactionType in transactionTypes" class="form-check">
@@ -10,7 +9,6 @@
     </div>
 
   </div>
-
 </template>
 <script>
 export default {
@@ -22,12 +20,14 @@ export default {
           typeId: 0,
           typeName: '',
           isSelected: false
-        },
+        }
       ]
     }
   },
   methods: {
+
     getTransactionTypes: function () {
+
       this.$http.get("/atm/transaction-types")
           .then(response => {
             this.transactionTypes = response.data
@@ -36,9 +36,10 @@ export default {
             console.log(error)
           })
     },
+
   },
-beforeMount() {
+  beforeMount() {
     this.getTransactionTypes()
-}
+  }
 }
 </script>
