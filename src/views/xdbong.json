@@ -1,0 +1,13 @@
+{
+  "cityId": 0,
+  "locationName": "",
+  "numberOfAtms": number
+  "picture": string
+  "transactionTypes": [
+    {
+      "typeId": number
+      "typeName": string
+      "isSelected": false
+    }
+  ]
+}
