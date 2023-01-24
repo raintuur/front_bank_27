@@ -43,7 +43,7 @@ export default {
   methods: {
 
     getAtmLocations: function (cityId) {
-      this.$http.get("/atm/locations", {
+      this.$http.get("/atm/location", {
             params: {
               cityId: cityId
             },
