@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import CitiesButtons from "@/components/libraries/CitiesButtons.vue";
+import CitiesButtons from "@/components/library/CitiesButtons.vue";
 
 export default {
   name: "LibrariesView",
