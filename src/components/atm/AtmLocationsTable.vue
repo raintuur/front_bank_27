@@ -1,19 +1,19 @@
 <template>
-  <table class="table table-hover">
+  <table class="table table-hover table-dark">
     <thead>
     <tr>
-      <td>Linn</td>
-      <td>Asukoht</td>
-      <td>Teenused</td>
+      <th scope="col">Linn</th>
+      <th scope="col">Asukoht</th>
+      <th scope="col">Teenused</th>
     </tr>
     </thead>
     <tbody>
-    <tr v-for="AtmLocation in AtmLocations" :key="AtmLocations.locationId">
-      <td>{{ AtmLocation.cityName }}</td>
-      <td>{{ AtmLocation.locationName }}</td>
+
+    <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
+      <td>{{ atmLocation.cityName }}</td>
+      <td>{{ atmLocation.locationName }}</td>
       <td>
-        <div v-for="transactionType in AtmLocation.transactionTypes" class="row justify-content-center"
-             :key="transactionType.typeName">
+        <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
           {{ transactionType.typeName }}
         </div>
       </td>
@@ -26,11 +26,11 @@ export default {
   name: 'AtmLocationsTable',
   data: function () {
     return {
-      AtmLocations: [
+      atmLocations: [
         {
-          locationId: 1,
-          locationName: "",
-          cityName: "",
+          locationId: 0,
+          locationName: '',
+          cityName: '',
           transactionTypes: [
             {
               typeName: ''
@@ -41,6 +41,7 @@ export default {
     }
   },
   methods: {
+
     getAtmLocations: function (cityId) {
       this.$http.get("/atm/locations", {
             params: {
@@ -51,14 +52,18 @@ export default {
             }
           }
       ).then(response => {
-        this.AtmLocations = response.data
+        this.atmLocations = response.data
       }).catch(error => {
         console.log(error)
       })
+
     }
+
   },
   beforeMount() {
     this.getAtmLocations(0)
   }
+
+
 }
 </script>

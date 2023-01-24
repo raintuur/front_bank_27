@@ -1,69 +1,74 @@
 <template>
-
   <div>
-
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <AddNewCarInput :car="car" @clickAddCarEvent="addCar"
-                    @pictureInputSuccess="setCarImage"/>
-    <!--  Autod  -->
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
+    />
+
     <br>
+
+    <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
+
+    <img :src="car.carImage" class="img-thumbnail" >
+
+
   </div>
 
 </template>
 
+
 <script>
 import NewCarHeader from "@/components/car/NewCarHeader.vue";
-import AddNewCarInput from "@/components/car/AddNewCarInput.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
 import CarsTable from "@/components/car/CarsTable.vue";
 
 export default {
   name: 'CarsView',
-  components: {CarsTable, AddNewCarInput, NewCarHeader},
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
       car: {
-        carId: '',
+        carId: 0,
         carMake: '',
         carModel: '',
-        carImage: ''
+        carImage: '',
       },
+
       cars: [
         {
-          carId: '1',
-          carMake: 'Kia',
-          carModel: 'ceed',
-          carImage: ''
+          carId: 1,
+          carMake: 'Audi',
+          carModel: 'R8',
         },
         {
-          carId: '2',
-          carMake: 'Lexus',
-          carModel: 'IS200',
-          carImage: ''
+          carId: 2,
+          carMake: 'BMW',
+          carModel: 'X5',
         },
         {
-          carId: '3',
-          carMake: 'Volkswagen',
-          carModel: 'Golf Variant',
-          carImage: ''
+          carId: 3,
+          carMake: 'Tesla',
+          carModel: 'CyberTruck',
         }
+
       ],
-      companyName: 'AAA'
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
-
   methods: {
     addCar: function () {
-      let newCarString = JSON.stringify(this.car)
-      let parseNewCar = JSON.parse(newCarString)
-      parseNewCar.carId = this.cars.length + 1
-      this.cars.push(parseNewCar)
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
     },
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
+
   }
 }
 </script>
-

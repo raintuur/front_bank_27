@@ -1,0 +1,9 @@
+.input-success {
+    background-color: #198754 !important;
+    color: white;
+}
+
+.input-danger {
+    background-color: red !important;
+    color: white;
+}
