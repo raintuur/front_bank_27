@@ -1,5 +1,8 @@
 <template>
+
   <div>
+
+    {{roleType}}
     <!-- ROW 1   -->
     <div class="row justify-content-center">
 
@@ -27,7 +30,7 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
-
+    roleType: sessionStorage.getItem('roleType')
     }
   },
   methods: {
