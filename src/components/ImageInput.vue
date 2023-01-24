@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="file" v-on:change="handleImage" accept="image/x-png,image/jpeg">
+    <input type="file" v-on:change="handleImage" accept="image/x-png,image/jpeg,image/gif">
   </div>
 </template>
 

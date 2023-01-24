@@ -43,7 +43,6 @@ export default {
   methods: {
 
     getAtmLocations: function (cityId) {
-
       this.$http.get("/atm/locations", {
             params: {
               cityId: cityId
@@ -62,7 +61,6 @@ export default {
 
   },
   beforeMount() {
-
     this.getAtmLocations(0)
   }
 
