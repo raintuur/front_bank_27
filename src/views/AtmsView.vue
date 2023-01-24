@@ -3,21 +3,19 @@
     <!-- ROW 1   -->
     <div class="row justify-content-center">
 
-      <!-- COL 1 -->
+      <!-- COL 1   -->
       <div class="col-2">
         <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
       </div>
 
+      <!-- COL 2   -->
       <div class="col-5">
-        <!-- COL 2 -->
         <AtmLocationsTable ref="atmLocations"/>
-
       </div>
 
     </div>
+
   </div>
-
-
 </template>
 
 <script>
@@ -40,6 +38,4 @@ export default {
 
 
 }
-
 </script>
-

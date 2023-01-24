@@ -9,7 +9,6 @@
     </thead>
     <tbody>
 
-    <!-- Allolevat elementi soovime JSONI massiivi for loopiga genereerida-->
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
       <td>{{ atmLocation.locationName }}</td>
@@ -18,7 +17,6 @@
           {{ transactionType.typeName }}
         </div>
       </td>
-
     </tr>
     </tbody>
   </table>
@@ -44,37 +42,28 @@ export default {
   },
   methods: {
 
-
-    getAllAtmLocations: function () {
-      this.$http.get("/all/atm/locations").then(response => {
-        // soovime andmed kuhugi muutujasse panna
-        this.atmLocations = response.data
-      })
-          .catch(error => {
-            console.log(error)
-          })
-    },
-
     getAtmLocations: function (cityId) {
       this.$http.get("/atm/locations", {
-        params: {
-          cityId: cityId
-        },
-        headers: {
-          Prefer: 'code=200, example=' + cityId
-        }
-      }).then(response => {
+            params: {
+              cityId: cityId
+            },
+            headers: {
+              Prefer: 'code=200, example=' + cityId
+            }
+          }
+      ).then(response => {
         this.atmLocations = response.data
       }).catch(error => {
         console.log(error)
       })
+
     }
 
   },
-
   beforeMount() {
-    this.getAllAtmLocations(0)
+    this.getAtmLocations(0)
   }
+
 
 }
 </script>

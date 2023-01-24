@@ -2,14 +2,19 @@
   <div>
     <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <NewCarInput :car="car" @clickAddCarEvent="addCar"
-                            @pictureInputSuccess="setCarImage"
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
     />
-<br>
+
+    <br>
+
     <!--  ROW 2  -->
+    <!--  Autod   -->
     <CarsTable :cars="cars"/>
 
-    <img :src="car.carImage" class="img-thumbnail">
+    <img :src="car.carImage" class="img-thumbnail" >
+
 
   </div>
 
@@ -27,27 +32,29 @@ export default {
   data: function () {
     return {
       car: {
-        carID: 0,
+        carId: 0,
         carMake: '',
         carModel: '',
         carImage: '',
       },
+
       cars: [
         {
-          carID: 1,
+          carId: 1,
           carMake: 'Audi',
           carModel: 'R8',
         },
         {
-          carID: 2,
+          carId: 2,
           carMake: 'BMW',
           carModel: 'X5',
         },
         {
-          carID: 3,
+          carId: 3,
           carMake: 'Tesla',
-          carModel: 'Cybertruck',
+          carModel: 'CyberTruck',
         }
+
       ],
       companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
@@ -61,6 +68,7 @@ export default {
     setCarImage: function (carImage) {
       this.car.carImage = carImage
     }
+
   }
 }
 </script>
