@@ -93,54 +93,57 @@ export default {
 
     atLeastOneTransactionTypeIsSelected: function () {
 
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+
+        if (transactionType.isSelected) {
+          return true
+        }
+      })
+      return false
+
+  },
 
 
-      return this.atmRequest.transactionTypes[0].isSelected
-          || this.atmRequest.transactionTypes[1].isSelected
-          || this.atmRequest.transactionTypes[2].isSelected;
-    },
+  allRequiredFieldsAreFilled: function () {
+    if (this.atmRequest.cityId > 0
+        && this.atmRequest.locationName !== ''
+        && this.atmRequest.numberOfAtms > 0
+        && this.atLeastOneTransactionTypeIsSelected()
+    ) {
+
+    }
+    return false;
+  },
+
+  addAtmLocation: function () {
+    this.$refs.transactionTypes.sendTransactionTypesToParent()
+
+    // string väärtuse teisendamine integeriks
+    //                      '10' =  Number('10')    -> 10
+    this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
 
-    allRequiredFieldsAreFilled: function () {
-      if (this.atmRequest.cityId > 0
-          && this.atmRequest.locationName != ''
-          && this.atmRequest.numberOfAtms > 0
-          && this.atLeastOneTransactionTypeIsSelected()
-      ) {
+    // todo: kontrollime, kas kõik vajalikud andmed on olemas
+    if (allRequiredFieldsAreFilled()) {
+      // saadame POST sõnumi
+      this.$http.post("/atm/location", this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      });
 
-      }
-        return false;
-    },
-
-    addAtmLocation: function () {
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
-
-      // string väärtuse teisendamine integeriks
-      //                      '10' =  Number('10')    -> 10
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
-
-
-      // todo: kontrollime, kas kõik vajalikud andmed on olemas
-      if (allRequiredFieldsAreFilled()) {
-        // saadame POST sõnumi
-        this.$http.post("/atm/location", this.atmRequest
-        ).then(response => {
-          console.log(response.data)
-        }).catch(error => {
-          console.log(error)
-        });
-
-      } else {
-        // viskame aledrin
-      }
-
-    },
-
-    setCityId: function (cityId) {
-      this.atmRequest.cityId = cityId
+    } else {
+      // viskame aledrin
     }
 
+  },
 
+  setCityId: function (cityId) {
+    this.atmRequest.cityId = cityId
   }
+
+
+}
 }
 </script>
