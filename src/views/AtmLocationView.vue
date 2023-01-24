@@ -30,13 +30,14 @@
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="pictureData" class="img-thumbnail">
+        <img :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
@@ -58,6 +59,9 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+
+
+
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -75,6 +79,10 @@ export default {
     }
   },
   methods: {
+
+    navigateToAtms: function () {
+      this.$router.push({name: 'atmsRoute'})
+    },
 
     setTransactionTypes: function (transactionTypes) {
       this.atmRequest.transactionTypes = transactionTypes
