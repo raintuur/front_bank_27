@@ -23,9 +23,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes"
-                                 @transactionTypesUpdateEvent="setTransactionTypes
-"/>
+        <TransactionTypeCheckBox ref="transactionTypes"  @transactionTypesUpdateEvent="setTransactionTypes"/>
 
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
