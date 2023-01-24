@@ -92,12 +92,14 @@ export default {
     },
 
     atLeastOneTransactionTypeIsSelected: function () {
+      let atLeastOneIsSelected = false
+
       this.atmRequest.transactionTypes.forEach(transactionType => {
         if (transactionType.isSelected) {
-          return true
+          atLeastOneIsSelected = true
         }
       })
-      return false
+      return atLeastOneIsSelected
     },
 
 
