@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <AlertDanger :message="message"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -39,8 +39,6 @@
     </div>
 
 
-
-
   </div>
 </template>
 
@@ -57,6 +55,7 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      message: '',
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -76,28 +75,64 @@ export default {
   methods: {
 
     navigateToAtms: function () {
-      this.$router.push({name:'atmsRoute'})
+      this.$router.push({name: 'atmsRoute'})
     },
 
     setTransactionTypes: function (transactionTypes) {
-      this.atmRequest.transactionTypes=transactionTypes
+      this.atmRequest.transactionTypes = transactionTypes
     },
 
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
 
-    addAtmLocation: function () {
-      // todo: kaivitame child componendis meetodi sendTransactionTypesToParent
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
+    atLeastOneTransactionTypeIsSelected: function () {
+      let atLeastOneIsSelected = false;
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+        if (transactionType.isSelected) {
+          atLeastOneIsSelected = true
+        }
+      })
+      return atLeastOneIsSelected;
+    },
 
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+    allRequiredFieldsAreFilled: function () {
+      console.log("OLEN SIIN")
+      if (
+          this.atmRequest.cityId > 0
+          && this.atmRequest.locationName !== ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atLeastOneTransactionTypeIsSelected()
+      ) {
+        return true
+      }
+      return false;
+    },
+
+    postAtmLocation: function () {
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
         console.log(error)
-      })
+      });
+    },
+
+    addAtmLocation: function () {
+      // todo: kaivitame child componendis meetodi sendTransactionTypesToParent
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+      // string vaartuse teisendamine integeriks '10' = Number('10')  ->  10
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+
+      // todo: kontrollime, kas koik vajalikud andmed on olemas
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAtmLocation();
+      } else {
+        this.message = 'Taida koik kohustuslikud valjad, vali ka vahemalt 1 teenus!'
+      }
+
+
     },
 
     setCityId: function (cityId) {
