@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AlertDanger :message="message"/>
+    <AlertDanger :message="messageError"/>
+    <AlertSuccess :message="messageSuccess"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -47,14 +48,16 @@ import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import ImageInput from "@/components/ImageInput.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+  components: {ImageInput, AlertDanger, AlertSuccess, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-      message: '',
+      messageError: '',
+      messageSuccess: '',
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -108,9 +111,13 @@ export default {
 
     postAddAtmLocation: function () {
       // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest
-      ).then(response => {
-        console.log(response.data)
+      this.$http.post("/atm/location", this.atmRequest, {
+        headers: {
+          Prefer: 'code=403, example=403'
+        }
+      })
+          .then(response => {
+            this.messageSuccess = 'Uus sularahaautomaat on edukalt lisatud!'
       }).catch(error => {
         console.log(error)
       });
@@ -118,6 +125,8 @@ export default {
 
 
     addAtmLocation: function () {
+      this.messageSuccess = ''
+      this.messageError = ''
       this.$refs.transactionTypes.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
@@ -125,7 +134,7 @@ export default {
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
       } else {
-        //viskab alerdi
+        this.messageError = 'Täida kõik kohustuslikud väljad ning vali ka vähemalt 1 teenus!'
       }
 
     },
