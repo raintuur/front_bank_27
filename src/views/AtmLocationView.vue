@@ -85,14 +85,26 @@ export default {
       this.atmRequest.picture = pictureBase64Data
     },
 
+    allRequiredFieldsAreFilled: function () {
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName != ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atmRequest.transactionTypes[0].isSelected
+          || this.atmRequest.transactionTypes[1].isSelected
+          || this.atmRequest.transactionTypes[2].isSelected)
+
+    }
+
     addAtmLocation: function () {
 
       this.$refs.transactionTypes.sendTransactionTypesToParent()
 
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
+
+
       // todo: kontrolli kas kõik vajalikud andmed/sisestused on olemas
-      if (this.atmRequest.cityId !== 0) {
+      if (allRequiredFieldsAreFilled()) {
       // saadame POST sõnumi
 
       } else {
