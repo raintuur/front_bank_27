@@ -87,11 +87,32 @@ export default {
       this.atmRequest.picture = pictureBase64Data
     },
 
-    addAtmLocation: function () {
-      // todo: käivitame child componentis meetodi sendTransactionTypesToParent
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
+    allRequiredFieldsAreFilled: function () {
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName != ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atmRequest.transactionTypes[0].isSelected
+      ) {
 
+      }
+      return false;
+    },
+
+    addAtmLocation: function () {
+
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+    // '10' teeb stringi numbriks
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+
+
+      // todo: kontrollime, kas kõik vajalikud andmed/sisestused on olemas
+      if (allRequiredFieldsAreFilled()) {
+        //saadame POST sõnumi
+      } else {
+        //viskame alerdi
+      }
+
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
