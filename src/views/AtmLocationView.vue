@@ -23,16 +23,17 @@
         </div>
 
 
-        <TransactionTypeCheckBox/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tyhista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="pictureData" class="img-thumbnail">
+        <img :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
@@ -74,11 +75,22 @@ export default {
   },
   methods: {
 
+    navigateToAtms: function () {
+      this.$router.push({name:'atmsRoute'})
+    },
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes=transactionTypes
+    },
+
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
 
     addAtmLocation: function () {
+      // todo: kaivitame child componendis meetodi sendTransactionTypesToParent
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
