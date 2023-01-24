@@ -1,7 +1,7 @@
 <template>
   <div>
     <AlertDanger :message="messageError"/>
-    <AlertSuccess :message="messageSuccess" />
+    <AlertSuccess :message="messageSuccess"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -24,9 +24,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes"
-                                 @transactionTypesUpdateEvent="setTransactionTypes
-"/>
+        <TransactionTypeCheckBox ref="transactionTypes"  @transactionTypesUpdateEvent="setTransactionTypes"/>
 
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
@@ -63,7 +61,8 @@ export default {
     ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-      message: '',
+      messageError: '',
+      messageSuccess: '',
 
       atmRequest: {
         cityId: 0,
@@ -115,16 +114,16 @@ export default {
     },
 
     postAddAtmLocation: function () {
+
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
-        this.messageSuccess = 'Uus ATM on edukalt lisatud.'
+        this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
         console.log(error)
       });
-
-
     },
+
 
     addAtmLocation: function () {
       this.messageSuccess = ''
@@ -138,7 +137,6 @@ export default {
         this.postAddAtmLocation();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
-
       }
 
     },
