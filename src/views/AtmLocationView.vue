@@ -1,7 +1,8 @@
 <template>
   <div>
-    <AlertDanger :message="messageError"/>
     <AlertSuccess :message="messageSuccess"/>
+    <AlertDanger :message="messageError"/>
+
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -24,7 +25,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes"  @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
 
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
@@ -58,7 +59,8 @@ export default {
   name: "AtmLocationView",
   components: {
     AlertSuccess,
-    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
+  },
   data: function () {
     return {
       messageError: '',
@@ -112,16 +114,19 @@ export default {
           this.atmRequest.numberOfAtms > 0 &&
           this.atLeastOneTransactionTypeIsSelected();
     },
+
     postAddAtmLocation: function () {
       let preferExample = 'code=200'
-      if(this.atmRequest.locationName === 'Rimi') {
-        preferExample = "code=403"
+
+      if (this.atmRequest.locationName === 'Rimi') {
+        preferExample = 'code=403, example=403';
       }
+
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest, {
-        headers: {
-          Prefer: preferExample
-        }
+            headers: {
+              Prefer: preferExample
+            }
           }
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
@@ -129,6 +134,7 @@ export default {
         this.messageError = error.response.data.errorMessage
       });
     },
+
 
     addAtmLocation: function () {
       this.messageSuccess = ''
@@ -143,6 +149,7 @@ export default {
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
+
     },
 
     setCityId: function (cityId) {
