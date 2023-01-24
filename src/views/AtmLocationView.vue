@@ -23,21 +23,20 @@
         </div>
 
 
-        <TransactionTypeCheckBox/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-secondary">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="pictureData" class="img-thumbnail">
+        <img :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
-
-
 
 
   </div>
@@ -74,12 +73,33 @@ export default {
   },
   methods: {
 
+    navigateToAtms: function () {
+      this.$router.push({name: 'atmsRoute', params: {cityId: '38'}})
+    },
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
+
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
 
     addAtmLocation: function () {
+
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+      // todo: kontrolli kas kõik vajalikud andmed/sisestused on olemas
+      if (this.atmRequest.cityId !== 0) {
+      // saadame POST sõnumi
+
+      } else {
+      //   viskame alerti
+
+      }
+
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
