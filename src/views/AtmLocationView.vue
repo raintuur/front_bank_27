@@ -54,6 +54,7 @@ import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
+
 export default {
   name: "AtmLocationView",
   components: {
@@ -114,13 +115,22 @@ export default {
     },
 
     postAddAtmLocation: function () {
+      let preferExample = 'code=200'
 
+      if (this.atmRequest.locationName === 'Rimi') {
+        preferExample = 'code=403, example=403';
+      }
       // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest
+      this.$http.post("/atm/location", this.atmRequest, {
+        headers: {
+          Prefer: preferExample
+        }
+      }
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
-        console.log(error)
+
+        this.messageErr = error.response.data.errorMessage
       });
     },
 
