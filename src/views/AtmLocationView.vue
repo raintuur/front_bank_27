@@ -1,6 +1,6 @@
 <template>
   <div>
-<AlertDanger message = />
+    <AlertDanger :message="message"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -86,8 +86,6 @@ export default {
     },
 
     atLeastOneTransactionTypeIsSelected: function () {
-      let atLeastOneIsSelected = false;
-
       this.atmRequest.transactionTypes.forEach(transactionType => {
         if (transactionType.isSelected) {
           return true
@@ -97,40 +95,39 @@ export default {
     },
 
     allRequiredFieldsAreFilled: function () {
+      console.log("OLEN SIIN")
       if (this.atmRequest.cityId > 0
           && this.atmRequest.locationName !== ''
           && this.atmRequest.numberOfAtms > 0
           && this.atLeastOneTransactionTypeIsSelected()
-      )
+      ){
+        return true
+      }
       return false;
     },
 
-    addAtmLocation: function () {
-      // todo: käivitame child component'is meetodi sendTransactionTypesToParent
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
-      // string väärtuse teisendamine integeriks
-      // '10' = Number('10') --> 10
-
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
-      // todo: kontrollida, et kõik väljad oleksid täidetud
-      if (this.allRequiredFieldsAreFilled()) {
-        //saadame POST sõnumi
-        this.$http.post(/atm/location, this.atmRequest
-      ).then(response => {
-        console.log(response.data)
-        }).catch(error => {
-          console.log(error)
-        });
-      } else {
-        //viskab alerdi
-      }
-
+    postAddAtmLocation: function () {
+      // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
         console.log(error)
-      })
+      });
+    },
+
+
+    addAtmLocation: function () {
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAddAtmLocation();
+      } else {
+        //viskab alerdi
+      }
+
     },
 
     setCityId: function (cityId) {
