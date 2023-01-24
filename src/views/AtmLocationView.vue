@@ -151,7 +151,9 @@ export default {
       if (this.allRequiredFieldsAreFilled()) {
         // saadame POST sõnumi
         this.postAddAtmLocation();
-
+        setTimeout(()  => {
+          this.$router.go(0)
+        }, 2000)
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
