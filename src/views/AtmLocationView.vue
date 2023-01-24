@@ -1,9 +1,10 @@
 <template>
   <div>
-
+    <AlertDanger :message="message"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
+      <!--  COLUMN 1  -->
       <div class="col-2">
         <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
@@ -12,28 +13,33 @@
       <div class="col-3">
 
         <div class="input-group mb-3">
-          <span class="input-group-text"
-                :class="{'input-success': atmRequest.locationName !== ''}">Asukoht</span>
+          <span class="input-group-text" :class="{'input-success' :atmRequest.locationName !== ''}">Asukoht</span>
           <input v-model="atmRequest.locationName" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0 }">Automaatide arv</span>
+          <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
           <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
         </div>
-        <TransactionTypeCheckBox/>
+
+
+        <TransactionTypeCheckBox ref="transactionTypes"
+                                 @transactionTypesUpdateEvent="setTransactionTypes
+"/>
+
+
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
-
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
         <img :src="atmRequest.picture" class="img-thumbnail">
-      </div>
 
+      </div>
     </div>
 
 
@@ -53,6 +59,8 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      message: '',
+
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -70,23 +78,70 @@ export default {
     }
   },
   methods: {
-    setPictureBase64Data: function (picture64Data) {
-      this.atmRequest.picture = picture64Data
+
+    navigateToAtms: function () {
+      this.$router.push({name: 'atmsRoute'})
     },
-    addAtmLocation: function () {
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
+
+    setPictureBase64Data: function (pictureBase64Data) {
+      this.atmRequest.picture = pictureBase64Data
+    },
+
+    atLeastOneTransactionTypeIsSelected: function () {
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+        if (transactionType.isSelected) {
+          return true
+        }
+      })
+      return false
+    },
+
+
+    allRequiredFieldsAreFilled: function () {
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName !== ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atLeastOneTransactionTypeIsSelected()
+      ) {
+
+      }
+      return false;
+    },
+
+    postAddAtmLocation: function () {
+      // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
         console.log(error)
-      })
+      });
     },
+
+
+    addAtmLocation: function () {
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAddAtmLocation();
+      } else {
+
+
+      }
+
+    },
+
     setCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
 
-  }
 
+  }
 }
 </script>
