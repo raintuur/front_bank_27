@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AlertDanger :message="message"/>
 
     <!--  ROW 1  -->
     <div class="row justify-content-center">
@@ -23,21 +24,23 @@
         </div>
 
 
-        <TransactionTypeCheckBox/>
+        <TransactionTypeCheckBox ref="transactionTypes"
+                                 @transactionTypesUpdateEvent="setTransactionTypes"/>
+
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
+
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="pictureData" class="img-thumbnail">
+        <img :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
-
-
 
 
   </div>
@@ -51,11 +54,13 @@ import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 
+
 export default {
   name: "AtmLocationView",
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      message: '',
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -73,13 +78,7 @@ export default {
     }
   },
   methods: {
-
-    setPictureBase64Data: function (pictureBase64Data) {
-      this.atmRequest.picture = pictureBase64Data
-    },
-
-    addAtmLocation: function () {
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+    postAddAtmLocation: function () {
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
@@ -88,11 +87,59 @@ export default {
       })
     },
 
+    navigateToAtms: function () {
+      this.$router.push({name: 'atmsRoute'})
+    },
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
+
+    setPictureBase64Data: function (pictureBase64Data) {
+      this.atmRequest.picture = pictureBase64Data
+    },
+
+    atLeastOneTransactionTypeIsSelected: function () {
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+        isOneSelected:  false
+            if (transactionType.isSelected) {
+              console.log("true")
+
+              return true
+            } else {
+              console.log("false")
+              return false
+            }
+          }
+      )
+    },
+
+    allRequiredFieldsAreFilled: function () {
+      console.log("Olen Siin")
+      return (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName !== ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atLeastOneTransactionTypeIsSelected)
+    },
+
+    addAtmLocation: function () {
+
+      // Käivitame child componendis meetodi sendTransactionTypesToParent.
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+
+      // Siin on väärtuseks veel '10'.
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+      // Kontrollime, kas kõik vajalikud sisendandmed on olmas.
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAddAtmLocation()
+      } else {
+        this.message = 'Täida kõik kohustuslikud väljad, vali vähemalt üks teenus!'
+      }
+    },
     setCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
-
-
   }
 }
 </script>
