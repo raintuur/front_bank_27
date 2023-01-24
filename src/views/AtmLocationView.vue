@@ -118,7 +118,7 @@ export default {
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
-        this.messageSuccess = "Uus ATM on edukalt lisatud"
+        this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
         console.log(error)
       });
