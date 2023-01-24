@@ -23,8 +23,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes"
-                                 @transactionTypesUpdateEvent="setTransactionTypes
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes
 "/>
 
 
@@ -101,22 +100,16 @@ export default {
         }
       })
 
-      return false
+      return atLeastOneIsSelected
     },
 
 
     allRequiredFieldsAreFilled: function () {
-      console.log("olen siin")
-      if (this.atmRequest.cityId > 0 &&
+      return (this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected()
-      ) {
-        console.log("returned true")
-        return true
-      }
-        console.log("returned false")
-        return false;
+          this.atLeastOneTransactionTypeIsSelected())
+
     },
 
     postAddAtmLocation: function () {
