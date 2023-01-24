@@ -1,6 +1,6 @@
 <template>
   <div>
-
+<AlertDanger message = />
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -23,23 +23,21 @@
         </div>
 
 
-        <TransactionTypeCheckBox/>
+        <TransactionTypeCheckBox ref="transactionTypes"
+                                 @transactionTypesUpdateEvent="setTransactionTypes"/>
+
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-secondary">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="pictureData" class="img-thumbnail">
-
+        <img :src="atmRequest.picture" class="img-thumbnail" alt="">
       </div>
     </div>
-
-
-
-
   </div>
 </template>
 
@@ -56,6 +54,7 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      message: '',
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -74,12 +73,58 @@ export default {
   },
   methods: {
 
+    navigateToAtms: function () {
+      this.$router.push({name: 'atmsRoute'})
+    },
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
+
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
 
+    atLeastOneTransactionTypeIsSelected: function () {
+      let atLeastOneIsSelected = false;
+
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+        if (transactionType.isSelected) {
+          return true
+        }
+      })
+      return false
+    },
+
+    allRequiredFieldsAreFilled: function () {
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName !== ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atLeastOneTransactionTypeIsSelected()
+      )
+      return false;
+    },
+
     addAtmLocation: function () {
+      // todo: käivitame child component'is meetodi sendTransactionTypesToParent
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+      // string väärtuse teisendamine integeriks
+      // '10' = Number('10') --> 10
+
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+      // todo: kontrollida, et kõik väljad oleksid täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        //saadame POST sõnumi
+        this.$http.post(/atm/location, this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+        }).catch(error => {
+          console.log(error)
+        });
+      } else {
+        //viskab alerdi
+      }
+
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
