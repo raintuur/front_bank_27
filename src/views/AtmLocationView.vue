@@ -23,10 +23,14 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypes"
+                                 @transactionTypesUpdateEvent="setTransactionTypes
+"/>
+
+
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
-        <button v-on:click="navigateToAtms" type="button" class="btn btn-light">Tühista</button>
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
       </div>
@@ -55,6 +59,9 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+
+
+
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -86,7 +93,7 @@ export default {
     },
 
     addAtmLocation: function () {
-      //käivitame child komponentis meetodi sendTransactionTypesToParent
+      // todo: käivitame child component'is meetodi sendTransactionTypesToParent
       this.$refs.transactionTypes.sendTransactionTypesToParent()
 
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
