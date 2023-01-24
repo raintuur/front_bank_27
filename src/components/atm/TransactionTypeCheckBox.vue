@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h5>Teenused:</h5>
 
     <div v-for="transactionType in transactionTypes" class="form-check">
       <input v-model="transactionType.isSelected" class="form-check-input" type="checkbox">

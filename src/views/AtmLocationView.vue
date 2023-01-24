@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <AlertDanger :message="message"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -56,6 +56,8 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
+      message:'',
+
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -75,7 +77,7 @@ export default {
   methods: {
 
     navigateToAtms: function () {
-    this.$router.push({name: 'atmsRoute'})
+      this.$router.push({name: 'atmsRoute'})
     },
 
     setTransactionTypes: function (transactionTypes) {
@@ -85,16 +87,53 @@ export default {
     setPictureBase64Data: function (picture64Data) {
       this.atmRequest.picture = picture64Data
     },
-    addAtmLocation: function () {
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
+    atLeastOneTransactionTypeisSelected: function () {
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+        if (transactionType.isSelected) {
+          return true
+        }
+      })
+      return false
+    },
 
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+    allRequiredFieldsAreFilled: function () {
+      console.log("OLEN SIIN")
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName !== ''
+          && this.atmRequest.numberOfAtms > 0
+          && (this.atLeastOneTransactionTypeisSelected())
+      ) {
+        return true
+      }
+      return false
+    },
+
+    postAddAtmLocation: function () {
+      // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
         console.log(error)
       })
+    }, addAtmLocation: function () {
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+      // string väärtuse teisendamine integeriks
+      //                    '10'   = Number('10')  -> 10
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+
+      // kontrollime kas kõik vajalikud väljad on täidetud nõuetekohaselt
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAddAtmLocation();
+      } else {
+        //viskame alerti
+        this.message ='Täida kõik kohustuslikud väljad, vali vähemalt üks teenus'
+
+
+      }
+
+
     },
     setCityId: function (cityId) {
       this.atmRequest.cityId = cityId
