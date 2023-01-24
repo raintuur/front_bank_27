@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <AlertDanger :message="message"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -59,7 +59,7 @@ export default {
   components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-
+      message: '',
 
       atmRequest: {
         cityId: 0,
@@ -92,46 +92,43 @@ export default {
     },
 
     atLeastOneTransactionTypeIsSelected: function () {
-
-
-
-      return this.atmRequest.transactionTypes[0].isSelected
-          || this.atmRequest.transactionTypes[1].isSelected
-          || this.atmRequest.transactionTypes[2].isSelected;
+      this.atmRequest.transactionTypes.forEach(transactionType => {
+        if (transactionType.isSelected) {
+          return true
+        }
+      })
+      return false
     },
 
 
     allRequiredFieldsAreFilled: function () {
       if (this.atmRequest.cityId > 0
-          && this.atmRequest.locationName != ''
+          && this.atmRequest.locationName !== ''
           && this.atmRequest.numberOfAtms > 0
           && this.atLeastOneTransactionTypeIsSelected()
       ) {
 
       }
-        return false;
+      return false;
     },
 
-    addAtmLocation: function () {
+    postAddAtmLocation: function () {
+      // saadame POST sõnumi
+      this.$http.post("/atm/location", this.atmRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      });
+    }, addAtmLocation: function () {
       this.$refs.transactionTypes.sendTransactionTypesToParent()
-
-      // string väärtuse teisendamine integeriks
-      //                      '10' =  Number('10')    -> 10
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
-
-      // todo: kontrollime, kas kõik vajalikud andmed on olemas
-      if (allRequiredFieldsAreFilled()) {
-        // saadame POST sõnumi
-        this.$http.post("/atm/location", this.atmRequest
-        ).then(response => {
-          console.log(response.data)
-        }).catch(error => {
-          console.log(error)
-        });
-
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAddAtmLocation();
       } else {
-        // viskame aledrin
+
       }
 
     },
