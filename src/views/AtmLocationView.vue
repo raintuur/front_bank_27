@@ -1,7 +1,6 @@
 <template>
   <div>
     <AlertDanger :message="message"/>
-
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -95,7 +94,7 @@ export default {
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
 
-      this.atmRequest.transactionTypes.forEach(transaction => {
+      this.atmRequest.transactionTypes.forEach(transactionType => {
         if (transactionType.isSelected) {
           atLeastOneIsSelected = true
         }
@@ -105,44 +104,32 @@ export default {
 
 
     allRequiredFieldsAreFilled: function () {
-      if (
-          this.atmRequest.cityId > 0
-          && this.atmRequest.locationName !== ''
-          && this.atmRequest.numberOfAtms > 0
-          && this.atLeastOneTransactionTypeIsSelected();
-      ) {
-
-      {
-      return true }
-
-      {
-      return false
-    }
+      return this.atmRequest.cityId > 0 &&
+          this.atmRequest.locationName !== '' &&
+          this.atmRequest.numberOfAtms > 0 &&
+          this.atLeastOneTransactionTypeIsSelected();
+    },
 
     postAddAtmLocation: function () {
       // saadame POST sõnumi
-      console.log("Olen siin.")
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
       }).catch(error => {
         console.log(error)
       });
+    },
 
 
-    }, addAtmLocation: function () {
+    addAtmLocation: function () {
       this.$refs.transactionTypes.sendTransactionTypesToParent()
-
-      // string väärtuse teisendamine integeriks
-      //                      '10' =  Number('10')    -> 10
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
-
-      // todo: kontrollime, kas kõik vajalikud andmed on olemas
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
       } else {
-        this.message = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus.'
+        this.message = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
 
       }
 
