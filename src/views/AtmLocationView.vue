@@ -114,12 +114,19 @@ export default {
     },
 
     postAddAtmLocation: function () {
-
+      let preferExample = 'code=403, example=403'
       // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest
-      ).then(response => {
+      this.$http.post("/atm/location", this.atmRequest, config: {
+      headers: {
+        Prefer: preferExample
+      }
+      }),
+
+
+    ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
+        this.messageError = error.response.data.errorMessage
         console.log(error)
       });
     },
