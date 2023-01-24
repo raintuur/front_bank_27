@@ -61,7 +61,6 @@ export default {
     return {
 
 
-
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -92,11 +91,36 @@ export default {
       this.atmRequest.picture = pictureBase64Data
     },
 
+
+
+    allReiquiredFieldsAreFilled: function () {
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName != ''
+          && this.atmRequest.numberOfAtms) > 0
+        &&
+      this.atmRequest.transactionTypes[0].isSelected ||
+
+        return false;
+    },
+
     addAtmLocation: function () {
       // todo: käivitame child component'is meetodi sendTransactionTypesToParent
       this.$refs.transactionTypes.sendTransactionTypesToParent()
 
+      //string väärtuse teisendamine:
+      //                    '10'   =    Number('10')    -> 10
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+      //todo: kontrollime vajalike andmete olemasolu
+      if (allReiquiredFieldsAreFilled()) {
+        //saadame POST sõnumi
+
+      } else {
+        //viskame alerdi
+
+      }
+
+
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         console.log(response.data)
