@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Kodu</router-link> |
+      <router-link to="/">Kodu (ikoon)</router-link> |
       <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Lisa uus asukoht</router-link> |
-      <router-link to="/login">Logi sisse</router-link>
+      <router-link to="/login">Sisse logimine</router-link>
     </nav>
     <router-view/>
   </div>

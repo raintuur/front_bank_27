@@ -1,12 +1,14 @@
 <template>
-  <div> class = "row
+  <div class="row justify-content-center">
+
 
     <div class="col-4 ">
+
 
       <form class="px-4 py-3">
         <div class="mb-3">
           <label class="form-label">Kasutajanimi</label>
-          <input v-model="username" type="text" class="form-control" placeholder="Mart123">
+          <input v-model="username" type="text" class="form-control"placeholder="Mart123">
         </div>
         <div class="mb-3">
           <label class="form-label">Parool</label>
@@ -19,9 +21,7 @@
       <a class="dropdown-item" href="#">New around here? Sign up</a>
     </div>
 
-
   </div>
-
 </template>
 
 <script>
@@ -32,44 +32,30 @@ export default {
       username: '',
       password: '',
     }
-
   },
+
   methods: {
     login: function () {
-      this.$http.get(url
-    :
-      "/login", config
-    :
-      {
-        params: {
-
-          username: this.username,
-              password
-        :
-          this.password
-        }
-      }
-
-    ).
-      then(response => {
+      this.$http.get("/login", {
+            params: {
+              username: this.username,
+              password: this.password
+            }
+          }
+      ).then(response => {
         let userId = response.data.userId;
         let roleType = response.data.roleType;
 
-        sessionStorage.setItem('userId', )
+        sessionStorage.setItem('userId', userId)
+        sessionStorage.setItem('roleType', roleType)
+        localStorage.setItem('lang', 'EST')
 
-        console.log(response.data)
+        this.$router.push({name: 'atmsRoute'})
+
       }).catch(error => {
         console.log(error)
       })
     },
-
-
-)
-}
-}
+  }
 }
 </script>
-
-<style scoped>
-
-</style>
