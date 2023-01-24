@@ -117,20 +117,22 @@ export default {
     },
 
     postAddAtmLocation: function () {
-        let preferExample = 'code=200'
-        if (this.atmRequest.locationName === 'Rimi') {
-          preferExample = 'code=403, example=403'
-        }
+      let preferExample = 'code=200'
 
-      this.$http.post('/atm/location', this.atmRequest, {
-        headers: {
-          Prefer: preferExample
-        }
+      if (this.atmRequest.locationName === 'Rimi') {
+        preferExample = 'code=403, example=403';
       }
+
+      // saadame POST sõnumi
+      this.$http.post("/atm/location", this.atmRequest, {
+            headers: {
+              Prefer: preferExample
+            }
+          }
       ).then(response => {
-        this.messageSuccess = 'Uus ATM edukalt lisatud'
+        this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
-        this.messageError = error.response.data.ErrorMessage
+        this.messageError = error.response.data.errorMessage
       });
 
 
@@ -151,7 +153,7 @@ export default {
         this.postAddAtmLocation();
 
       } else {
-        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus'
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
 
     },
