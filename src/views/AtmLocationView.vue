@@ -120,7 +120,10 @@ export default {
       }).catch(error => {
         console.log(error)
       });
-    }, addAtmLocation: function () {
+    },
+
+
+    addAtmLocation: function () {
       this.$refs.transactionTypes.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
@@ -128,6 +131,7 @@ export default {
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
       } else {
+
 
       }
 
