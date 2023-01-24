@@ -23,7 +23,11 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypes"
+                                 @transactionTypesUpdateEvent="setTransactionTypes
+"/>
+
+
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
@@ -36,8 +40,6 @@
 
       </div>
     </div>
-
-
 
 
   </div>
@@ -73,6 +75,10 @@ export default {
     }
   },
   methods: {
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
 
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
