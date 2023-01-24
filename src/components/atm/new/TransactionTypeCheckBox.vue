@@ -37,6 +37,10 @@ export default {
           })
     },
 
+    sendTransactionTypesToParent: function () {
+      this.$emit('transactionTypesUpdateEvent', this.transactionTypes)
+    }
+
   },
   beforeMount() {
     this.getTransactionTypes()
