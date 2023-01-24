@@ -1,7 +1,8 @@
 <template>
   <div>
-    <AlertDanger :message="messageError"/>
     <AlertSuccess :message="messageSuccess"/>
+    <AlertDanger :message="messageError"/>
+
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -24,7 +25,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes"  @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
 
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
@@ -54,12 +55,12 @@ import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
-
 export default {
   name: "AtmLocationView",
   components: {
     AlertSuccess,
-    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
+  },
   data: function () {
     return {
       messageError: '',
@@ -120,17 +121,17 @@ export default {
       if (this.atmRequest.locationName === 'Rimi') {
         preferExample = 'code=403, example=403';
       }
+
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest, {
-        headers: {
-          Prefer: preferExample
-        }
-      }
+            headers: {
+              Prefer: preferExample
+            }
+          }
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
-
-        this.messageErr = error.response.data.errorMessage
+        this.messageError = error.response.data.errorMessage
       });
     },
 
