@@ -18,15 +18,16 @@
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' :Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
-          <input v-model="atmRequest.numberOfAtms"  type="number" min="0" class="form-control">
+          <span class="input-group-text"
+                :class="{'input-success' :Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
+          <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
         </div>
 
 
         <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionType"/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
-          <button v-on:click="navigateToAtms" type="button" class="btn btn-light">Tühista</button>
-          <button v-on:click="addAtmLocation" type="button" class="btn btn-success">Salvesta</button>
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-light">Tühista</button>
+        <button v-on:click="addAtmLocation" type="button" class="btn btn-success">Salvesta</button>
       </div>
 
       <!--  COLUMN 3  -->
@@ -82,17 +83,36 @@ export default {
     setPictureBase64Data: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
+
+    allRequiredFieldsAreFilled: function () {
+      if (this.atmRequest.cityId > 0
+          && this.atmRequest.locationName != ''
+          && this.atmRequest.numberOfAtms > 0
+          && this.atLeastOneTransactionTypeIsSlected()
+
+      ){
+        return false;
+      }
+
+    },
+
     addAtmLocation: function () {
-      // todo: käivitame child componentis meetodi 'sendTransactionTypesToParent'
       this.$refs.transactionTypes.sendTransactionTypesToParent()
 
-      this.atmRequest.numberOfAtms = Number()
-      this.$http.post("/atm/location", this.atmRequest
-      ).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+      if (allRequiredFieldsAreFilled()) {
+        this.$http.post("/atm/location", this.atmRequest
+        ).then(response => {
+          console.log(response.data)
+        }).catch(error => {
+          console.log(error)
+        });
+
+      } else {
+
+      }
+
+
     },
 
     setCityId: function (cityId) {
