@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AlertDanger :message="message"/>
+    <AlertDanger :message="messageError"/>
+    <AlertSuccess :message="messageSuccess"/>
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -51,13 +52,17 @@ import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+  components: {
+    AlertSuccess,
+    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
   data: function () {
     return {
-      message: '',
+      messageError: '',
+      messageSuccess: '',
 
       atmRequest: {
         cityId: 0,
@@ -107,19 +112,28 @@ export default {
           this.atmRequest.numberOfAtms > 0 &&
           this.atLeastOneTransactionTypeIsSelected();
     },
-
     postAddAtmLocation: function () {
+      let preferExample = 'code=200'
+      if(this.atmRequest.locationName === 'Rimi') {
+        preferExample = "code=403"
+      }
       // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest
+      this.$http.post("/atm/location", this.atmRequest, {
+        headers: {
+          Prefer: preferExample
+        }
+          }
       ).then(response => {
-        console.log(response.data)
+        this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
-        console.log(error)
+        this.messageError = error.response.data.errorMessage
       });
     },
 
-
     addAtmLocation: function () {
+      this.messageSuccess = ''
+      this.messageError = ''
+
       this.$refs.transactionTypes.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
@@ -127,10 +141,8 @@ export default {
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
       } else {
-        this.message = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
-
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
-
     },
 
     setCityId: function (cityId) {
