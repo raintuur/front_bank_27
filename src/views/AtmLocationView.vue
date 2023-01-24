@@ -23,7 +23,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
@@ -79,6 +79,9 @@ export default {
     },
 
     addAtmLocation: function () {
+      // todo: käivitame child component'is meetodi sendTransactionTypesToParent
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
