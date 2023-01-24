@@ -89,37 +89,40 @@ export default {
     },
 
     atLeastOneTransactionTypeIsSelected: function () {
+      let atLeastOneIsSelected = false
+
       this.atmRequest.transactionTypes.forEach(transactionType => {
         if (transactionType.isSelected) {
-          return true
+          atLeastOneIsSelected = true
         }
       })
-      return false
+      return atLeastOneIsSelected
     },
 
     allRequiredFieldsAreFilled: function () {
-      console.log("OLEN SIIN")
-      if (this.atmRequest.cityId > 0
-          && this.atmRequest.locationName !== ''
-          && this.atmRequest.numberOfAtms > 0
-          && this.atLeastOneTransactionTypeIsSelected()
-      ){
-        return true
-      }
-      return false;
+      return this.atmRequest.cityId > 0 &&
+          this.atmRequest.locationName !== '' &&
+          this.atmRequest.numberOfAtms > 0 &&
+          this.atLeastOneTransactionTypeIsSelected();
     },
 
     postAddAtmLocation: function () {
+      let preferExample = 'code=200'
+
+      if (this.atmRequest.locationName === 'Rimi') {
+        preferExample = 'code=403, example=403';
+      }
+
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest, {
-        headers: {
-          Prefer: 'code=403, example=403'
-        }
-      })
-          .then(response => {
-            this.messageSuccess = 'Uus sularahaautomaat on edukalt lisatud!'
+            headers: {
+              Prefer: preferExample
+            }
+          }
+      ).then(response => {
+        this.messageSuccess = 'Uus ATM on edukalt lisatud'
       }).catch(error => {
-        console.log(error)
+        this.messageError = error.response.data.errorMessage
       });
     },
 
@@ -133,6 +136,7 @@ export default {
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
+        setTimeout(() =>{this.$router.go(0)}, 4000)
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad ning vali ka vähemalt 1 teenus!'
       }
