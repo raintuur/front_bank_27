@@ -27,6 +27,7 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
+      roleType: sessionStorage.getItem('roleType')
 
     }
   },
