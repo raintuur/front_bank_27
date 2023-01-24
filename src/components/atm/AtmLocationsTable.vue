@@ -52,7 +52,7 @@ export default {
             }
           }
       ).then(response => {
-        this.atmLocations = response.data.value
+        this.atmLocations = response.data
       }).catch(error => {
         console.log(error)
       })

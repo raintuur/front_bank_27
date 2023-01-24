@@ -21,9 +21,12 @@
           <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0 }">Automaatide arv</span>
           <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
         </div>
-        <TransactionTypeCheckBox/>
+        <TransactionTypeCheckBox ref="transactionTypes"
+                                 @transactionTypesUpdateEvent="setTransactionTypes"/>
+
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
+        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">´Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
 
 
@@ -70,10 +73,21 @@ export default {
     }
   },
   methods: {
+
+    navigateToAtms: function () {
+    this.$router.push({name: 'atmsRoute'})
+    },
+
+    setTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
+
     setPictureBase64Data: function (picture64Data) {
       this.atmRequest.picture = picture64Data
     },
     addAtmLocation: function () {
+      this.$refs.transactionTypes.sendTransactionTypesToParent()
+
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
       this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
@@ -85,8 +99,8 @@ export default {
     setCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
-
   }
+
 
 }
 </script>
