@@ -104,14 +104,10 @@ export default {
 
 
     allRequiredFieldsAreFilled: function () {
-      if (this.atmRequest.cityId > 0
-          && this.atmRequest.locationName !== ''
-          && this.atmRequest.numberOfAtms > 0
-          && this.atLeastOneTransactionTypeIsSelected()
-      ) {
-
-      }
-      return false;
+      return this.atmRequest.cityId > 0 &&
+          this.atmRequest.locationName !== '' &&
+          this.atmRequest.numberOfAtms > 0 &&
+          this.atLeastOneTransactionTypeIsSelected();
     },
 
     postAddAtmLocation: function () {
@@ -133,7 +129,7 @@ export default {
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
       } else {
-
+        this.message = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
 
       }
 
