@@ -63,6 +63,7 @@ export default {
   },
   data: function () {
     return {
+      isEdit: this.$route.query.isEdit,
       messageError: '',
       messageSuccess: '',
 
@@ -160,6 +161,9 @@ export default {
     }
 
 
+  },
+
+  beforeMount() {
   }
 }
 </script>
