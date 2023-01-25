@@ -1,7 +1,8 @@
 <template>
   <div>
-<AlertDanger :message="messageError"/>
-<AlertSuccess :message="messageSuccess"/>
+    <AlertSuccess :message="messageSuccess"/>
+    <AlertDanger :message="messageError"/>
+
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
@@ -24,8 +25,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes
-"/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
 
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
@@ -59,7 +59,8 @@ export default {
   name: "AtmLocationView",
   components: {
     AlertSuccess,
-    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
+  },
   data: function () {
     return {
       messageError: '',
@@ -103,17 +104,15 @@ export default {
           atLeastOneIsSelected = true
         }
       })
-
       return atLeastOneIsSelected
     },
 
 
     allRequiredFieldsAreFilled: function () {
-      return (this.atmRequest.cityId > 0 &&
+      return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected())
-
+          this.atLeastOneTransactionTypeIsSelected();
     },
 
     postAddAtmLocation: function () {
@@ -134,8 +133,6 @@ export default {
       }).catch(error => {
         this.messageError = error.response.data.errorMessage
       });
-
-
     },
 
 
@@ -146,12 +143,10 @@ export default {
       this.$refs.transactionTypes.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
-
-      // kontrollime, kas kõik vajalikud väljad on nõuetekohaselt täidetud
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
-        // saadame POST sõnumi
         this.postAddAtmLocation();
-        setTimeout(()  => {
+        setTimeout(() => {
           this.$router.go(0)
         }, 2000)
       } else {

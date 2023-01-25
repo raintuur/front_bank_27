@@ -1,14 +1,17 @@
 <template>
   <div>
+
     {{roleType}}
-<!--Row 1-->
+    <!-- ROW 1   -->
     <div class="row justify-content-center">
 
-      <!--TABEL-->
+      <!-- COL 1   -->
       <div class="col-2">
         <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
       </div>
-      <div class = "col-5">
+
+      <!-- COL 2   -->
+      <div class="col-5">
         <AtmLocationsTable ref="atmLocations"/>
       </div>
 
@@ -34,5 +37,7 @@ export default {
       this.$refs.atmLocations.getAtmLocations(cityId)
     }
   }
+
+
 }
 </script>

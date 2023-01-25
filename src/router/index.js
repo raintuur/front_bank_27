@@ -18,14 +18,14 @@ const routes = [
     component: EditLocationView
   },
   {
-    path: '/libraries',
-    name: 'librariesRoute',
-    component: LibrariesView
-  },
-  {
     path: '/login',
     name: 'loginRoute',
     component: LoginView
+  },
+  {
+    path: '/libraries',
+    name: 'librariesRoute',
+    component: LibrariesView
   },
   {
     path: '/atm/location',
