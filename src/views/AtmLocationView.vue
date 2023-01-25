@@ -157,7 +157,7 @@ export default {
 
     },
 
-    getAtmLocation: function () {
+    getAtmLocation() {
       this.$http.get("/atm/location", {
             params: {
               locationId: this.locationId
@@ -166,7 +166,7 @@ export default {
       ).then(response => {
         this.atmRequest = response.data
 
-        // Käivitame meetodi selle viidatud child komponendi sees
+        // käivitame meetodi selle viidatud laps komponendi sees
         this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
       }).catch(error => {
         console.log(error)
