@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/memes">Memes</router-link> |
-      <router-link to="/cars">Cars</router-link> |
-      <router-link to="/atms">ATMs</router-link> |
+      <router-link to="/">Kodu (ikoon)</router-link> |
+      <router-link to="/memes">Meemid</router-link> |
+<!--      <router-link to="/cars">Autod</router-link> |-->
+      <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Lisa uus automaat</router-link> |
-      <router-link to="/login">Sisse logimine</router-link>
-      <router-link to="/libraries">Raamatukogud</router-link>
+      <router-link to="/login">Logi sisse</router-link> |
+<!--      <router-link to="/libraries">Raamatukogud</router-link>-->
     </nav>
     <router-view/>
   </div>
