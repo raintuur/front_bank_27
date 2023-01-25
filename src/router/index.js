@@ -12,6 +12,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    name: 'loginRoute',
+    component: LoginView
+  },
+  {
     path: '/libraries',
     name: 'librariesRoute',
     component: LibrariesView
