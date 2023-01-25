@@ -5,7 +5,7 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th>nupp</th>
+      <th v-if="roleType === 'admin'">Muuda</th>
     </tr>
     </thead>
     <tbody>
@@ -18,9 +18,7 @@
           {{ transactionType.typeName }}
         </div>
       </td>
-      <td>
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)" icon="fa-regular fa-pen-to-square" />
-      </td>
+      <td v-if="roleType === 'admin'"><font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)" icon="fa-regular fa-pen-to-square" /></td>
     </tr>
     </tbody>
   </table>
@@ -30,6 +28,8 @@ export default {
   name: 'AtmLocationsTable',
   data: function () {
     return {
+      roleType: sessionStorage.getItem('roleType'),
+
       atmLocations: [
         {
           locationId: 0,
@@ -66,8 +66,16 @@ export default {
 
 
     navigateToEditAtmLocation: function (locationId) {
-      // todo: navigeeri edit lehele, kaasa anna locationId ?????
-      alert("location ID" + locationId)
+
+      this.$router.push({name: 'editLocationRoute', query: {locationId: locationId}})
+
+      // userId: this.$route.query.userId
+      // this.$router.push({
+      //   name: 'customerHomeRoute', query: {
+      //     userId: this.loginResponse.userId,
+      //     roleName: this.loginResponse.roleType
+      //   }
+      // })
     }
 
 
