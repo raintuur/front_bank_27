@@ -8,7 +8,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown ref="citiesDropdown" :city-id-prop="atmRequest.cityId" @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -165,7 +165,9 @@ export default {
             }
           }
       ).then(response => {
-        console.log(response.data)
+
+        this.atmRequest = response.data
+        this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
       }).catch(error => {
         console.log(error)
       })
