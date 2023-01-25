@@ -9,9 +9,6 @@
 <script>
 export default {
   name: 'CitiesDropdown',
-  props: {
-    cityIdProp: Number
-  },
   data: function () {
     return {
       cities: [
@@ -20,7 +17,7 @@ export default {
           cityName: ''
         }
       ],
-      cityId: this.cityIdProp
+      cityId: 0
     }
   },
   methods: {
@@ -36,12 +33,15 @@ export default {
 
     citiesDropdownOnChangeEvent: function () {
       this.$emit('citiesDropdownOnChangeEvent', this.cityId)
+    },
+    setCityId: function (cityId) {
+      this.cityId = cityId
+
     }
 
 
   },
   beforeMount() {
-    this.cityId = this.cityIdProp
     this.getAllCities()
   }
 
