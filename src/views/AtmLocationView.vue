@@ -15,7 +15,8 @@
 
         <div class="input-group mb-3">
           <span class="input-group-text" :class="{'input-success' :atmRequest.locationName !== ''}">Asukoht</span>
-          <input v-model="atmRequest.locationName" type="text" class="form-control">
+          <input v-if="locationId = 0" v-model="atmRequest.locationName" type="text" class="form-control">
+          <input v-else v-model="atmRequest.locationName" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-3">
@@ -69,6 +70,8 @@ export default {
       dangerMessage: '',
       successMessage: '',
       // alertCounter: 10,
+      // SAADA ATMLOCATIONSTABELIST ANDMED KAASA KOOS NUPU VAJUTUSEGA
+      // locationId: this.$route.query.locationId,
 
       atmRequest: {
         cityId: 0,
@@ -82,7 +85,20 @@ export default {
             isSelected: true
           }
         ]
-      }
+      },
+      // atmResponse: {
+      //   cityId: 0,
+      //   locationName: '',
+      //   numberOfAtms: 0,
+      //   picture: '',
+      //   transactionTypes: [
+      //     {
+      //       typeId: 0,
+      //       typeName: '',
+      //       isSelected: true
+      //     }
+      //   ]
+      // }
 
     }
   },
@@ -197,9 +213,22 @@ export default {
     //     this.dangerMessage = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus {{ this.alertCounter }}'
     //   }
     //
-    // }
+    getAtmLocation: function (locationId) {
+      this.$http.get("/atm/location", {
+            headers: {
+              Prefer: 'code=200, example=' + locationId
+            },
+            params: {
+              locationId: locationId
+            }
 
-
-  }
+          }
+      ).then(response => {
+        this.atmRequest = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  },
 }
 </script>

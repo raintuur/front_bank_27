@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/">Koduleht (ikoon)</router-link> |
-      <router-link to="/libraries">Raamatukogud</router-link> |
+<!--      <router-link to="/libraries">Raamatukogud</router-link> |-->
       <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Lisa uus asukoht</router-link> |
 <!--  <router-link to="/cars">Cars</router-link> |-->
