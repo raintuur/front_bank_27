@@ -19,7 +19,7 @@
         </div>
       </td>
       <td>
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation" icon="fa-regular fa-pen-to-square" />
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)" icon="fa-regular fa-pen-to-square" />
       </td>
     </tr>
     </tbody>
@@ -67,7 +67,7 @@ export default {
 
     navigateToEditAtmLocation: function (locationId) {
       // todo: navigeeri edit lehele, kaasa anna locationId ?????
-      alert("Töötab")
+      alert("location ID" + locationId)
     }
 
 
