@@ -7,6 +7,7 @@ import AtmsView from "@/views/AtmsView.vue";
 import AtmLocationView from "@/views/AtmLocationView.vue";
 import LibrariesView from "@/views/LibrariesView.vue";
 import LoginView from "@/views/LoginView.vue";
+import EditLocationView from "@/views/EditLocationView.vue";
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/login',
     name: 'loginRoute',
     component: LoginView
+  },
+  {
+    path: '/admin/edit/location',
+    name: 'editLocationRoute',
+    component: EditLocationView
   },
   {
     path: '/libraries',
