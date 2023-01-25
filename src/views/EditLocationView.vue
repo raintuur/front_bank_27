@@ -14,6 +14,23 @@ export default {
       locationId: this.$route.query.locationId,
       locationIdAsParam: this.$route.params.locationId
     }
+  },
+  methods: {
+    getAtmLocation: function () {
+      this.$http.get("/atm/location", {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+  },
+  beforeMount() {
+    this.getAtmLocation()
   }
 }
 </script>
