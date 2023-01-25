@@ -2,7 +2,7 @@
   <div>
     location id as query/request parameter (URL): {{locationId}}
     <br>
-    location id as parameter: {{locationId}}
+    location id as parameter: {{locationIdAsParam}}
   </div>
 </template>
 
