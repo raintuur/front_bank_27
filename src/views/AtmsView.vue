@@ -30,7 +30,6 @@ export default {
   data: function () {
     return {
       roleType: sessionStorage.getItem('roleType')
-
     }
   },
   methods: {
