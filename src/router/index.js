@@ -13,6 +13,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/admin/edit/location',
+    name: 'editLocationRoute',
+    component: EditLocationView
+  },
+  {
     path: '/login',
     name: 'loginRoute',
     component: LoginView
@@ -32,7 +37,7 @@ const routes = [
     name: 'carsRoute',
     component: CarsView
   },
-{
+  {
     path: '/atms',
     name: 'atmsRoute',
     component: AtmsView
@@ -46,11 +51,6 @@ const routes = [
     path: '/memes',
     name: 'memesRoute',
     component: MemesView
-  },
-  {
-    path: '/admin/edit/location',
-    name: 'editLocationRoute',
-    component: EditLocationView
   }
 ]
 

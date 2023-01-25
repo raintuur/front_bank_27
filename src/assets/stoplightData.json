@@ -1,0 +1,41 @@
+[
+    {
+      "locationId": 1,
+      "locationName": "Tondi Selver",
+      "cityName": "Tallinn",
+      "transactionTypes": [
+        {
+          "typeName": "raha sisse"
+        },
+        {
+          "typeName": "raha välja"
+        },
+        {
+          "typeName": "maksed"
+        }
+      ]
+    },
+    {
+      "locationId": 2,
+      "locationName": "Sikupilli Prisma",
+      "cityName": "Tallinn",
+      "transactionTypes": [
+        {
+          "typeName": "raha sisse"
+        }
+      ]
+    },
+    {
+      "locationId": 3,
+      "locationName": "Jõe Prisma",
+      "cityName": "Tartu",
+      "transactionTypes": [
+        {
+          "typeName": "raha sisse"
+        },
+        {
+          "typeName": "raha välja"
+        }
+      ]
+    }
+  ]

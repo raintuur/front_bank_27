@@ -1,13 +1,14 @@
 <template>
   <div>
-    <AlertDanger :message="messageError"/>
     <AlertSuccess :message="messageSuccess"/>
+    <AlertDanger :message="messageError"/>
+
     <!--  ROW 1  -->
     <div class="row justify-content-center">
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown ref="citiesDropdown" @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -24,8 +25,8 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes"
-                                 @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
+
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
 
@@ -36,7 +37,7 @@
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail" alt="">
+        <img :src="atmRequest.picture" class="img-thumbnail">
       </div>
     </div>
   </div>
@@ -48,16 +49,22 @@ import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
 import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
-import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import ImageInput from "@/components/ImageInput.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 export default {
   name: "AtmLocationView",
-  components: {ImageInput, AlertDanger, AlertSuccess, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox},
+  components: {
+    AlertSuccess,
+    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
+  },
   data: function () {
     return {
+      isEdit: Boolean(this.$route.query.isEdit),
+      locationId: this.$route.query.locationId,
       messageError: '',
       messageSuccess: '',
+
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -130,6 +137,7 @@ export default {
     addAtmLocation: function () {
       this.messageSuccess = ''
       this.messageError = ''
+
       this.$refs.transactionTypes.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
@@ -138,9 +146,25 @@ export default {
         this.postAddAtmLocation();
         setTimeout(() =>{this.$router.go(0)}, 4000)
       } else {
-        this.messageError = 'Täida kõik kohustuslikud väljad ning vali ka vähemalt 1 teenus!'
+        this.messageError = 'Täida kõik kohustuslikud väljad ning vali vähemalt 1 teenus!'
       }
 
+    },
+
+    getAtmLocation() {
+      this.$http.get("/atm/location", {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        this.atmRequest = response.data
+
+        // käivitame meetodi selle viidatud laps komponendi sees
+        this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
+      }).catch(error => {
+        console.log(error)
+      })
     },
 
     setCityId: function (cityId) {
@@ -148,6 +172,12 @@ export default {
     }
 
 
+  },
+
+  beforeMount() {
+    if (this.isEdit) {
+      this.getAtmLocation()
+    }
   }
 }
 </script>

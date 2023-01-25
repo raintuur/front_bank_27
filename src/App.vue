@@ -2,12 +2,9 @@
   <div id="app">
     <nav>
       <router-link to="/">Kodu (ikoon)</router-link> |
-      <router-link to="/memes">Meemid</router-link> |
-<!--      <router-link to="/cars">Autod</router-link> |-->
       <router-link to="/atms">Pangaautomaadid</router-link> |
-      <router-link to="/atm/location">Lisa uus automaat</router-link> |
-      <router-link to="/login">Logi sisse</router-link> |
-<!--      <router-link to="/libraries">Raamatukogud</router-link>-->
+      <router-link to="/atm/location">Asukoht</router-link> |
+      <router-link to="/login">Logi sisse</router-link>
     </nav>
     <router-view/>
   </div>
@@ -35,3 +32,6 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
+<!--      <router-link to="/libraries">Raamatukogud</router-link>-->
+<!--          <router-link to="/memes">Meemid</router-link> |-->
