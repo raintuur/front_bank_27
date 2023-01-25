@@ -8,6 +8,7 @@
 <script>
 export default {
   name: 'CitiesDropdown',
+
   data: function () {
     return {
       cities: [
@@ -16,7 +17,6 @@ export default {
           cityName: ''
         }
       ],
-      cityId: 0
     }
   },
   methods: {
@@ -33,11 +33,16 @@ export default {
 
     citiesDropdownOnChangeEvent: function () {
       this.$emit('citiesDropdownOnChangeEvent', this.cityId)
+    },
+
+    setCityId: function (cityId) {
+      this.cityId = cityId
     }
 
 
   },
   beforeMount() {
+    this.cityId = this.cityIdProp
     this.getAllCities()
   }
 

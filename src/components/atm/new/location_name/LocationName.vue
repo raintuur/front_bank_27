@@ -16,6 +16,8 @@ import LocationNameSuccess from "@/components/atm/new/location_name/LocationName
 export default {
   name: 'LocationName',
   components: {LocationNameSuccess, LocationNameDefault},
+
+
   data: function () {
     return {
       locationName: ''

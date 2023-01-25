@@ -6,12 +6,12 @@
 
       <!-- COL 1   -->
       <div class="col-2">
-        <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown ref="citiesDropdown" @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--col 2-->
       <div class="col-3">
-        <LocationName @locationNameChangeEvent="setLocationName"/>
+        <LocationName  @locationNameChangeEvent="setLocationName"/>
         <numberOfAtmsInput @numberOfAtmChangeEvent="setNumberOfAtms"/>
         <div>
           <TransactionTypeCheckbox ref="transactionTypesRef" @transactionTypesUpdateEvent="setTransactionTypes"/>
@@ -56,7 +56,8 @@ export default {
 
   data: function () {
     return {
-
+      isEdit: Boolean(this.$route.query.isEdit),
+      locationId: this.$route.query.locationId,
       messageError: '',
       messageSuccess: '',
 
@@ -161,7 +162,28 @@ export default {
       this.$router.push({name: 'atmsRoute'})
     },
 
-  }
+    getAtmLocation: function () {
+      this.$http.get("/atm/location", {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        this.atmRequest = response.data
+        this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+  },
+
+ beforeMount() {
+    if(this.isEdit){
+      this.getAtmLocation()
+    }
+ }
+
 }
 </script>
 
