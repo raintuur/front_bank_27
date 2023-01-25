@@ -1,20 +1,26 @@
 <template>
   <div class="row justify-content-center">
-    <div class="col col-6">
+
+
+    <div class="col-4 ">
+
+
       <form class="px-4 py-3">
         <div class="mb-3">
           <label class="form-label">Kasutajanimi</label>
-          <input v-model="username" type="text" class="form-control" placeholder="asdf123">
+          <input v-model="username" type="text" class="form-control"placeholder="Mart123">
         </div>
         <div class="mb-3">
           <label class="form-label">Parool</label>
           <input v-model="password" type="password" class="form-control" placeholder="parool123">
         </div>
+
         <button v-on:click="login" type="submit" class="btn btn-primary">Logi sisse</button>
       </form>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">New around here? Sign up</a>
     </div>
+
   </div>
 </template>
 
@@ -24,9 +30,10 @@ export default {
   data: function () {
     return {
       username: '',
-      password: ''
+      password: '',
     }
   },
+
   methods: {
     login: function () {
       this.$http.get("/login", {
@@ -44,7 +51,7 @@ export default {
         localStorage.setItem('lang', 'EST')
 
         this.$router.push({name: 'atmsRoute'})
-        console.log(response.data)
+
       }).catch(error => {
         console.log(error)
       })
@@ -52,7 +59,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
