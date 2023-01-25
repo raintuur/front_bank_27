@@ -17,6 +17,7 @@
           <router-link :to="{name: 'editLocationRoute', query: {locationId: atmLocation.locationId}}">
             {{ atmLocation.locationName }} URL
           </router-link>
+          <br>
           <router-link :to="{name: 'editLocationRoute', params: {locationId: atmLocation.locationId}}">
             {{ atmLocation.locationName }} PARAM
           </router-link>
