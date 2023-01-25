@@ -18,8 +18,8 @@
           {{ transactionType.typeName }}
         </div>
       </td>
-      <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td>
-      <td><font-awesome-icon icon="fa-regular fa-pen-to-square" /></td>
+      <td>
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation"  icon="fa-regular fa-pen-to-square" /></td>
     </tr>
     </tbody>
   </table>
@@ -60,6 +60,11 @@ export default {
         console.log(error)
       })
 
+    },
+
+    navigateToEditAtmLocation: function (locationId) {
+      // todo: navigeeri edit lehele, kaasa anna locationId
+      alert("Tootab")
     }
 
   },
