@@ -8,7 +8,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown :city-id-prop="atmRequest.cityId" @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -63,6 +63,8 @@ export default {
   },
   data: function () {
     return {
+      isEdit: Boolean(this.$route.query.isEdit),
+      locationId: this.$route.query.locationId,
       messageError: '',
       messageSuccess: '',
 
@@ -135,7 +137,6 @@ export default {
       });
     },
 
-
     addAtmLocation: function () {
       this.messageSuccess = ''
       this.messageError = ''
@@ -155,10 +156,27 @@ export default {
 
     },
 
+    async getAtmLocation() {
+      await this.$http.get("/atm/location", {
+            params: {
+              locationId: this.locationId,
+            }
+          }
+      ).then(response => {
+        this.atmRequest = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
     setCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
-
+  },
+  beforeMount() {
+    if (this.isEdit) {
+      this.getAtmLocation()
+    }
 
   }
 }
