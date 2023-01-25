@@ -18,6 +18,11 @@ const routes = [
     component: LoginView
   },
   {
+    path: '/login',
+    name: 'loginRoute',
+    component: LoginView
+  },
+  {
     path: '/admin/edit/location',
     name: 'editLocationRoute',
     component: EditLocationView

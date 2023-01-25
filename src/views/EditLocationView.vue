@@ -1,6 +1,7 @@
 <template>
   <div>
-
+    location id as query/request parameter {{locationIdAsParam}}
+    <br>
     location id {{locationId}}
 
   </div>
@@ -11,8 +12,26 @@ export default {
   name: "EditLocationView",
   data: function () {
     return {
-      locationId: this.$route.query.locationId
+      locationId: this.$route.query.locationId,
+      locationIdAsParam: this.$route.params.locationId
     }
+  },
+  methods: {
+    getAtmLocation: function () {
+      this.$http.get("/atm/location", {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+  },
+  beforeMount() {
+    this.getAtmLocation()
   }
 }
 </script>
