@@ -36,7 +36,7 @@ export default {
       this.$emit('citiesDropdownOnChangeEvent', this.cityIdProp)
     },
 
-    setCityId: function () {
+    setCityId: function (cityId) {
       this.cityId = cityId
     }
 
