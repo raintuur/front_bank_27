@@ -1,7 +1,8 @@
 <template>
   <div>
-    location id query/Request parameter (URL): {{locationId}}
-    location id parameter: {{locationIdAsParam}}
+    location id as query/request parameter (URL): {{locationId}}
+    <br>
+    location id as parameter: {{locationIdAsParam}}
   </div>
 </template>
 
@@ -18,7 +19,7 @@ export default {
     getAtmLocation: function () {
       this.$http.get("/atm/location", {
             params: {
-              locationId: this.locationId,
+              locationId: this.locationId
             }
           }
       ).then(response => {
@@ -29,8 +30,7 @@ export default {
     },
   },
   beforeMount() {
-    alert(this.getAtmLocation)
+    this.getAtmLocation()
   }
 }
 </script>
-
