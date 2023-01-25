@@ -12,7 +12,17 @@
 
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
-      <td>{{ atmLocation.locationName }}</td>
+      <td>
+        <div v-if="roleType ==='admin'">
+          <router-link :to="{name:'editLocationRoute', query:{locationId:atmLocation.locationId}}">{{atmLocation.locationName}}</router-link>
+          <br>
+          <router-link :to="{name:'editLocationRoute', params:{locationId:atmLocation.locationId}}">{{atmLocation.locationName}}</router-link>
+        </div>
+        <div v-else>
+          {{ atmLocation.locationName }}
+        </div>
+
+        </td>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
           {{ transactionType.typeName }}
@@ -24,6 +34,9 @@
   </table>
 </template>
 <script>
+
+// <router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
+
 export default {
   name: 'AtmLocationsTable',
   data: function () {

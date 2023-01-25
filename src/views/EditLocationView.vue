@@ -1,6 +1,8 @@
 <template>
   <div>
-    location id {{locationId}}
+    location id as query/request parameter (URL): {{locationId}}
+    <br>
+    location id as parameter: {{locationId}}
   </div>
 </template>
 
@@ -9,7 +11,8 @@ export default {
   name: "EditLocationView",
   data: function () {
     return {
-      locationId: this.$route.query.locationId
+      locationId: this.$route.query.locationId,
+      locationIdAsParam: this.$route.params.locationId
     }
   }
 }
