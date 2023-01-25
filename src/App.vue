@@ -5,7 +5,6 @@
       <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Lisa uus asukoht</router-link> |
       <router-link to="/login">Sisse logimine</router-link>
-
     </nav>
     <router-view/>
   </div>
