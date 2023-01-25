@@ -70,7 +70,6 @@ export default {
       alert("location ID" + locationId)
     }
 
-
   },
   beforeMount() {
     this.getAtmLocations(0)
