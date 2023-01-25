@@ -65,10 +65,10 @@ export default {
     },
     navigateToEditAtmLocation: function (locationId) { //function sulgudes on parameeter! Kui välja kutsume argument, kus defineerime on parameeter
 
+      this.$router.push({name: 'editLocationRoute', query:{locationId: locationId}})
 
-
-      // todo: navigeeri edit lehele, kaasa anna locationId
-      alert("tere " + locationId)
+      // // todo: navigeeri edit lehele, kaasa anna locationId
+      // alert("tere " + locationId)
     }
 
   },
