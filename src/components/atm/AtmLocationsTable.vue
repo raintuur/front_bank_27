@@ -63,8 +63,7 @@ export default {
 
     },
     navigateToEditAtmLocation: function (locationId) {
-      // todo: navigeeri edit lehele, kaasa anna locationId ?????
-      alert("location ID" + locationId)
+     this.$router.push({name: 'editLocationRoute', query: {locationId:locationId}})
     }
 
   },

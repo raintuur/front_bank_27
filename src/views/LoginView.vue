@@ -48,7 +48,6 @@ export default {
 
         sessionStorage.setItem('userId', userId)
         sessionStorage.setItem('roleType', roleType)
-        localStorage.setItem('lang', 'EST')
 
         this.$router.push({name: 'atmsRoute'})
 
