@@ -5,6 +5,7 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
+      <th>nupp</th>
     </tr>
     </thead>
     <tbody>
@@ -17,6 +18,8 @@
           {{ transactionType.typeName }}
         </div>
       </td>
+      <td><font-awesome-icon icon="fa-solid fa-pen-to-square" /></td>
+      <td><font-awesome-icon icon="fa-regular fa-pen-to-square" /></td>
     </tr>
     </tbody>
   </table>
