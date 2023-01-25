@@ -8,7 +8,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown :city-id-prop="atmRequest.cityId" @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown ref="citiesDropdown" @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -157,7 +157,7 @@ export default {
 
     },
 
-    getAtmLocation: function () {
+    getAtmLocation() {
       this.$http.get("/atm/location", {
             params: {
               locationId: this.locationId
@@ -165,6 +165,9 @@ export default {
           }
       ).then(response => {
         this.atmRequest = response.data
+
+        // käivitame meetodi selle viidatud laps komponendi sees
+        this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
       }).catch(error => {
         console.log(error)
       })
