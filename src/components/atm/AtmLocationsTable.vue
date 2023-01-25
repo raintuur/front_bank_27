@@ -14,10 +14,10 @@
       <td>{{ atmLocation.cityName }}</td>
       <td>
         <div v-if="roleType === 'admin'">
-          <router-link :to="{name: 'editLocationRoute', query: {locationId: atmLocation.locationId}}"> {{atmLocation.locationName}} URL</router-link>
-          <br>
-          <router-link :to="{name: 'editLocationRoute', params: {locationId: atmLocation.locationId}}"> {{atmLocation.locationName}} PARAM</router-link>
-
+          <router-link :to="{name: 'atmLocationRoute', query:
+          {locationId: atmLocation.locationId, isEdit: 'true'}}">
+            {{atmLocation.locationName}} URL
+          </router-link>
         </div>
         <div v-else>
           {{ atmLocation.locationName }}
@@ -74,9 +74,8 @@ export default {
     },
 
     navigateToEditAtmLocation: function (locationId) {
-      this.$router.push({name: 'editLocationRoute', query: {
-        locationId: locationId
-        }})
+      this.$router.push({name: 'atmLocationRoute', query: {
+        locationId: locationId, isEdit: 'true'}})
     }
 
   },
