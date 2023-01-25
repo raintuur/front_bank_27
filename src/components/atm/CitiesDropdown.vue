@@ -11,6 +11,7 @@ export default {
   props: {
     cityIdProp: Number
   },
+
   data: function () {
     return {
       cities: [
@@ -19,7 +20,7 @@ export default {
           cityName: ''
         }
       ],
-      cityId: this.cityId
+      cityId: this.cityIdProp
     }
   },
   methods: {

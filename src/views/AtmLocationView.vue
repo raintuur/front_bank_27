@@ -8,7 +8,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown :city-id="atmRequest.cityId" @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown :city-id-prop="atmRequest.cityId" @citiesDropdownOnChangeEvent="setCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -176,6 +176,7 @@ export default {
 
 
   },
+
   beforeMount() {
     if (this.isEdit) {
       this.getAtmLocation()
