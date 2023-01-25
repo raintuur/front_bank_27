@@ -1,25 +1,20 @@
 <template>
   <div>
-
+    <NewCarHeader :company-name="companyName"/>
     <!--  ROW 1  -->
-    <div class="row justify-content-center">
+    <NewCarInput :car="car"
+                 @clickAddCarEvent="addCar"
+                 @pictureInputSuccess="setCarImage"
+    />
 
-       <!--  COLUMN 1    -->
-      <div class="col col-3">
-        <input v-model="carMake" type="text" class="form-control" placeholder="Auto mark">
-      </div>
+    <br>
 
-      <!--  COLUMN 2    -->
-      <div class="col col-3">
-        <input v-model="carModel" type="text" class="form-control" placeholder="Auto mudel">
-      </div>
+    <!--  ROW 2  -->
+    <!--  Autod   -->
+    <CarsTable :cars="cars"/>
 
-      <!--  COLUMN 3    -->
-      <div class="col-3">
-        <button v-on:click="addCar" type="button" class="btn btn-outline-success">Lisa auto</button>
-      </div>
+    <img :src="car.carImage" class="img-thumbnail" >
 
-    </div>
 
   </div>
 
@@ -27,18 +22,53 @@
 
 
 <script>
+import NewCarHeader from "@/components/car/NewCarHeader.vue";
+import NewCarInput from "@/components/car/NewCarInput.vue";
+import CarsTable from "@/components/car/CarsTable.vue";
+
 export default {
   name: 'CarsView',
+  components: {CarsTable, NewCarInput, NewCarHeader},
   data: function () {
     return {
-      carMake: '',
-      carModel: ''
+      car: {
+        carId: 0,
+        carMake: '',
+        carModel: '',
+        carImage: '',
+      },
+
+      cars: [
+        {
+          carId: 1,
+          carMake: 'Audi',
+          carModel: 'R8',
+        },
+        {
+          carId: 2,
+          carMake: 'BMW',
+          carModel: 'X5',
+        },
+        {
+          carId: 3,
+          carMake: 'Tesla',
+          carModel: 'CyberTruck',
+        }
+
+      ],
+      companyName: 'Kurvis Kraavis!!!!!!!!!!!'
     }
   },
   methods: {
     addCar: function () {
-     alert("Auto Audi A7 lisati süsteemi")
+      let carAsString = JSON.stringify(this.car)
+      let copyOfCar = JSON.parse(carAsString)
+      this.cars.push(copyOfCar)
+    },
+    setCarImage: function (carImage) {
+      this.car.carImage = carImage
     }
+
   }
 }
 </script>

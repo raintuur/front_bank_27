@@ -6,6 +6,7 @@
       <router-link to="/cars">Cars</router-link> |
       <router-link to="/atms">ATMs</router-link> |
       <router-link to="/atm/location">Lisa uus automaat</router-link> |
+      <router-link to="/login">Sisse logimine</router-link>
       <router-link to="/libraries">Raamatukogud</router-link>
     </nav>
     <router-view/>
