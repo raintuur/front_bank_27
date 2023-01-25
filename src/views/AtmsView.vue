@@ -1,6 +1,5 @@
 <template>
   <div>
-
     {{roleType}}
     <!-- ROW 1   -->
     <div class="row justify-content-center">
