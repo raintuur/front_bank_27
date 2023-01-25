@@ -61,6 +61,9 @@ import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 
 export default {
   name: "AtmLocationView",
+  props: {
+    atmLocation: {},
+  },
   components: {
     AlertSuccess,
     ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
@@ -86,19 +89,19 @@ export default {
           }
         ]
       },
-      // atmResponse: {
-      //   cityId: 0,
-      //   locationName: '',
-      //   numberOfAtms: 0,
-      //   picture: '',
-      //   transactionTypes: [
-      //     {
-      //       typeId: 0,
-      //       typeName: '',
-      //       isSelected: true
-      //     }
-      //   ]
-      // }
+      atmResponse: {
+        cityId: 0,
+        locationName: '',
+        numberOfAtms: 0,
+        picture: '',
+        transactionTypes: [
+          {
+            typeId: 0,
+            typeName: '',
+            isSelected: true
+          }
+        ]
+      }
 
     }
   },
@@ -213,22 +216,7 @@ export default {
     //     this.dangerMessage = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus {{ this.alertCounter }}'
     //   }
     //
-    getAtmLocation: function (locationId) {
-      this.$http.get("/atm/location", {
-            headers: {
-              Prefer: 'code=200, example=' + locationId
-            },
-            params: {
-              locationId: locationId
-            }
 
-          }
-      ).then(response => {
-        this.atmRequest = response.data
-      }).catch(error => {
-        console.log(error)
-      })
-    }
   },
 }
 </script>

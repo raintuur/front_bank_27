@@ -27,7 +27,7 @@
           </div>
         </td>
         <td v-if="roleType === 'admin'">
-          <font-awesome-icon v-on:click="navToEditPage(atmLocation.locationId)" icon="fa-regular fa-pen-to-square"/>
+          <font-awesome-icon v-on:click="navToEditPage(atmLocation.locationId)" :atmLocation="atmLocation" icon="fa-regular fa-pen-to-square"/>
         </td>
       </tr>
       </tbody>
