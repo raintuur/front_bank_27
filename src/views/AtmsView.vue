@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
 
       <!--TABEL-->
-      <div class="col-3">
+      <div class="col-2">
         <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
       </div>
       <div class = "col-5">
