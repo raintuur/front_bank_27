@@ -5,7 +5,7 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th v-if="roleType === 'admin'" > </th>
+      <th v-if="roleType === 'admin'"></th>
     </tr>
     </thead>
     <tbody>
@@ -14,12 +14,12 @@
       <td>{{ atmLocation.cityName }}</td>
       <td>
         <div v-if="roleType === 'admin'">
-          <router-link :to="{name: 'editLocationRoute', query: {locationId: atmLocation.locationId}}">{{atmLocation.locationName}} URL</router-link>
-          <br>
-          <router-link :to="{name: 'editLocationRoute', params: {locationId: atmLocation.locationId}}">{{atmLocation.locationName}} PARAM</router-link>
+          <router-link :to="{name: 'atmLocationRoute', query: {locationId: atmLocation.locationId, isEdit: 'true'}}"
+          >{{ atmLocation.locationName }} URL
+          </router-link>
         </div>
-        <div v-else=""> 
-          {{ atmLocation.locationName }} 
+        <div v-else="">
+          {{ atmLocation.locationName }}
         </div>
       </td>
       <td>
@@ -28,7 +28,9 @@
         </div>
       </td>
       <td v-if="roleType === 'admin'">
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"  icon="fa-regular fa-pen-to-square" /></td>
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                           icon="fa-regular fa-pen-to-square"/>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -73,16 +75,17 @@ export default {
     },
 
     navigateToEditAtmLocation: function (locationId) {
-      this.$router.push({name: 'editLocationRoute', query: {
-        locationId: locationId
-        }})
+      this.$router.push({
+        name: 'atmLocationRoute', query: {
+          locationId: locationId, isEdit: 'true'
+        }
+      })
     }
 
   },
   beforeMount() {
     this.getAtmLocations(0)
   }
-
 
 }
 </script>
