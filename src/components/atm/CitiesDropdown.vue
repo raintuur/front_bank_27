@@ -8,6 +8,7 @@
 <script>
 export default {
   name: 'CitiesDropdown',
+
   data: function () {
     return {
       cities: [
