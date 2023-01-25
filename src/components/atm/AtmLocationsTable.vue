@@ -66,16 +66,7 @@ export default {
 
 
     navigateToEditAtmLocation: function (locationId) {
-
       this.$router.push({name: 'editLocationRoute', query: {locationId: locationId}})
-
-      // userId: this.$route.query.userId
-      // this.$router.push({
-      //   name: 'customerHomeRoute', query: {
-      //     userId: this.loginResponse.userId,
-      //     roleName: this.loginResponse.roleType
-      //   }
-      // })
     }
 
 
