@@ -5,6 +5,7 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
+      <th> NUPP </th>
     </tr>
     </thead>
     <tbody>
@@ -17,6 +18,8 @@
           {{ transactionType.typeName }}
         </div>
       </td>
+      <td>
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation" icon="fa-regular fa-pen-to-square" /> </td>
     </tr>
     </tbody>
   </table>
@@ -57,6 +60,10 @@ export default {
         console.log(error)
       })
 
+    },
+
+    navigateToEditAtmLocation: function (locationId) {
+      alert("Töötab")
     }
 
   },
