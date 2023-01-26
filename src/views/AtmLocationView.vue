@@ -85,7 +85,14 @@ export default {
       ).then(response => {
 
         this.atmRequest = response.data
+
+        // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
+        this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
+        this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
+
+
+
       }).catch(error => {
         console.log(error)
       })
@@ -186,10 +193,6 @@ export default {
         this.messageError = error.response.data.errorMessage
       });
     },
-
-
-
-
 
 
 
