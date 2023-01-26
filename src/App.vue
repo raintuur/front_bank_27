@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Kodu (ikoon)</router-link> |
+      <router-link to="/"><font-awesome-icon icon="fa-sharp fa-solid fa-house-chimney" /></router-link> |
       <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Asukoht</router-link> |
       <router-link to="/login">Sisse logimine</router-link>
