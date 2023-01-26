@@ -7,14 +7,14 @@
 
       <!-- COL 1   -->
       <div class="col-2">
-        <CitiesDropdown @onChangeEvent="setSelectedCityId"/>
+        <CitiesDropdown @emitSelectedCityIdEvent="setSelectedCityId"/>
       </div>
 
       <!-- COL 2   -->
       <div class="col-5">
         <AtmLocationsTable ref="atmLocations"/>
       </div>
-// sss
+
     </div>
 
   </div>
