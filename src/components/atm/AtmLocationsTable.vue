@@ -13,19 +13,17 @@
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
       <td>
-        <div v-if="roleType === 'admin'">
-          <router-link :to="{name: 'atmLocationRoute', query: {locationId: atmLocation.locationId, isEdit: 'true'}}">
-            {{atmLocation.locationName}} URL
-          </router-link>
-        </div>
-        <div v-else>{{ atmLocation.locationName }}</div>
-      </td>
+        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
+          {{ atmLocation.locationName }}
+        </router-link>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
           {{ transactionType.typeName }}
         </div>
       </td>
-      <td v-if="roleType === 'admin'"><font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)" icon="fa-regular fa-pen-to-square" />
+      <td v-if="roleType === 'admin'">
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                           icon="fa-regular fa-pen-to-square"/>
       </td>
     </tr>
     </tbody>
@@ -70,7 +68,7 @@ export default {
 
     },
     navigateToEditAtmLocation: function (locationId) {
-     this.$router.push({name: 'atmLocationRoute', query: {locationId:locationId, isEdit: 'true'}})
+      this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})
     }
 
   },
