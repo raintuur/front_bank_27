@@ -112,16 +112,8 @@ export default {
       this.atmRequest.picture = pictureBase64Data
     },
 
-
     navigateToAtms: function () {
       this.$router.push({name: 'atmsRoute'})
-    },
-
-
-    timeoutAndReloadPage: function (timeOut) {
-      setTimeout(() => {
-        this.$router.go(0)
-      }, timeOut)
     },
 
     addAtmLocation: function () {
@@ -159,7 +151,6 @@ export default {
       return atLeastOneIsSelected
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
@@ -188,10 +179,11 @@ export default {
       });
     },
 
-
-
-
-
+    timeoutAndReloadPage: function (timeOut) {
+      setTimeout(() => {
+        this.$router.go(0)
+      }, timeOut)
+    },
 
   },
 
