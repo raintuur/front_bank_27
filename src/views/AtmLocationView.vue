@@ -8,27 +8,15 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" @onChangeEvent="setAtmRequestCityId"/>
+        <CitiesDropdown ref="citiesDropdown" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-
-        <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' :atmRequest.locationName !== ''}">Asukoht</span>
-          <input v-model="atmRequest.locationName" type="text" class="form-control">
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
-          <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
-        </div>
-
-
-        <TransactionTypeCheckBox ref="transactionTypeCheckBox" @sendTransactionTypesToParentEvent="setAtmRequestTransactionTypes"/>
-
-
-        <ImageInput @sendBase64StringToParentEvent="setAtmRequestPicture"/>
+        <AtmLocationName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName"/>
+        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent=" setAtmRequestNumberOfAtms"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
@@ -47,17 +35,21 @@
 </template>
 
 <script>
-import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
+import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
 import CitiesDropdown from "@/components/CitiesDropdown.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+import AtmLocationName from "@/components/atm/AtmLocationName.vue";
+import AtmQuantity from "@/components/atm/AtmQuantity.vue";
 
 export default {
   name: "AtmLocationView",
   components: {
+    AtmQuantity,
+    AtmLocationName,
     AlertSuccess,
-    ImageInput, AlertDanger, CitiesDropdown, TransactionTypeCheckBox
+    ImageInput, AlertDanger, CitiesDropdown, AtmTransactionTypes
   },
   data: function () {
     return {
@@ -104,6 +96,13 @@ export default {
       this.atmRequest.cityId = cityId
     },
 
+    setAtmRequestLocationName: function (locationName) {
+      this.atmRequest.locationName = locationName
+    },
+
+    setAtmRequestNumberOfAtms: function (numberOfAtms) {
+      this.atmRequest.numberOfAtms = numberOfAtms
+    },
 
     setAtmRequestTransactionTypes: function (transactionTypes) {
       this.atmRequest.transactionTypes = transactionTypes
@@ -119,26 +118,36 @@ export default {
       this.$router.push({name: 'atmsRoute'})
     },
 
-    addAtmLocation: function () {
-      this.messageSuccess = ''
-      this.messageError = ''
-
-      this.$refs.transactionTypeCheckBox.sendTransactionTypesToParent()
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+    alertTimeout: function (timeOut) {
+      setTimeout(() => {
+        this.$router.go(0)
+      }, timeOut)
+    }, addAtmLocation: function () {
+      this.messagesReset();
+      this.callAtmRequestEmits();
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 2000)
+
+        let timeOut = 2000
+        this.alertTimeout(timeOut);
+
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
-
     },
 
 
+    messagesReset: function () {
+      this.messageSuccess = ''
+      this.messageError = ''
+    },
+    callAtmRequestEmits: function () {
+      this.$refs.atmLocationName.emitLocationName()
+      this.$refs.atmQuantity.emitNumberOfAtms()
+      this.$refs.atmTransactionTypes.emitTransactionTypes()
+    },
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
 
@@ -149,15 +158,12 @@ export default {
       })
       return atLeastOneIsSelected
     },
-
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atLeastOneTransactionTypeIsSelected();
     },
-
     postAddAtmLocation: function () {
       let preferExample = 'code=200'
 

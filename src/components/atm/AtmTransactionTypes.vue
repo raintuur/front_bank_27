@@ -7,12 +7,11 @@
         {{transactionType.typeName}}
       </label>
     </div>
-
   </div>
 </template>
 <script>
 export default {
-  name: 'TransactionTypeCheckBox',
+  name: 'AtmTransactionTypes',
   data: function () {
     return {
       transactionTypes: [
@@ -37,8 +36,8 @@ export default {
           })
     },
 
-    sendTransactionTypesToParent: function () {
-      this.$emit('sendTransactionTypesToParentEvent', this.transactionTypes)
+    emitTransactionTypes: function () {
+      this.$emit('emitTransactionTypesEvent', this.transactionTypes)
     }
 
   },

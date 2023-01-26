@@ -1,5 +1,5 @@
 <template>
-  <select v-model="selectedCityId" v-on:change="onChangeEvent" class="form-select"
+  <select v-model="selectedCityId" v-on:change="emitSelectedCityId" class="form-select"
           aria-label="Default select example">
     <option value="0">Kõik linnad</option>
     <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
@@ -32,8 +32,8 @@ export default {
       })
     },
 
-    onChangeEvent: function () {
-      this.$emit('onChangeEvent', this.selectedCityId)
+    emitSelectedCityId: function () {
+      this.$emit('emitSelectedCityIdEvent', this.selectedCityId)
     },
     setSelectedCityId: function (cityId) {
       this.selectedCityId = cityId
