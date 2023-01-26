@@ -32,9 +32,8 @@
     </tbody>
   </table>
 </template>
+<router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
 <script>
-
-// <router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
 
 export default {
   name: 'AtmLocationsTable',
