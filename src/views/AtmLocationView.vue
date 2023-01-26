@@ -8,18 +8,20 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
+        <CitiesDropdown ref="citiesDropdown" :is-view="isView" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
         <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
-        <ImageInput @emitBase64Event="setAtmRequestPicture"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
-        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
+        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
+        <button v-if="isEdit" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 

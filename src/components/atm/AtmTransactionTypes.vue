@@ -1,12 +1,25 @@
 <template>
   <div>
     <h5>Teenused:</h5>
-    <div  v-if="!isView" v-for="transactionType in transactionTypes" class="form-check">
-      <input v-model="transactionType.isSelected" class="form-check-input" type="checkbox">
-      <label class="form-check-label">
-        {{transactionType.typeName}}
-      </label>
+
+    <!--  VAATAMINE  -->
+    <div v-if="isView">
+      <div v-for="transactionType in transactionTypes">
+        <div v-if="transactionType.isSelected">
+          {{transactionType.typeName}}
+        </div>
+      </div>
     </div>
+    <!--  LISAMINE / MUUTMINE  -->
+    <div v-else>
+      <div  v-for="transactionType in transactionTypes" class="form-check">
+        <input v-model="transactionType.isSelected" class="form-check-input" type="checkbox">
+        <label class="form-check-label">
+          {{transactionType.typeName}}
+        </label>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
