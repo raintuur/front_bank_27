@@ -8,7 +8,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown ref="citiesDropdown" @onChangeEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -145,7 +145,7 @@ export default {
       this.$refs.transactionTypes.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
-      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      // kontrollime, et kas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
         setTimeout(() => {
@@ -173,7 +173,7 @@ export default {
       })
     },
 
-    setCityId: function (cityId) {
+    setAtmRequestCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
 

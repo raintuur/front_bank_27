@@ -1,5 +1,5 @@
 <template>
-  <select v-model="cityId" v-on:change="citiesDropdownOnChangeEvent" class="form-select"
+  <select v-model="cityId" v-on:change="onChangeEvent" class="form-select"
           aria-label="Default select example">
     <option value="0">Kõik linnad</option>
     <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
@@ -17,7 +17,7 @@ export default {
           cityName: ''
         }
       ],
-      cityId: 0
+      selectedcityId: 0
     }
   },
   methods: {
@@ -32,8 +32,8 @@ export default {
       })
     },
 
-    citiesDropdownOnChangeEvent: function () {
-      this.$emit('citiesDropdownOnChangeEvent', this.cityIdProp)
+    onChangeEvent: function () {
+      this.$emit('onChangeEvent', this.cityIdProp)
     },
     setCityId: function (cityId) {
       this.cityId = cityId
