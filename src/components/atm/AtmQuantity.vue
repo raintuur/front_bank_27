@@ -10,7 +10,7 @@
         <span class="input-group-text"
               :class="{'input-filled': (Number(numberOfAtms) > 0), 'input-danger': (Number(numberOfAtms) < 0)}">
           Automaatide arv</span>
-        <input v-model="numberOfAtms" v-on:change="numberOfAtmChangeEvent" type="number" class="form-control">
+        <input :disabled="isView" v-model="numberOfAtms" v-on:change="emitNumberOfAtms" type="number" class="form-control">
       </div>
     </div>
 
@@ -20,10 +20,12 @@
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 
 export default {
-  name: 'numberOfAtmsInput',
+  name: 'AtmQuantity',
   components: {AlertDanger},
 
-
+  props: {
+    isView: Boolean
+  },
 
   data: function () {
     return {
@@ -33,8 +35,12 @@ export default {
   },
 
   methods: {
-    numberOfAtmChangeEvent: function () {
-      this.$emit('numberOfAtmChangeEvent', this.numberOfAtms)
+    emitNumberOfAtms: function () {
+      this.$emit('emitNumberOfAtmsEvent', Number(this.numberOfAtms))
+    },
+
+    setAtmQuantity: function (numberOfAtms) {
+      this.numberOfAtms = numberOfAtms
     }
   }
 

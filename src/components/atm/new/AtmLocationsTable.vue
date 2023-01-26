@@ -13,14 +13,9 @@
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
       <td>
-        <div v-if="roleType==='admin'">
-          <router-link :to="{name: 'atmLocationRoute',
-          query:{locationId: atmLocation.locationId, isEdit: 'true'}}">{{ atmLocation.locationName }} (URL)
-          </router-link>
-        </div>
-        <div v-else>
+        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
           {{ atmLocation.locationName }}
-        </div>
+        </router-link>
 
       </td>
       <td>
@@ -29,8 +24,13 @@
         </div>
       </td>
       <td v-if="roleType === 'admin'">
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                           icon="fa-regular fa-pen-to-square"/>
+        <div>
+          <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                             icon="fa-regular fa-pen-to-square"/>
+        </div>
+        <div>
+          <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-skull" />
+        </div>
       </td>
     </tr>
     </tbody>
@@ -75,6 +75,19 @@ export default {
         console.log(error)
       })
 
+    },
+
+    deleteAtmLocation: function (locationId) {
+      this.$http.delete("/atm/location", {
+            params: {
+              locationId: locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     },
 
     navigateToEditAtmLocation: function (locationId) {

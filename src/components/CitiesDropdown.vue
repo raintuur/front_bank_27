@@ -1,5 +1,5 @@
 <template>
-  <select v-model="cityId" v-on:change="citiesDropdownOnChangeEvent" class="form-select" aria-label="Default select example">
+  <select v-model="cityId" v-on:change="emitSelectedCityId" :disabled="isView" class="form-select" aria-label="Default select example">
     <option value="0">Kõik linnad</option>
     <option v-for="city in cities" :value="city.cityId">{{ city.cityName }}</option>
   </select>
@@ -9,6 +9,10 @@
 export default {
   name: 'CitiesDropdown',
 
+  props: {
+    isView: Boolean
+  },
+
   data: function () {
     return {
       cities: [
@@ -17,7 +21,7 @@ export default {
           cityName: ''
         }
       ],
-      cityId: Number,
+      cityId: 0,
     }
   },
 
@@ -33,8 +37,8 @@ export default {
       })
     },
 
-    citiesDropdownOnChangeEvent: function () {
-      this.$emit('citiesDropdownOnChangeEvent', this.cityId)
+    emitSelectedCityId: function () {
+      this.$emit('emitSelectedCityIdEvent', this.cityId)
     },
 
     setCityId: function (cityId) {
@@ -44,7 +48,6 @@ export default {
 
   },
   beforeMount() {
-    // this.cityId = this.cityIdProp
     this.getAllCities()
   }
 

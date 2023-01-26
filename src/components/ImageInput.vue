@@ -22,7 +22,7 @@ export default {
       const reader = new FileReader();
       reader.onload = () => {
         this.pictureDataBase64 = reader.result;
-        this.$emit('pictureInputSuccess', this.pictureDataBase64)
+        this.$emit('emitBase64Event', this.pictureDataBase64)
       };
       reader.onerror = function (error) {
         alert(error);
