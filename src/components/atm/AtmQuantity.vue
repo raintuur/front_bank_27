@@ -7,6 +7,9 @@
 <script>
 export default {
   name: 'AtmQuantity',
+  props: {
+    isView: Boolean
+  },
   data: function () {
     return {
       numberOfAtms: 0
