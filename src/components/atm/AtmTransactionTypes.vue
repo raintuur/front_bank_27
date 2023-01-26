@@ -7,7 +7,6 @@
         {{transactionType.typeName}}
       </label>
     </div>
-
   </div>
 </template>
 <script>
