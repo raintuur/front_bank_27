@@ -36,6 +36,7 @@
   </div>
 </template>
 
+
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
 import CitiesDropdown from "@/components/CitiesDropdown.vue";
@@ -129,7 +130,7 @@ export default {
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
-        this.postAddAtmLocation();
+        this.postAtmLocation();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
@@ -147,27 +148,16 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-    // atLeastOneTransactionTypeIsSelected: function () {
-    //   let atLeastOneIsSelected = false
-    //
-    //   this.atmRequest.transactionTypes.forEach(transactionType => {
-    //     if (transactionType.isSelected) {
-    //       atLeastOneIsSelected = true
-    //     }
-    //   })
-    //   return atLeastOneIsSelected
-    // },
 
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          // some () - kui massiivis vähemalt ühe objekti võrdlus on tõene
+          // some() - kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetod rehkendub tõeseks
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
-
     },
 
-    postAddAtmLocation: function () {
+    postAtmLocation: function () {
       let preferExample = 'code=200'
 
       if (this.atmRequest.locationName === 'Rimi') {
@@ -195,12 +185,21 @@ export default {
     },
 
 
-    updateAtmLocation: function () {
 
+
+
+    updateAtmLocation: function () {
+      this.callAtmRequestEmits()
+      this.putAtmLocation();
+
+
+    },
+
+
+    putAtmLocation: function () {
       this.$http.put("/atm/location", this.atmRequest, {
             params: {
               locationId: this.locationId
-
             }
           }
       ).then(response => {
@@ -209,6 +208,7 @@ export default {
         console.log(error)
       })
     },
+
   },
 
   beforeMount() {
