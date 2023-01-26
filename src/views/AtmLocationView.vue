@@ -15,20 +15,25 @@
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
         <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" :is-view="isView" :is-add="isAdd" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
+
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
         <img :src="atmRequest.picture" class="img-thumbnail">
+
       </div>
     </div>
+
+
   </div>
 </template>
+
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
 import CitiesDropdown from "@/components/CitiesDropdown.vue";
@@ -37,6 +42,7 @@ import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import AtmLocationName from "@/components/atm/AtmLocationName.vue";
 import AtmQuantity from "@/components/atm/AtmQuantity.vue";
+
 export default {
   name: "AtmLocationView",
   components: {
@@ -71,6 +77,7 @@ export default {
     }
   },
   methods: {
+
     getAtmLocation() {
       this.$http.get("/atm/location", {
             params: {
@@ -79,6 +86,7 @@ export default {
           }
       ).then(response => {
         this.atmRequest = response.data
+
         // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
@@ -88,43 +96,55 @@ export default {
         console.log(error)
       })
     },
+
     setAtmRequestCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     },
+
     setAtmRequestLocationName: function (locationName) {
       this.atmRequest.locationName = locationName
     },
+
     setAtmRequestNumberOfAtms: function (numberOfAtms) {
       this.atmRequest.numberOfAtms = numberOfAtms
     },
+
     setAtmRequestTransactionTypes: function (transactionTypes) {
       this.atmRequest.transactionTypes = transactionTypes
     },
+
     setAtmRequestPicture: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
+
     navigateToAtms: function () {
       this.$router.push({name: 'atmsRoute'})
     },
+
     addAtmLocation: function () {
       this.messagesReset();
       this.callAtmRequestEmits();
+
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
+
     },
+
     messagesReset: function () {
       this.messageSuccess = ''
       this.messageError = ''
     },
+
     callAtmRequestEmits: function () {
       this.$refs.atmLocationName.emitLocationName()
       this.$refs.atmQuantity.emitNumberOfAtms()
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
+
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
 
@@ -135,18 +155,21 @@ export default {
       })
       return atLeastOneIsSelected
     },
+
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atLeastOneTransactionTypeIsSelected();
     },
+
     postAddAtmLocation: function () {
       let preferExample = 'code=200'
 
       if (this.atmRequest.locationName === 'Rimi') {
         preferExample = 'code=403, example=403';
       }
+
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest, {
             headers: {
@@ -160,13 +183,17 @@ export default {
         this.messageError = error.response.data.errorMessage
       });
     },
+
     timeoutAndReloadPage: function (timeOut) {
       setTimeout(() => {
         this.$router.go(0)
       }, timeOut)
-    }
+    },
+
+
 
   },
+
   beforeMount() {
     if (this.isEdit || this.isView) {
       this.getAtmLocation()

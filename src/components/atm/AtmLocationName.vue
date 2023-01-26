@@ -20,6 +20,7 @@ export default {
     emitLocationName: function () {
       this.$emit('emitLocationNameEvent', this.locationName)
     },
+
     setLocationName(locationName) {
       this.locationName = locationName
     }
