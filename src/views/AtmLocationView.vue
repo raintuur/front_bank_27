@@ -25,7 +25,7 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypeCheckBox" @sendTransactionTypesToParentEvent="setTransactionTypes"/>
 
 
         <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
@@ -140,10 +140,10 @@ export default {
       this.messageSuccess = ''
       this.messageError = ''
 
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
+      this.$refs.transactionTypeCheckBox.sendTransactionTypesToParent()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
-      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      // kontrollime, kas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
         setTimeout(() => {
