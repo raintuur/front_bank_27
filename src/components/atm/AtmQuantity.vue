@@ -16,6 +16,9 @@ export default {
   methods: {
     emitNumberOfAtms: function () {
       this.emit('emitNumberOfAtms', Number(this.numberOfAtms))
+    },
+    setNumberOfAtms(numberOfAtms) {
+      this.numberOfAtms = numberOfAtms
     }
   }
 }
