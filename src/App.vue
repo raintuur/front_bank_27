@@ -4,7 +4,7 @@
       <router-link to="/"><font-awesome-icon icon="fa-solid fa-house-chimney" /></router-link> |
       <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Asukoht</router-link> |
-      <router-link to="/login">Sisse logimine</router-link>
+      <router-link to="/login">Sisselogimine</router-link>
     </nav>
     <router-view/>
   </div>
