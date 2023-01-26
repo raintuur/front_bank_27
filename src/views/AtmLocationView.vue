@@ -155,8 +155,9 @@ export default {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          // some() - kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetod rehkendub tõeseks
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
+                                          // some() -
+      // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
 
     postAtmLocation: function () {
@@ -196,7 +197,6 @@ export default {
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
-
 
     },
 
