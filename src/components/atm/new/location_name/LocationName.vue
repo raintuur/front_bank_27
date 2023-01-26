@@ -10,12 +10,10 @@
 </div>
 </template>
 <script>
-import LocationNameDefault from "@/components/atm/new/location_name/LocationNameDefault.vue";
-import LocationNameSuccess from "@/components/atm/new/location_name/LocationNameSuccess.vue";
 
 export default {
   name: 'LocationName',
-  components: {LocationNameSuccess, LocationNameDefault},
+  components: {},
 
 
   data: function () {

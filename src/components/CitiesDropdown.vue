@@ -17,8 +17,10 @@ export default {
           cityName: ''
         }
       ],
+      cityId: Number,
     }
   },
+
   methods: {
 
     getAllCities: function () {
@@ -42,7 +44,7 @@ export default {
 
   },
   beforeMount() {
-    this.cityId = this.cityIdProp
+    // this.cityId = this.cityIdProp
     this.getAllCities()
   }
 

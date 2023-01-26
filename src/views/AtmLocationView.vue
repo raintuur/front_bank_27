@@ -39,11 +39,10 @@
 
 <script>
 import TransactionTypeCheckbox from "@/components/atm/new/TransactionTypeCheckbox.vue";
-import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+import CitiesDropdown from "@/components/CitiesDropdown.vue";
 import LocationName from "@/components/atm/new/location_name/LocationName.vue";
 import NumberOfAtmsInput from "@/components/atm/new/numberOf/NumberOfAtmsInput.vue";
 import ImageInput from "@/components/ImageInput.vue";
-import atmsView from "@/views/AtmsView.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import {config} from "@fortawesome/fontawesome-svg-core";
