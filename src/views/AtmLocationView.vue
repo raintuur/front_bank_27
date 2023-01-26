@@ -13,22 +13,10 @@
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-
-        <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' :atmRequest.locationName !== ''}">Asukoht</span>
-          <input v-model="atmRequest.locationName" type="text" class="form-control">
-        </div>
-
-        <div class="input-group mb-3">
-          <span class="input-group-text" :class="{'input-success' : Number(atmRequest.numberOfAtms) > 0}">Automaatide arv</span>
-          <input v-model="atmRequest.numberOfAtms" type="number" min="0" class="form-control">
-        </div>
-
-
-        <TransactionTypeCheckBox ref="transactionTypeCheckBox" @sendTransactionTypesToParentEvent="setAtmRequestTransactionTypes"/>
-
-
-        <ImageInput @sendBase64StringToParentEvent="setAtmRequestPicture"/>
+        <AtmLocationName @emitLocationNameEvent="setAtmRequestLocationName" />
+        <AtmQuantity @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms" />
+        <AtmTransactionTypes ref="atmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
@@ -47,16 +35,20 @@
 </template>
 
 <script>
-import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
+import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
 import CitiesDropdown from "@/components/CitiesDropdown.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+import AtmLocationName from "@/components/atm/AtmLocationName.vue";
+import AtmQuantity from "@/components/atm/AtmQuantity.vue";
 
 export default {
   name: "AtmLocationView",
   components: {
-    AlertSuccess, ImageInput, AlertDanger, CitiesDropdown, TransactionTypeCheckBox
+    AtmQuantity,
+    AtmLocationName,
+    AlertSuccess, ImageInput, AlertDanger, CitiesDropdown, AtmTransactionTypes
   },
   data: function () {
     return {
@@ -103,6 +95,14 @@ export default {
       this.atmRequest.cityId = cityId
     },
 
+    setAtmRequestLocationName: function (locationName) {
+      this.atmRequest.locationName = locationName
+    },
+
+    setAtmRequestNumberOfAtms: function (numberOfAtms) {
+      this.atmRequest.numberOfAtms = numberOfAtms
+    },
+
     setAtmRequestTransactionTypes: function (transactionTypes) {
       this.atmRequest.transactionTypes = transactionTypes
     },
@@ -120,7 +120,7 @@ export default {
       this.messageSuccess = ''
       this.messageError = ''
 
-      this.$refs.transactionTypeCheckBox.sendTransactionTypesToParent()
+      this.$refs.atmTransactionTypes.emitTransactionTypes()
       this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
