@@ -57,7 +57,7 @@ export default {
   name: "AtmLocationView",
   components: {
     AlertSuccess,
-    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
+    ImageInput, AlertDanger, CitiesDropdown, TransactionTypeCheckBox
   },
   data: function () {
     return {
@@ -174,7 +174,6 @@ export default {
     setAtmRequestCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
-
 
   },
 
