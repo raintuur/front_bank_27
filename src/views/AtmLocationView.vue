@@ -8,18 +8,21 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
+        <CitiesDropdown ref="citiesDropdown" :is-view="isView" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-        <AtmLocationName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName"/>
-        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
-        <ImageInput @emitBase64Event="setAtmRequestPicture"/>
+        <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
+        <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-view="isView" :is-add="isAdd"
+                             @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
-        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
-        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
+        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
+        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 
@@ -53,6 +56,8 @@ export default {
   },
   data: function () {
     return {
+      isView: Boolean(this.$route.query.isView),
+      isAdd: Boolean(this.$route.query.isAdd),
       isEdit: Boolean(this.$route.query.isEdit),
       locationId: this.$route.query.locationId,
       messageError: '',
@@ -89,6 +94,7 @@ export default {
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
         this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
+        this.$refs.atmTransactionTypes.setAtmTransactionTypes(this.atmRequest.transactionTypes)
       }).catch(error => {
         console.log(error)
       })
@@ -118,19 +124,13 @@ export default {
       this.$router.push({name: 'atmsRoute'})
     },
 
-    timeoutAndReloadPage: function (timeout) {
-      setTimeout(() => {
-        this.$router.go(0)
-      }, timeout)
-    },
-
     addAtmLocation: function () {
       this.messagesReset();
       this.callAtmRequestEmits();
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
-        this.postAddAtmLocation();
+        this.postAtmLocation();
 
         let timeOut = 3000
 
@@ -152,25 +152,15 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-    atLeastOneTransactionTypeIsSelected: function () {
-      let atLeastOneIsSelected = false
-
-      this.atmRequest.transactionTypes.forEach(transactionType => {
-        if (transactionType.isSelected) {
-          atLeastOneIsSelected = true
-        }
-      })
-      return atLeastOneIsSelected
-    },
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected();
+          this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
+      // some() kui massiivis vähemalt ühe objekti võrdlus on tõene
     },
 
-    postAddAtmLocation: function () {
+    postAtmLocation: function () {
       let preferExample = 'code=200'
 
       if (this.atmRequest.locationName === 'Rimi') {
@@ -189,11 +179,35 @@ export default {
       }).catch(error => {
         this.messageError = error.response.data.errorMessage
       });
+    },
+
+    timeoutAndReloadPage: function (timeout) {
+      setTimeout(() => {
+        this.$router.go(0)
+      }, timeout)
+    },
+
+    updateAtmLocation: function () {
+      this.callAtmRequestEmits()
+      this.putAtmLocation();
+    },
+
+    putAtmLocation: function () {
+      this.$http.post("/atm/location", this.atmRequest, {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     }
   },
 
   beforeMount() {
-    if (this.isEdit) {
+    if (this.isEdit || this.isView) {
       this.getAtmLocation()
     }
   }
