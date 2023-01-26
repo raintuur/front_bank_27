@@ -36,6 +36,7 @@
   </div>
 </template>
 
+
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
 import CitiesDropdown from "@/components/CitiesDropdown.vue";
@@ -152,8 +153,8 @@ export default {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
+          // some() - kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetod rehkendub tõeseks
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
-
     },
 
     postAtmLocation: function () {
@@ -183,11 +184,19 @@ export default {
       }, timeOut)
     },
 
-    // updateAtmLocation: function () {
+
+
+
 
     updateAtmLocation: function () {
+      this.callAtmRequestEmits()
+      this.putAtmLocation();
 
 
+    },
+
+
+    putAtmLocation: function () {
       this.$http.put("/atm/location", this.atmRequest, {
             params: {
               locationId: this.locationId
@@ -199,7 +208,9 @@ export default {
         console.log(error)
       })
     },
+
   },
+
   beforeMount() {
     if (this.isEdit || this.isView) {
       this.getAtmLocation()

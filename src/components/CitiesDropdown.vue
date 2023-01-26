@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'CitiesDropdown',
-  props:{
+  props: {
     isView: Boolean
   },
   data: function () {
