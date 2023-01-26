@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Kodu (ikoon)</router-link> |
+      <router-link to="/"><font-awesome-icon icon="fa-solid fa-house-fire" /></router-link> |
       <router-link to="/atms">Pangaautomaadid</router-link> |
       <router-link to="/atm/location">Asukoht</router-link> |
       <router-link to="/login">Logi sisse</router-link>
@@ -32,6 +32,3 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
-
-<!--      <router-link to="/libraries">Raamatukogud</router-link>-->
-<!--          <router-link to="/memes">Meemid</router-link> |-->
