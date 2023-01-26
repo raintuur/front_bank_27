@@ -87,7 +87,7 @@ export default {
             }
           }
       ).then(response => {
-        this.atmLocations = response.data
+        this.getAtmLocations(0)
       }).catch(error => {
         console.log(error)
       })
