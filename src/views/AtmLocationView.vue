@@ -8,21 +8,22 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown":is-view="isView" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
+        <CitiesDropdown ref="citiesDropdown" :is-view="isView" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
         <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" :is-view="isView"  :is-add="isAdd" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-view="isView" :is-add="isAdd"
+                             @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
-
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda
+        </button>
       </div>
 
       <!--  COLUMN 3  -->
@@ -31,8 +32,6 @@
 
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -129,7 +128,7 @@ export default {
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
-        this.postAddAtmLocation()
+        this.postAtmLocation()
 
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
@@ -147,25 +146,15 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-    atLeastOneTransactionTypeIsSelected: function () {
-      let atLeastOneIsSelected = false
-
-      this.atmRequest.transactionTypes.forEach(transactionType => {
-        if (transactionType.isSelected) {
-          atLeastOneIsSelected = true
-        }
-      })
-      return atLeastOneIsSelected
-    },
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected();
+          //  some() - kui massiivis vähemalt ühe objekti ,mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
+          this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
     },
 
-    postAddAtmLocation: function () {
+    postAtmLocation: function () {
       let preferExample = 'code=200'
 
       if (this.atmRequest.locationName === 'Rimi') {
@@ -185,13 +174,36 @@ export default {
         this.messageError = error.response.data.errorMessage
       });
     },
+
     timeoutAndReloadPage: function (timeOut) {
       setTimeout(() => {
         this.$router.go(0)
       }, timeOut)
     },
 
+    putAtmLocation: function () {
+      this.$http.put("/atm/location", this.atmRequest, {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
+    updateAtmLocation: function () {
+      this.messagesReset();
+      this.callAtmRequestEmits();
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.putAtmLocation();
+      } else {
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
+      }
+    },
 
   },
   beforeMount() {
