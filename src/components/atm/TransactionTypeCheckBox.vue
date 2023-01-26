@@ -38,7 +38,7 @@ export default {
     },
 
     sendTransactionTypesToParent: function () {
-      this.$emit('transactionTypesUpdateEvent', this.transactionTypes)
+      this.$emit('sendTransactionTypesToParentEvent', this.transactionTypes)
     }
 
   },
