@@ -49,8 +49,6 @@
 <script>
 import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
-import LocationName from "@/components/atm/new/location_name/LocationName.vue";
-import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
@@ -59,7 +57,7 @@ export default {
   name: "AtmLocationView",
   components: {
     AlertSuccess,
-    ImageInput, AlertDanger, NumberOfAtms, LocationName, CitiesDropdown, TransactionTypeCheckBox
+    ImageInput, AlertDanger, CitiesDropdown, TransactionTypeCheckBox
   },
   data: function () {
     return {
