@@ -8,13 +8,13 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" :city-id-prop="atmRequest.cityId" @onChangeEvent="setAtmRequestCityId"/>
+        <CitiesDropdown ref="citiesDropdown" :city-id-prop="atmRequest.cityId" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-        <AtmLocationName @emitLocationNameEvent="setAtmRequestLocationName" />
-        <AtmQuantity @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms" />
+        <AtmLocationName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName" />
+        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms" />
         <AtmTransactionTypes ref="atmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
@@ -116,28 +116,35 @@ export default {
     },
 
 
+    timeoutAndReloadPage: function (timeOut) {
+      setTimeout(() => {
+        this.$router.go(0)
+      }, timeOut)
+    },
     addAtmLocation: function () {
-      this.messageSuccess = ''
-      this.messageError = ''
+      this.messagesReset();
+      this.callAtmRequestEmits();
 
-      this.$refs.atmTransactionTypes.emitTransactionTypes()
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 2000)
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
 
     },
 
+    messagesReset: function () {
+      this.messageSuccess = ''
+      this.messageError = ''
+    },
 
-
-
+    callAtmRequestEmits: function () {
+      this.$refs.atmLocationName.emitLocationName()
+      this.$refs.atmQuantity.emitNumberOfAtms()
+      this.$refs.atmTransactionTypes.emitTransactionTypes()
+    },
 
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
@@ -173,6 +180,8 @@ export default {
           }
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
+        this.timeoutAndReloadPage(2000)
+
       }).catch(error => {
         this.messageError = error.response.data.errorMessage
       });
