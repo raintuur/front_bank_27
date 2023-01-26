@@ -14,7 +14,7 @@
       <!--  COLUMN 2  -->
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
-        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
+        <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
         <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
