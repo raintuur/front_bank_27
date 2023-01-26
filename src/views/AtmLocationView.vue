@@ -8,7 +8,7 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" @citiesDropdownOnChangeEvent="setCityId"/>
+        <CitiesDropdown ref="citiesDropdown" @onChangeEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
@@ -47,10 +47,8 @@
 </template>
 
 <script>
-import TransactionTypeCheckBox from "@/components/atm/new/TransactionTypeCheckBox.vue";
+import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
 import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
-import LocationName from "@/components/atm/new/location_name/LocationName.vue";
-import NumberOfAtms from "@/components/atm/new/number_of/NumberOfAtms.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
@@ -167,13 +165,13 @@ export default {
         this.atmRequest = response.data
 
         // käivitame meetodi selle viidatud laps komponendi sees
-        this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
+        this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
       }).catch(error => {
         console.log(error)
       })
     },
 
-    setCityId: function (cityId) {
+    setAtmRequestCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
 
