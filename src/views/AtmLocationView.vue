@@ -2,12 +2,15 @@
   <div>
     <AlertSuccess :message="messageSuccess"/>
     <AlertDanger :message="messageError"/>
+
     <!--  ROW 1  -->
     <div class="row justify-content-center">
+
       <!--  COLUMN 1  -->
       <div class="col-2">
         <CitiesDropdown ref="citiesDropdown" :is-view="isView" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
+
       <!--  COLUMN 2  -->
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
@@ -15,18 +18,26 @@
         <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView"
                              @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
+
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda
+        </button>
+
       </div>
+
       <!--  COLUMN 3  -->
       <div class="col-3">
         <img :src="atmRequest.picture" class="img-thumbnail">
+
       </div>
     </div>
+
+
   </div>
 </template>
+
 
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
@@ -53,6 +64,7 @@ export default {
       locationId: this.$route.query.locationId,
       messageError: '',
       messageSuccess: '',
+
       atmRequest: {
         cityId: 0,
         locationName: '',
@@ -70,6 +82,7 @@ export default {
     }
   },
   methods: {
+
     getAtmLocation() {
       this.$http.get("/atm/location", {
             params: {
@@ -78,6 +91,7 @@ export default {
           }
       ).then(response => {
         this.atmRequest = response.data
+
         // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
@@ -87,27 +101,35 @@ export default {
         console.log(error)
       })
     },
+
     setAtmRequestCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     },
+
     setAtmRequestLocationName: function (locationName) {
       this.atmRequest.locationName = locationName
     },
+
     setAtmRequestNumberOfAtms: function (numberOfAtms) {
       this.atmRequest.numberOfAtms = numberOfAtms
     },
+
     setAtmRequestTransactionTypes: function (transactionTypes) {
       this.atmRequest.transactionTypes = transactionTypes
     },
+
     setAtmRequestPicture: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
+
     navigateToAtms: function () {
       this.$router.push({name: 'atmsRoute'})
     },
+
     addAtmLocation: function () {
       this.messagesReset();
       this.callAtmRequestEmits();
+
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAtmLocation();
@@ -116,27 +138,35 @@ export default {
       }
 
     },
+
     messagesReset: function () {
       this.messageSuccess = ''
       this.messageError = ''
     },
+
     callAtmRequestEmits: function () {
       this.$refs.atmLocationName.emitLocationName()
       this.$refs.atmQuantity.emitNumberOfAtms()
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
+
+
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          // some() - kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetod rehkendub tõeseks
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
+                                          // some() -
+      // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
+
     postAtmLocation: function () {
       let preferExample = 'code=200'
+
       if (this.atmRequest.locationName === 'Rimi') {
         preferExample = 'code=403, example=403';
       }
+
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest, {
             headers: {
@@ -150,21 +180,26 @@ export default {
         this.messageError = error.response.data.errorMessage
       });
     },
+
     timeoutAndReloadPage: function (timeOut) {
       setTimeout(() => {
         this.$router.go(0)
       }, timeOut)
     },
+
     updateAtmLocation: function () {
       this.messagesReset();
       this.callAtmRequestEmits();
+
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.putAtmLocation();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
+
     },
+
     putAtmLocation: function () {
       this.$http.put("/atm/location", this.atmRequest, {
             params: {
@@ -177,7 +212,9 @@ export default {
         console.log(error)
       })
     },
+
   },
+
   beforeMount() {
     if (this.isEdit || this.isView) {
       this.getAtmLocation()
