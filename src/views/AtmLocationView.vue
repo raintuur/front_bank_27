@@ -8,18 +8,20 @@
 
       <!--  COLUMN 1  -->
       <div class="col-2">
-        <CitiesDropdown ref="citiesDropdown" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
+        <CitiesDropdown ref="citiesDropdown" :is-view="isView" @emitSelectedCityIdEvent="setAtmRequestCityId"/>
       </div>
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-        <AtmLocatonName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName"/>
-        <AtmQuantity ref="atmQuantity" @emitNumberOfAtms="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="AtmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
-        <ImageInput @emitBase64Event="setAtmRequestPicture"/>
+        <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
+        <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtms="setAtmRequestNumberOfAtms"/>
+        <AtmTransactionTypes ref="AtmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
-        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
-        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
+        <button v-if="isAdd || isEdit" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
+        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 
@@ -40,19 +42,21 @@ import CitiesDropdown from "@/components/CitiesDropdown.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
-import AtmLocatonName from "@/components/atm/AtmLocatonName.vue";
+import AtmLocationName from "@/components/atm/AtmLocationName.vue";
 import AtmQuantity from "@/components/atm/AtmQuantity.vue";
 
 export default {
   name: "AtmLocationView",
   components: {
     AtmQuantity,
-    AtmLocatonName,
+    AtmLocationName,
     AlertSuccess,
     ImageInput, AlertDanger, CitiesDropdown, AtmTransactionTypes
   },
   data: function () {
     return {
+      isView: Boolean(this.$route.query.isView),
+      isAdd: Boolean(this.$route.query.isAdd),
       isEdit: Boolean(this.$route.query.isEdit),
       locationId: this.$route.query.locationId,
       messageError: '',
@@ -86,8 +90,11 @@ export default {
       ).then(response => {
         this.atmRequest = response.data
 
-        // käivitame meetodi selle viidatud laps komponendi sees
+        // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
+        this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
+        this.$refs.atmQuantity.setAtmQuantity(this.atmRequest.numberOfAtms)
+        this.$refs.AtmTransactionTypes.setTransactionTypes(this.atmRequest.transactionTypes)
       }).catch(error => {
         console.log(error)
       })
@@ -125,15 +132,18 @@ export default {
     addAtmLocation: function () {
       this.resetMessages();
       this.callAtmRequestEmits();
+      console.log(this.atmRequest)
 
-      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      // kontrollime, et kas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
-        this.postAddAtmLocation();
+        this.postAtmLocation();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
 
     },
+
+
 
     resetMessages: function () {
       this.messageSuccess = ''
@@ -146,27 +156,17 @@ export default {
       this.$refs.AtmTransactionTypes.emitTransactionTypes()
     },
 
-    atLeastOneTransactionTypeIsSelected: function () {
-      let atLeastOneIsSelected = false
-
-      this.atmRequest.transactionTypes.forEach(transactionType => {
-        if (transactionType.isSelected) {
-          atLeastOneIsSelected = true
-        }
-      })
-      return atLeastOneIsSelected
-    },
-
 
 
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected();
+          // some() - kui massiivis vähemalt üks on true
+          this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
     },
 
-    postAddAtmLocation: function () {
+    postAtmLocation: function () {
       let preferExample = 'code=200'
 
       if (this.atmRequest.locationName === 'Rimi') {
@@ -183,7 +183,7 @@ export default {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
         this.timeoutAndReloadPage(2000);
       }).catch(error => {
-        this.messageError = error.response.data.errorMessage
+        this.messageError = error.response.data.messageError
       });
     },
 
@@ -192,10 +192,37 @@ export default {
         this.$router.go(0)
       }, timeOut)
     },
+
+
+
+    updateAtmLocation: function () {
+      this.resetMessages();
+      this.callAtmRequestEmits();
+
+      // kontrollime, et kas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.putAtmLocation();
+      } else {
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
+      }
+    },
+
+    putAtmLocation: function () {
+      this.$http.post("/atm/location", this.atmRequest, {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
   },
 
   beforeMount() {
-    if (this.isEdit) {
+    if (this.isEdit || this.isView) {
       this.getAtmLocation()
     }
   }
