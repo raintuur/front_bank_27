@@ -13,14 +13,10 @@
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
       <td>
-        <div v-if="roleType ==='admin'">
-          <router-link :to="{name:'atmLocationRoute', query:{locationId: atmLocation.locationId, isEdit: 'true'}}">
-            {{ atmLocation.locationName }} URL
-          </router-link>
-        </div>
-        <div v-else>
+
+        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
           {{ atmLocation.locationName }}
-        </div>
+        </router-link>
 
       </td>
       <td>
