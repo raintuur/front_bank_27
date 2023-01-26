@@ -48,7 +48,7 @@
 
 <script>
 import TransactionTypeCheckBox from "@/components/atm/TransactionTypeCheckBox.vue";
-import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+import CitiesDropdown from "@/components/CitiesDropdown.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import ImageInput from "@/components/ImageInput.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
