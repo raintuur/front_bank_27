@@ -52,7 +52,7 @@ export default {
   methods: {
 
     getAtmLocations: function (cityId) {
-      this.$http.get("/atm/locations",{
+      this.$http.get("/atm/locations", {
             params: {
               cityId: cityId
             },
@@ -69,8 +69,7 @@ export default {
     },
 
     navigateToEditAtmLocation: function (locationId) {
-      this.$router.push({name: 'atmLocationRoute', query: {
-        locationId: locationId, isEdit: 'true'}})
+      this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})
     },
 
     deleteAtmLocation: function (locationId) {
