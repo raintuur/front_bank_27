@@ -12,6 +12,9 @@
 <script>
 export default {
   name: 'AtmTransactionTypes',
+  props: {
+    isAdd: Boolean
+  },
   data: function () {
     return {
       transactionTypes: [
@@ -38,11 +41,17 @@ export default {
 
     emitTransactionTypes: function () {
       this.$emit('emitTransactionTypesEvent', this.transactionTypes)
+    },
+
+    setTransactionTypes(transactionTypes) {
+      this.transactionTypes = transactionTypes
     }
 
   },
   beforeMount() {
-    this.getTransactionTypes()
+    if (this.isAdd) {
+      this.getTransactionTypes();
+    }
   }
 }
 </script>
