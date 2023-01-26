@@ -14,7 +14,7 @@
       <!--  COLUMN 2  -->
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName"/>
-        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent=" setAtmRequestNumberOfAtms"/>
+        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
         <AtmTransactionTypes ref="atmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
@@ -108,7 +108,6 @@ export default {
       this.atmRequest.transactionTypes = transactionTypes
     },
 
-
     setAtmRequestPicture: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
@@ -118,36 +117,37 @@ export default {
       this.$router.push({name: 'atmsRoute'})
     },
 
-    alertTimeout: function (timeOut) {
+
+    timeoutAndReloadPage: function (timeOut) {
       setTimeout(() => {
         this.$router.go(0)
       }, timeOut)
-    }, addAtmLocation: function () {
+    },
+
+    addAtmLocation: function () {
       this.messagesReset();
       this.callAtmRequestEmits();
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
-
-        let timeOut = 2000
-        this.alertTimeout(timeOut);
-
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
-    },
 
+    },
 
     messagesReset: function () {
       this.messageSuccess = ''
       this.messageError = ''
     },
+
     callAtmRequestEmits: function () {
       this.$refs.atmLocationName.emitLocationName()
       this.$refs.atmQuantity.emitNumberOfAtms()
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
+
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
 
@@ -158,12 +158,15 @@ export default {
       })
       return atLeastOneIsSelected
     },
+
+
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atLeastOneTransactionTypeIsSelected();
     },
+
     postAddAtmLocation: function () {
       let preferExample = 'code=200'
 
@@ -179,6 +182,7 @@ export default {
           }
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
+        this.timeoutAndReloadPage(2000)
       }).catch(error => {
         this.messageError = error.response.data.errorMessage
       });
