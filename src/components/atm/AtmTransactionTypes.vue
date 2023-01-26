@@ -13,10 +13,12 @@
 <script>
 export default {
   name: 'AtmTransactionTypes',
+  props: {
+    isAdd: Boolean
+  },
   data: function () {
     return {
 
-      isEdit: Boolean(this.$route.query.isEdit),
 
       transactionTypes: [
         {
@@ -49,7 +51,7 @@ export default {
 
   },
   beforeMount() {
-    if (!this.isEdit) {
+    if (this.isAdd) {
       this.getTransactionTypes()
     }
 
