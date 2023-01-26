@@ -21,7 +21,7 @@
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 
@@ -147,6 +147,8 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
+
+
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
 
@@ -158,11 +160,12 @@ export default {
       return atLeastOneIsSelected
     },
 
+
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected();
+          this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
     },
 
     postAddAtmLocation: function () {
@@ -190,6 +193,20 @@ export default {
       setTimeout(() => {
         this.$router.go(0)
       }, timeOut)
+    },
+
+    updateAtmLocation: function () {
+      this.callAtmRequestEmits()
+      this.$http.put("/atm/location", this.atmRequest, {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     },
 
 
