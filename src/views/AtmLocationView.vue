@@ -25,10 +25,10 @@
         </div>
 
 
-        <TransactionTypeCheckBox ref="transactionTypes" @transactionTypesUpdateEvent="setTransactionTypes"/>
+        <TransactionTypeCheckBox ref="transactionTypeCheckBox" @sendTransactionTypesToParentEvent="setAtmRequestTransactionTypes"/>
 
 
-        <ImageInput @pictureInputSuccess="setPictureBase64Data"/>
+        <ImageInput @sendBase64StringToParentEvent="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
@@ -84,17 +84,60 @@ export default {
   },
   methods: {
 
+    getAtmLocation() {
+      this.$http.get("/atm/location", {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        this.atmRequest = response.data
+
+        // käivitame meetodi selle viidatud laps komponendi sees
+        this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    setAtmRequestCityId: function (cityId) {
+      this.atmRequest.cityId = cityId
+    },
+
+
+    setAtmRequestTransactionTypes: function (transactionTypes) {
+      this.atmRequest.transactionTypes = transactionTypes
+    },
+
+
+    setAtmRequestPicture: function (pictureBase64Data) {
+      this.atmRequest.picture = pictureBase64Data
+    },
+
+
     navigateToAtms: function () {
       this.$router.push({name: 'atmsRoute'})
     },
 
-    setTransactionTypes: function (transactionTypes) {
-      this.atmRequest.transactionTypes = transactionTypes
+    addAtmLocation: function () {
+      this.messageSuccess = ''
+      this.messageError = ''
+
+      this.$refs.transactionTypeCheckBox.sendTransactionTypesToParent()
+      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
+
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.postAddAtmLocation();
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 2000)
+      } else {
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
+      }
+
     },
 
-    setPictureBase64Data: function (pictureBase64Data) {
-      this.atmRequest.picture = pictureBase64Data
-    },
 
     atLeastOneTransactionTypeIsSelected: function () {
       let atLeastOneIsSelected = false
@@ -136,44 +179,9 @@ export default {
     },
 
 
-    addAtmLocation: function () {
-      this.messageSuccess = ''
-      this.messageError = ''
 
-      this.$refs.transactionTypes.sendTransactionTypesToParent()
-      this.atmRequest.numberOfAtms = Number(this.atmRequest.numberOfAtms)
 
-      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
-      if (this.allRequiredFieldsAreFilled()) {
-        this.postAddAtmLocation();
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 2000)
-      } else {
-        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
-      }
 
-    },
-
-    getAtmLocation() {
-      this.$http.get("/atm/location", {
-            params: {
-              locationId: this.locationId
-            }
-          }
-      ).then(response => {
-        this.atmRequest = response.data
-
-        // käivitame meetodi selle viidatud laps komponendi sees
-        this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-
-    setAtmRequestCityId: function (cityId) {
-      this.atmRequest.cityId = cityId
-    }
 
   },
 
