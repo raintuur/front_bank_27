@@ -167,7 +167,7 @@ export default {
         this.atmRequest = response.data
 
         // käivitame meetodi selle viidatud laps komponendi sees
-        this.$refs.citiesDropdown.setCityId(this.atmRequest.cityId)
+        this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
       }).catch(error => {
         console.log(error)
       })
@@ -176,7 +176,6 @@ export default {
     setAtmRequestCityId: function (cityId) {
       this.atmRequest.cityId = cityId
     }
-
 
   },
 
