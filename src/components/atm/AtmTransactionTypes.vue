@@ -17,8 +17,6 @@ export default {
   },
   data: function () {
     return {
-
-
       transactionTypes: [
         {
           typeId: 0,
@@ -44,15 +42,16 @@ export default {
     emitTransactionTypes: function () {
       this.$emit('emitTransactionTypesEvent', this.transactionTypes)
     },
+
     setTransactionTypes(transactionTypes) {
-this.transactionTypes = transactionTypes
+      this.transactionTypes = transactionTypes
     }
 
   },
   beforeMount() {
     if (this.isAdd) {
-    this.getTransactionTypes();
-  }
+      this.getTransactionTypes();
+    }
   }
 }
 </script>

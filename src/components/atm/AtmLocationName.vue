@@ -16,14 +16,14 @@ export default {
     }
   },
   methods:{
+
     emitLocationName: function () {
       this.$emit('emitLocationNameEvent', this.locationName)
     },
 
-
-  setLocationName(locationName) {
-this.locationName = locationName
-  }
+    setLocationName(locationName) {
+      this.locationName = locationName
+    }
   }
 }
 </script>

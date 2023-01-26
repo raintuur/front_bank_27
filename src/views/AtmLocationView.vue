@@ -54,8 +54,8 @@ export default {
   data: function () {
     return {
       isView: Boolean(this.$route.query.isView),
-      isEdit: Boolean(this.$route.query.isEdit),
       isAdd: Boolean(this.$route.query.isAdd),
+      isEdit: Boolean(this.$route.query.isEdit),
       locationId: this.$route.query.locationId,
       messageError: '',
       messageSuccess: '',
@@ -87,6 +87,7 @@ export default {
       ).then(response => {
         this.atmRequest = response.data
 
+        // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
         this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
@@ -116,11 +117,9 @@ export default {
       this.atmRequest.picture = pictureBase64Data
     },
 
-
     navigateToAtms: function () {
       this.$router.push({name: 'atmsRoute'})
     },
-
 
     addAtmLocation: function () {
       this.messagesReset();
@@ -157,7 +156,6 @@ export default {
       return atLeastOneIsSelected
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
@@ -185,11 +183,14 @@ export default {
         this.messageError = error.response.data.errorMessage
       });
     },
+
     timeoutAndReloadPage: function (timeOut) {
       setTimeout(() => {
         this.$router.go(0)
       }, timeOut)
-    }
+    },
+
+
 
   },
 
