@@ -12,17 +12,19 @@ export default {
   },
   data: function () {
     return {
-      numberOfAtms: 0,
+      numberOfAtms: 0
     }
   },
   methods: {
-    emitNumberOfAtms: function () {
 
+    emitNumberOfAtms: function () {
       this.$emit('emitNumberOfAtmsEvent', Number(this.numberOfAtms))
     },
-    setAtmQuantity: function (atmQuantity) {
-      this.numberOfAtms = atmQuantity
+
+    setNumberOfAtms(numberOfAtms) {
+      this.numberOfAtms = numberOfAtms
     }
+
   }
 }
 </script>

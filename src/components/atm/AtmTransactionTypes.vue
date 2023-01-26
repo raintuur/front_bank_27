@@ -1,25 +1,24 @@
 <template>
   <div>
     <h5>Teenused:</h5>
+
+    <!--  VAATAMINE  -->
     <div v-if="isView">
-      <div v-for="transactionType in transactionTypes" class="form-check">
+      <div v-for="transactionType in transactionTypes">
         <div v-if="transactionType.isSelected">
-          {{ transactionType.typeName }}
+          {{transactionType.typeName}}
         </div>
       </div>
     </div>
+    <!--  LISAMINE / MUUTMINE  -->
     <div v-else>
-      <div v-for="transactionType in transactionTypes" class="form-check">
-        <div>
-          <input v-model="transactionType.isSelected" class="form-check-input" type="checkbox">
-          <label class="form-check-label">
-            {{ transactionType.typeName }}
-          </label>
-        </div>
+      <div  v-for="transactionType in transactionTypes" class="form-check">
+        <input v-model="transactionType.isSelected" class="form-check-input" type="checkbox">
+        <label class="form-check-label">
+          {{transactionType.typeName}}
+        </label>
       </div>
-
     </div>
-
 
   </div>
 </template>
@@ -54,17 +53,18 @@ export default {
           })
     },
 
-    emitAtmTransactionTypes: function () {
-      this.$emit('emitAtmTransactionTypesEvent', this.transactionTypes)
+    emitTransactionTypes: function () {
+      this.$emit('emitTransactionTypesEvent', this.transactionTypes)
     },
-    setAtmTransactionTypes: function (transactionTypes) {
+
+    setTransactionTypes(transactionTypes) {
       this.transactionTypes = transactionTypes
     }
 
   },
   beforeMount() {
     if (this.isAdd) {
-      this.getTransactionTypes()
+      this.getTransactionTypes();
     }
   }
 }

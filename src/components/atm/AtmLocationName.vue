@@ -12,17 +12,18 @@ export default {
   },
   data: function () {
     return {
-      locationName: '',
-
+      locationName: ''
     }
   },
-  methods: {
+  methods:{
+
     emitLocationName: function () {
       this.$emit('emitLocationNameEvent', this.locationName)
     },
-    setLocationName: function (locationName) {
+
+    setLocationName(locationName) {
       this.locationName = locationName
     }
-  },
+  }
 }
 </script>

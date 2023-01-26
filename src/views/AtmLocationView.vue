@@ -13,13 +13,13 @@
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
-        <AtmQuantity ref="atmQuantity" :is-view="isView" @emitLocationNameEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitAtmTransactionTypesEvent="setAtmRequestTransactionTypes"/>
-        <ImageInput @emitBase64Event="setAtmRequestPicture"/>
+        <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
-        <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
+        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
         <button v-if="isEdit" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
@@ -55,8 +55,8 @@ export default {
   },
   data: function () {
     return {
-      isAdd: Boolean(this.$route.query.isAdd),
       isView: Boolean(this.$route.query.isView),
+      isAdd: Boolean(this.$route.query.isAdd),
       isEdit: Boolean(this.$route.query.isEdit),
       locationId: this.$route.query.locationId,
       messageError: '',
@@ -89,11 +89,11 @@ export default {
       ).then(response => {
         this.atmRequest = response.data
 
-        // käivitame meetodi selle viidatud laps komponendi sees
+        // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
-        this.$refs.atmQuantity.setAtmQuantity(this.atmRequest.numberOfAtms)
-        this.$refs.atmTransactionTypes.setAtmTransactionTypes(this.atmRequest.transactionTypes)
+        this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
+        this.$refs.atmTransactionTypes.setTransactionTypes(this.atmRequest.transactionTypes)
       }).catch(error => {
         console.log(error)
       })
@@ -115,32 +115,28 @@ export default {
       this.atmRequest.transactionTypes = transactionTypes
     },
 
-
     setAtmRequestPicture: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
     },
-
 
     navigateToAtms: function () {
       this.$router.push({name: 'atmsRoute'})
     },
 
     addAtmLocation: function () {
-      this.resetMessages();
-
+      this.messagesReset();
       this.callAtmRequestEmits();
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAddAtmLocation();
-
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
 
     },
 
-    resetMessages: function () {
+    messagesReset: function () {
       this.messageSuccess = ''
       this.messageError = ''
     },
@@ -148,7 +144,7 @@ export default {
     callAtmRequestEmits: function () {
       this.$refs.atmLocationName.emitLocationName()
       this.$refs.atmQuantity.emitNumberOfAtms()
-      this.$refs.atmTransactionTypes.emitAtmTransactionTypes()
+      this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
     atLeastOneTransactionTypeIsSelected: function () {
@@ -161,7 +157,6 @@ export default {
       })
       return atLeastOneIsSelected
     },
-
 
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
@@ -185,11 +180,10 @@ export default {
           }
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
-        this.timeoutAndReloadPage(2000);
+        this.timeoutAndReloadPage(2000)
       }).catch(error => {
-        this.messageError = error.response.data.message
+        this.messageError = error.response.data.errorMessage
       });
-
     },
 
     timeoutAndReloadPage: function (timeOut) {
@@ -200,13 +194,10 @@ export default {
 
 
 
-
-
-
   },
 
   beforeMount() {
-    if (this.isEdit) {
+    if (this.isEdit || this.isView) {
       this.getAtmLocation()
     }
   }
