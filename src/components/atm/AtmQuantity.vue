@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'AtmQuantity',
-  props:{
+  props: {
     isView: Boolean
   },
   data: function () {
@@ -15,14 +15,16 @@ export default {
       numberOfAtms: 0
     }
   },
-
   methods: {
+
     emitNumberOfAtms: function () {
-      this.$emit ('emitNumberOfAtmsEvent', Number(this.numberOfAtms))
+      this.$emit('emitNumberOfAtmsEvent', Number(this.numberOfAtms))
     },
+
     setNumberOfAtms(numberOfAtms) {
-    this.numberOfAtms = numberOfAtms
+      this.numberOfAtms = numberOfAtms
     }
+
   }
 }
 </script>

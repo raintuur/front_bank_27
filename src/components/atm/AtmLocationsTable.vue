@@ -76,7 +76,6 @@ export default {
     },
 
 
-
     navigateToEditAtmLocation: function (locationId) {
       this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})
     }
