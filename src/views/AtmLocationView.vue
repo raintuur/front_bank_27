@@ -13,13 +13,13 @@
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-        <AtmLocationName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName"/>
+        <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
         <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
-        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
+        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
 
       </div>
 
@@ -53,6 +53,8 @@ export default {
   },
   data: function () {
     return {
+      isView: Boolean(this.$route.query.isView),
+      isAdd: Boolean(this.$route.query.isAdd),
       isEdit: Boolean(this.$route.query.isEdit),
       locationId: this.$route.query.locationId,
       messageError: '',
@@ -89,6 +91,7 @@ export default {
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
         this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
+        this.$refs.atmTransactionTypes.setTransactionTypes(this.atmRequest.transactionTypes)
       }).catch(error => {
         console.log(error)
       })
@@ -187,10 +190,12 @@ export default {
       }, timeOut)
     },
 
+
+
   },
 
   beforeMount() {
-    if (this.isEdit) {
+    if (this.isEdit || this.isView) {
       this.getAtmLocation()
     }
   }
