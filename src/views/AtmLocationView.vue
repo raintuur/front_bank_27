@@ -21,7 +21,7 @@
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 
@@ -35,6 +35,7 @@
 
   </div>
 </template>
+
 
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
@@ -129,7 +130,7 @@ export default {
 
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
-        this.postAddAtmLocation();
+        this.postAtmLocation();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
@@ -147,25 +148,16 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-    atLeastOneTransactionTypeIsSelected: function () {
-      let atLeastOneIsSelected = false
-
-      this.atmRequest.transactionTypes.forEach(transactionType => {
-        if (transactionType.isSelected) {
-          atLeastOneIsSelected = true
-        }
-      })
-      return atLeastOneIsSelected
-    },
 
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          this.atLeastOneTransactionTypeIsSelected();
+          // some() - kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetod rehkendub tõeseks
+          this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
     },
 
-    postAddAtmLocation: function () {
+    postAtmLocation: function () {
       let preferExample = 'code=200'
 
       if (this.atmRequest.locationName === 'Rimi') {
@@ -193,6 +185,29 @@ export default {
     },
 
 
+
+
+
+    updateAtmLocation: function () {
+      this.callAtmRequestEmits()
+      this.putAtmLocation();
+
+
+    },
+
+
+    putAtmLocation: function () {
+      this.$http.put("/atm/location", this.atmRequest, {
+            params: {
+              locationId: this.locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
   },
 
