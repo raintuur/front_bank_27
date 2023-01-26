@@ -13,9 +13,15 @@ export default {
     }
   },
   methods: {
+
     emitNumberOfAtms: function () {
       this.$emit('emitNumberOfAtmsEvent', Number(this.numberOfAtms))
+    },
+
+    setNumberOfAtms(numberOfAtms) {
+      this.numberOfAtms = numberOfAtms
     }
+
   }
 }
 </script>

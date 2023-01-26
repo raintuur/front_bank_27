@@ -85,8 +85,10 @@ export default {
       ).then(response => {
         this.atmRequest = response.data
 
-        // käivitame meetodi selle viidatud laps komponendi sees
+        // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
+        this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
+        this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
       }).catch(error => {
         console.log(error)
       })
@@ -184,6 +186,7 @@ export default {
         this.$router.go(0)
       }, timeOut)
     },
+
 
   },
 
