@@ -26,7 +26,8 @@
       </td>
       <td v-if="roleType === 'admin'">
         <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                           icon="fa-regular fa-pen-to-square"/>
+                           icon="fa-regular fa-pen-to-square"/> <br>
+        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can"/>
       </td>
     </tr>
     </tbody>
@@ -78,8 +79,21 @@ export default {
 
     navigateToEditAtmLocation: function (locationId) {
       this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})
-    }
+    },
 
+    deleteAtmLocation: function (locationId) {
+      this.$http.delete("/atm/location", {
+            params: {
+              locationId: locationId
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        this.getAtmLocations(0)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
   },
   beforeMount() {
