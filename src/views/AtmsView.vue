@@ -7,7 +7,7 @@
 
       <!-- COL 1   -->
       <div class="col-2">
-        <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
+        <CitiesDropdown @onChangeEvent="setSelectedCityId"/>
       </div>
 
       <!-- COL 2   -->
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CitiesDropdown from "@/components/atm/CitiesDropdown.vue";
+import CitiesDropdown from "@/components/CitiesDropdown.vue";
 import AtmLocationsTable from "@/components/atm/AtmLocationsTable.vue";
 
 export default {
