@@ -8,7 +8,7 @@
 
       <!-- COL 1   -->
       <div class="col-2">
-        <CitiesDropdown @citiesDropdownOnChangeEvent="setSelectedCityId"/>
+        <CitiesDropdown @onChangeEvent="setSelectedCityId"/>
       </div>
 
       <!-- COL 2   -->
