@@ -19,7 +19,7 @@
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
-        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Salvesta</button>
+        <button v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
 
       </div>
 
@@ -90,7 +90,7 @@ export default {
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
         this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
-
+        this.$refs.atmTransactionTypes.setTransactionTypes(this.atmRequest.transactionTypes)
 
 
       }).catch(error => {

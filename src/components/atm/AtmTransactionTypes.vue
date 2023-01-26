@@ -15,6 +15,9 @@ export default {
   name: 'AtmTransactionTypes',
   data: function () {
     return {
+
+      isEdit: Boolean(this.$route.query.isEdit),
+
       transactionTypes: [
         {
           typeId: 0,
@@ -36,6 +39,9 @@ export default {
             console.log(error)
           })
     },
+    setTransactionTypes(transactionTypes) {
+      this.transactionTypes = transactionTypes
+    },
 
     emitTransactionTypes: function () {
       this.$emit('emitTransactionTypesEvent', this.transactionTypes)
@@ -43,7 +49,10 @@ export default {
 
   },
   beforeMount() {
-    this.getTransactionTypes()
+    if (!this.isEdit) {
+      this.getTransactionTypes()
+    }
+
   }
 }
 </script>
