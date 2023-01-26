@@ -13,15 +13,25 @@
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
       <td>
-       <router-link :to="{name:'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
-         {{atmLocation.locationName}}</router-link>
+        <div v-if="roleType ==='admin'">
+          <router-link :to="{name:'atmLocationRoute', query:{locationId: atmLocation.locationId, isEdit: 'true'}}">
+            {{ atmLocation.locationName }} URL
+          </router-link>
+        </div>
+        <div v-else>
+          {{ atmLocation.locationName }}
+        </div>
+
       </td>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
           {{ transactionType.typeName }}
         </div>
       </td>
-      <td v-if="roleType === 'admin'"><font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)" icon="fa-regular fa-pen-to-square" /></td>
+      <td v-if="roleType === 'admin'">
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                           icon="fa-regular fa-pen-to-square"/>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -29,8 +39,6 @@
 <script>
 
 // <router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
-
-import {query} from "vue/src/platforms/web/util";
 
 export default {
   name: 'AtmLocationsTable',
@@ -53,7 +61,6 @@ export default {
     }
   },
   methods: {
-    query,
 
     getAtmLocations: function (cityId) {
       this.$http.get("/atm/locations", {

@@ -13,9 +13,9 @@
 
       <!--  COLUMN 2  -->
       <div class="col-3">
-        <AtmLocationName ref="atmLocationName" @emitLocationNameEvent="setAtmRequestLocationName" />
-        <AtmQuantity ref="atmQuantity" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms" />
-        <AtmTransactionTypes ref="atmTransactionTypes" is-add="isAdd" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName" />
+        <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms" />
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
