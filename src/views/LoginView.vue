@@ -42,7 +42,7 @@ export default {
           }
       ).then(response => {
 
-        sessionStorage.setItem('userId', response.data.UserId)
+        sessionStorage.setItem('userId', response.data.userId)
         sessionStorage.setItem('roleType', response.data.roleType)
         localStorage.setItem('lang', 'zuahili')
 
