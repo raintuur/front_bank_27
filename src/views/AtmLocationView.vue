@@ -189,9 +189,15 @@ export default {
 
 
     updateAtmLocation: function () {
-      this.callAtmRequestEmits()
-      this.putAtmLocation();
+      this.messagesReset();
+      this.callAtmRequestEmits();
 
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.putAtmLocation();
+      } else {
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
+      }
 
     },
 
