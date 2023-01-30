@@ -25,7 +25,7 @@ export default {
   methods: {
 
     getAllCities: function () {
-      this.$http.get("/all/atm/city")
+      this.$http.get("/atm/cities")
           .then(result => {
             this.cities = result.data
 
