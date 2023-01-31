@@ -3,6 +3,7 @@
 
 
     <div class="col-4 ">
+
       <AlertDanger :message="message"/>
 
       <form class="px-4 py-3">
@@ -32,7 +33,9 @@ export default {
   components: {AlertDanger},
   data: function () {
     return {
+
       message: '',
+
       loginResponse: {
         userId: 0,
         roleType: ''
@@ -51,14 +54,15 @@ export default {
   methods: {
 
     login: function () {
-      this.message = ''
+      this.message = '';
       if (this.username == '' || this.password == '') {
-        this.message = 'Täida kõik väljad!';
+        this.message = 'Täida kõik väljad';
       } else {
-        this.sendLoginRequest
+        this.sendLoginRequest();
       }
-      this.sendLoginRequest();
+
     },
+
     sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
@@ -79,7 +83,9 @@ export default {
         this.apiError = error.response.data
         this.message = this.apiError.message
       });
-    }
+    },
+
+
   }
 }
 </script>
