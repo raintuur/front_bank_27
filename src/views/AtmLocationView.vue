@@ -15,13 +15,15 @@
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
         <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView" @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView"
+                             @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda
+        </button>
 
       </div>
 
@@ -153,8 +155,9 @@ export default {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
-          // some() - kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetod rehkendub tõeseks
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
+                                          // some() -
+      // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
 
     postAtmLocation: function () {
@@ -184,10 +187,6 @@ export default {
       }, timeOut)
     },
 
-
-
-
-
     updateAtmLocation: function () {
       this.messagesReset();
       this.callAtmRequestEmits();
@@ -200,7 +199,6 @@ export default {
       }
 
     },
-
 
     putAtmLocation: function () {
       this.$http.put("/atm/location", this.atmRequest, {

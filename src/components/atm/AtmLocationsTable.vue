@@ -5,7 +5,7 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th v-if="roleType === 'admin'">Muuda</th>
+      <th v-if="roleType === 'admin'"></th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
       <td v-if="roleType === 'admin'">
         <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
                            icon="fa-regular fa-pen-to-square"/>
-        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash" class="mx-4"/>
+        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion" class="mx-4"/>
       </td>
     </tr>
     </tbody>
@@ -93,7 +93,6 @@ export default {
         console.log(error)
       })
     },
-
 
   },
   beforeMount() {
