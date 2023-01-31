@@ -4,11 +4,13 @@
 
     <div class="col-4 ">
 
+      <AlertDanger :message="apiError.message"/>
+
 
       <form class="px-4 py-3">
         <div class="mb-3">
           <label class="form-label">Kasutajanimi</label>
-          <input v-model="username" type="text" class="form-control"placeholder="Mart123">
+          <input v-model="username" type="text" class="form-control" placeholder="Mart123">
         </div>
         <div class="mb-3">
           <label class="form-label">Parool</label>
@@ -25,10 +27,16 @@
 </template>
 
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: "LoginView",
+  components: {AlertDanger},
   data: function () {
     return {
+
+      message: '',
+
       loginResponse: {
         userId: 0,
         roleType: ''
@@ -46,7 +54,17 @@ export default {
 
   methods: {
 
+
     login: function () {
+      this.message = '';
+      if (this.username == '' || this.password == '') {
+        this.message = 'Taida koik valjad'
+      } else {
+        this.sendLoginRequest();
+      }
+
+    },
+    sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
               username: this.username,
@@ -63,9 +81,11 @@ export default {
         this.$router.push({name: 'atmsRoute'})
 
       }).catch(error => {
-        console.log(error)
+        this.apiError = error.response.data
+        this.message = this.apiError.message
+
       })
-    },
+    }
   }
 }
 </script>
