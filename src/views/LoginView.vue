@@ -29,11 +29,12 @@ export default {
   name: "LoginView",
   data: function () {
     return {
+
       loginResponse: {
         userId: 0,
         roleType: ''
-        
       },
+
       apiError: {
         message: '',
         errorCode: ''
@@ -45,6 +46,7 @@ export default {
   },
 
   methods: {
+
     login: function () {
       this.$http.get("/login", {
             params: {
