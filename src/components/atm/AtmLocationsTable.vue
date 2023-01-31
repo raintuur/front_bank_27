@@ -1,11 +1,11 @@
 <template>
-  <table class="table table-hover table-dark">
+  <table class="table table-hover">
     <thead>
     <tr>
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th v-if="roleType === 'admin'">Muuda</th>
+      <th v-if="roleType === 'admin'"></th>
     </tr>
     </thead>
     <tbody>
@@ -37,6 +37,7 @@
       <td v-if="roleType === 'admin'">
         <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
                            icon="fa-regular fa-pen-to-square"/>
+        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-regular fa-trash-can" class="mx-2" />
       </td>
     </tr>
     </tbody>
@@ -88,7 +89,20 @@ export default {
 
     navigateToEditAtmLocation: function (locationId) {
       this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})
-    }
+    },
+
+    deleteAtmLocation: function (locationId) {
+      this.$http.delete("/atm/location", {
+            params: {
+              locationId: locationId,
+            }
+          }
+      ).then(response => {
+        this.getAtmLocations(0)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
 
   },

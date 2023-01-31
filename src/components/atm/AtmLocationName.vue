@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  name: 'AtmLocationName',
   props: {
     isView: Boolean
   },
@@ -21,7 +22,6 @@ export default {
     setLocationName(locationName) {
       this.locationName = locationName
     }
-  },
-  name: 'AtmLocationName'
+  }
 }
 </script>
