@@ -4,6 +4,8 @@
 
     <div class="col-4 ">
 
+      <AlertDanger :message="message"/>
+
 
       <form class="px-4 py-3">
         <div class="mb-3">
@@ -25,10 +27,14 @@
 </template>
 
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: "LoginView",
+  components: {AlertDanger},
   data: function () {
     return {
+      message:'',
 
       loginResponse: {
         userId: 0,
@@ -47,7 +53,17 @@ export default {
 
   methods: {
 
+
+
     login: function () {
+      this.message = '';
+      if(this.username == '' || this.password == '') {
+        this.message = 'Täida kõik väljad'
+      } else {
+        this.sendLoginRequest();
+      }
+    },
+    sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
               username: this.username,
@@ -64,8 +80,9 @@ export default {
         this.$router.push({name: 'atmsRoute'})
 
       }).catch(error => {
-        console.log(error)
-      })
+        this.apiError = error.response.data
+        this.message = this.apiError.message
+      });
     },
   }
 }
