@@ -14,7 +14,9 @@
       <td>{{ atmLocation.cityName }}</td>
       <td>
 
-        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">{{atmLocation.locationName}} </router-link>
+        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
+          {{ atmLocation.locationName }}
+        </router-link>
 
       </td>
       <td>
@@ -25,6 +27,7 @@
       <td v-if="roleType === 'admin'">
         <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
                            icon="fa-regular fa-pen-to-square"/>
+        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can" class="mx-3"/>
       </td>
     </tr>
     </tbody>
@@ -75,7 +78,20 @@ export default {
           locationId: locationId, isEdit: 'true'
         }
       })
-    }
+    },
+
+    deleteAtmLocation: function (locationId) {
+      this.$http.delete("/atm/location", {
+            params: {
+              locationId: locationId
+            }
+          }
+      ).then(response => {
+        this.getAtmLocations(0)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
 
   },
   beforeMount() {

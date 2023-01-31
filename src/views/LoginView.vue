@@ -29,12 +29,23 @@ export default {
   name: "LoginView",
   data: function () {
     return {
+      loginResponse: {
+        userId: 0,
+        roleType: ''
+      },
+
+      apiError: {
+        message: '',
+        errorCode: ''
+      },
+
       username: '',
       password: '',
     }
   },
 
   methods: {
+
     login: function () {
       this.$http.get("/login", {
             params: {
@@ -43,11 +54,10 @@ export default {
             }
           }
       ).then(response => {
-        let userId = response.data.userId;
-        let roleType = response.data.roleType;
+        this.loginResponse = response.data
 
-        sessionStorage.setItem('userId', userId)
-        sessionStorage.setItem('roleType', roleType)
+        sessionStorage.setItem('userId', this.loginResponse.userId)
+        sessionStorage.setItem('roleType', this.loginResponse.roleType)
         localStorage.setItem('lang', 'EST')
 
         this.$router.push({name: 'atmsRoute'})
