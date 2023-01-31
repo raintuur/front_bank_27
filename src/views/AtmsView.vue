@@ -1,5 +1,4 @@
 <template>
-
   <div>
 
     {{roleType}}
@@ -30,7 +29,7 @@ export default {
   components: {AtmLocationsTable, CitiesDropdown},
   data: function () {
     return {
-    roleType: sessionStorage.getItem('roleType')
+      roleType: sessionStorage.getItem('roleType')
     }
   },
   methods: {

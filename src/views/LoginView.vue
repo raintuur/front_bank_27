@@ -1,25 +1,25 @@
 <template>
-
   <div class="row justify-content-center">
 
-    <div class="col-4">
+
+    <div class="col-4 ">
+
+
       <form class="px-4 py-3">
         <div class="mb-3">
-          <label  class="form-label">Kasutajanimi</label>
+          <label class="form-label">Kasutajanimi</label>
           <input v-model="username" type="text" class="form-control" placeholder="Mart123">
         </div>
         <div class="mb-3">
           <label class="form-label">Parool</label>
-          <input v-model="password" type="password" class="form-control" placeholder="Parool123">
+          <input v-model="password" type="password" class="form-control" placeholder="parool123">
         </div>
+
         <button v-on:click="login" type="submit" class="btn btn-primary">Logi sisse</button>
       </form>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">New around here? Sign up</a>
-
-
     </div>
-
 
   </div>
 </template>
@@ -29,34 +29,44 @@ export default {
   name: "LoginView",
   data: function () {
     return {
-    username: '',
-    password: '',
+
+      loginResponse: {
+        userId: 0,
+        roleType: ''
+      },
+
+      apiError: {
+        message: '',
+        errorCode: ''
+      },
+
+      username: '',
+      password: '',
     }
   },
+
   methods: {
+
     login: function () {
       this.$http.get("/login", {
             params: {
               username: this.username,
-              password: this.password,
+              password: this.password
             }
           }
       ).then(response => {
-        this.loginSuc
+        this.loginResponse = response.data
 
-        sessionStorage.setItem('userId', userId)
-        sessionStorage.setItem('roleType', roleType)
+        sessionStorage.setItem('userId', this.loginResponse.userId)
+        sessionStorage.setItem('roleType', this.loginResponse.roleType)
         localStorage.setItem('lang', 'EST')
 
         this.$router.push({name: 'atmsRoute'})
-        
-        console.log(response.data)
+
       }).catch(error => {
         console.log(error)
       })
     },
   }
 }
-
 </script>
-

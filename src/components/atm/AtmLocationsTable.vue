@@ -5,7 +5,7 @@
       <th scope="col">Linn</th>
       <th scope="col">Asukoht</th>
       <th scope="col">Teenused</th>
-      <th v-if="roleType === 'admin'">Muuda</th>
+      <th v-if="roleType === 'admin'"></th>
     </tr>
     </thead>
     <tbody>
@@ -13,7 +13,11 @@
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
       <td>
-        <router-link :to="{name:'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">{{atmLocation.locationName}}</router-link>
+
+        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
+          {{ atmLocation.locationName }}
+        </router-link>
+
       </td>
       <td>
         <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
@@ -21,14 +25,18 @@
         </div>
       </td>
       <td v-if="roleType === 'admin'">
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)" icon="fa-regular fa-pen-to-square" />
-        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can" class="mx-4"/>
+        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                           icon="fa-regular fa-pen-to-square"/>
+        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion" class="mx-4"/>
       </td>
     </tr>
     </tbody>
   </table>
 </template>
 <script>
+
+// <router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
+
 export default {
   name: 'AtmLocationsTable',
   data: function () {
@@ -67,6 +75,7 @@ export default {
       })
 
     },
+
 
     navigateToEditAtmLocation: function (locationId) {
       this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})

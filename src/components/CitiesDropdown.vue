@@ -38,7 +38,6 @@ export default {
     emitSelectedCityId: function () {
       this.$emit('emitSelectedCityIdEvent', this.selectedCityId)
     },
-
     setSelectedCityId: function (cityId) {
       this.selectedCityId = cityId
     }
