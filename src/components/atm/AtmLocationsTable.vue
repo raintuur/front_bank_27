@@ -14,7 +14,7 @@
       <td>{{ atmLocation.cityName }}</td>
       <td>
 
-        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
+        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
           {{ atmLocation.locationName }}
         </router-link>
 
@@ -27,18 +27,22 @@
       <td v-if="roleType === 'admin'">
         <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
                            icon="fa-regular fa-pen-to-square"/>
-        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can" class="mx-3"/>
+        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion" class="mx-4"/>
       </td>
     </tr>
     </tbody>
   </table>
 </template>
 <script>
+
+// <router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
+
 export default {
   name: 'AtmLocationsTable',
   data: function () {
     return {
       roleType: sessionStorage.getItem('roleType'),
+
       atmLocations: [
         {
           locationId: 0,
@@ -72,12 +76,9 @@ export default {
 
     },
 
+
     navigateToEditAtmLocation: function (locationId) {
-      this.$router.push({
-        name: 'atmLocationRoute', query: {
-          locationId: locationId, isEdit: 'true'
-        }
-      })
+      this.$router.push({name: 'atmLocationRoute', query: {locationId: locationId, isEdit: 'true'}})
     },
 
     deleteAtmLocation: function (locationId) {
@@ -97,6 +98,7 @@ export default {
   beforeMount() {
     this.getAtmLocations(0)
   }
+
 
 }
 </script>

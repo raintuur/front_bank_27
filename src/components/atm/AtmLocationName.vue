@@ -10,12 +10,12 @@ export default {
   props: {
     isView: Boolean
   },
-  data: function (){
+  data: function () {
     return {
       locationName: ''
     }
   },
-  methods: {
+  methods:{
 
     emitLocationName: function () {
       this.$emit('emitLocationNameEvent', this.locationName)
@@ -24,7 +24,6 @@ export default {
     setLocationName(locationName) {
       this.locationName = locationName
     }
-
   }
 }
 </script>

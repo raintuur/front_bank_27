@@ -38,6 +38,7 @@
   </div>
 </template>
 
+
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
 import CitiesDropdown from "@/components/CitiesDropdown.vue";
@@ -90,6 +91,8 @@ export default {
           }
       ).then(response => {
         this.atmRequest = response.data
+
+        // väärtustame kõikide alamkomponentide väljad
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
         this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
@@ -136,7 +139,6 @@ export default {
 
     },
 
-
     messagesReset: function () {
       this.messageSuccess = ''
       this.messageError = ''
@@ -154,7 +156,8 @@ export default {
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
-      // some - kui massiivis vahemalt yks objekti vordlus on toene, siis meetod rehkendub toeseks.
+                                          // some() -
+      // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
 
     postAtmLocation: function () {
@@ -195,7 +198,6 @@ export default {
         this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
       }
 
-
     },
 
     putAtmLocation: function () {
@@ -209,7 +211,7 @@ export default {
       }).catch(error => {
         console.log(error)
       })
-    }
+    },
 
   },
 

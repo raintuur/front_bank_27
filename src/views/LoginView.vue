@@ -4,8 +4,7 @@
 
     <div class="col-4 ">
 
-      <AlertDanger :message="apiError.message"/>
-
+      <AlertDanger :message="message"/>
 
       <form class="px-4 py-3">
         <div class="mb-3">
@@ -54,16 +53,16 @@ export default {
 
   methods: {
 
-
     login: function () {
       this.message = '';
       if (this.username == '' || this.password == '') {
-        this.message = 'Taida koik valjad'
+        this.message = 'Täida kõik väljad';
       } else {
         this.sendLoginRequest();
       }
 
     },
+
     sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
@@ -83,9 +82,10 @@ export default {
       }).catch(error => {
         this.apiError = error.response.data
         this.message = this.apiError.message
+      });
+    },
 
-      })
-    }
+
   }
 }
 </script>

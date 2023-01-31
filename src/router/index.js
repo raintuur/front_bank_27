@@ -5,18 +5,12 @@ import AtmsView from "@/views/AtmsView.vue";
 import AtmLocationView from "@/views/AtmLocationView.vue";
 import LoginView from "@/views/LoginView.vue";
 
-
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/login',
     name: 'loginRoute',
-    component: LoginView
-  },
-  {
-    path: '/login',
-    name: 'login',
     component: LoginView
   },
   {
