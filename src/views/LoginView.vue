@@ -6,7 +6,6 @@
 
       <AlertDanger :message="message"/>
 
-
       <form class="px-4 py-3">
         <div class="mb-3">
           <label class="form-label">Kasutajanimi</label>
@@ -34,7 +33,8 @@ export default {
   components: {AlertDanger},
   data: function () {
     return {
-      message:'',
+
+      message: '',
 
       loginResponse: {
         userId: 0,
@@ -53,16 +53,16 @@ export default {
 
   methods: {
 
-
-
     login: function () {
       this.message = '';
-      if(this.username == '' || this.password == '') {
-        this.message = 'Täida kõik väljad'
+      if (this.username == '' || this.password == '') {
+        this.message = 'Täida kõik väljad';
       } else {
         this.sendLoginRequest();
       }
+
     },
+
     sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
@@ -84,6 +84,8 @@ export default {
         this.message = this.apiError.message
       });
     },
+
+
   }
 }
 </script>
