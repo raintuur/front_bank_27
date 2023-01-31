@@ -23,6 +23,7 @@ export default {
     }
   },
   methods: {
+    
 
     getAllCities: function () {
       this.$http.get("/atm/cities")
