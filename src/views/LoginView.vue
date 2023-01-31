@@ -60,7 +60,6 @@ export default {
       } else {
         this.sendLoginRequest();
       }
-
     },
 
     sendLoginRequest: function () {
