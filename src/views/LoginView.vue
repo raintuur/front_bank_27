@@ -42,10 +42,7 @@ export default {
             }
           }
       ).then(response => {
-
-
-        let userId = response.data.userId;
-        let roleType = response.data.roleType;
+        this.loginSuc
 
         sessionStorage.setItem('userId', userId)
         sessionStorage.setItem('roleType', roleType)
