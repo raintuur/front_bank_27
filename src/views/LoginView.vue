@@ -4,6 +4,7 @@
 
     <div class="col-4 ">
 
+      <AlertDanger :message="apiError.message"/>
 
       <form class="px-4 py-3">
         <div class="mb-3">
@@ -25,37 +26,64 @@
 </template>
 
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: "LoginView",
+  components: {AlertDanger},
   data: function () {
     return {
+
+
+      loginResponse: {
+        userId: 0,
+        roleType: ''
+      },
+
+      apiError: {
+        message: '',
+        errorCode: ''
+      },
       username: '',
       password: '',
     }
   },
 
   methods: {
-    login: function () {
-      this.$http.get("/login", {
-            params: {
-              username: this.username,
-              password: this.password
-            }
-          }
-      ).then(response => {
-        let userId = response.data.userId;
-        let roleType = response.data.roleType;
 
-        sessionStorage.setItem('userId', userId)
-        sessionStorage.setItem('roleType', roleType)
-        localStorage.setItem('lang', 'EST')
 
-        this.$router.push({name: 'atmsRoute'})
+, login: function () {
+      this.message = '';
+      if (this.username == '' || this.password == '') {
+        this.message = 'Täida kõik väljad';
+      } else {
 
-      }).catch(error => {
-        console.log(error)
-      })
+      }
+      this.sendLoginRequest();
     },
   }
+sendLoginRequest: function () {
+  this.$http.get("/login", {
+        params: {
+          username: this.username,
+          password: this.password
+        }
+      }
+  ).then(response => {
+
+    this.loginResponse = response.data
+
+
+    sessionStorage.setItem('userId', this.loginResponse.userId)
+    sessionStorage.setItem('roleType', this.loginResponse.roleType)
+    localStorage.setItem('lang', 'EST')
+
+    this.$router.push({name: 'atmsRoute'})
+
+  }).catch(error => {
+    this.apiError = error.response.data
+
+  });
+}
 }
 </script>
