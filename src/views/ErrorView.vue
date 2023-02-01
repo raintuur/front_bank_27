@@ -1,10 +1,13 @@
 <template>
-$END$
+  <div>
+    <h1>Midagi läks valesti! :)</h1>
+
+  </div>
 </template>
 
 <script>
 export default {
-name: "ErrorView"
+  name: "ErrorView"
 }
 </script>
 
