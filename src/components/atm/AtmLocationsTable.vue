@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <AlertDanger :message="message"/>
   <table class="table table-hover table-dark">
     <thead>
     <tr>
@@ -32,6 +34,7 @@
     </tr>
     </tbody>
   </table>
+  </div>
 </template>
 <script>
 
@@ -58,9 +61,9 @@ export default {
       apiError:{
         message: '',
         errorCode: ''
-      }
+      },
 
-
+  message: '',
 
 
     }
@@ -68,6 +71,7 @@ export default {
   methods: {
 
     getAtmLocations: function (cityId) {
+      this.message = ''
       this.$http.get("/atm/locations", {
             params: {
               cityId: cityId
@@ -81,8 +85,9 @@ export default {
       }).catch(error => {
         this.apiError = error.response.data
 
-        if (this.apiError.errorCode == '444') {
-          // siis error sõnum siia samasse vaatesse
+        if (this.apiError.errorCode == '555') {
+          this.message = this.apiError.message
+          this.atmLocations = []
         } else {
           this.$router.push({name: 'errorRoute'})
         }
