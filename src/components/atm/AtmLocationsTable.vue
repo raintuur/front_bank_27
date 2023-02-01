@@ -54,7 +54,11 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      apiError:{
+        message: '',
+        errorCode: ''
+      }
     }
   },
   methods: {
@@ -71,7 +75,13 @@ export default {
       ).then(response => {
         this.atmLocations = response.data
       }).catch(error => {
-        console.log(error)
+        this.apiError = error.response.data
+
+        is (this.apiError.errorCode === '555'){
+          //siis error sõnum siia samasse vaatesse
+        } else {
+          this.$router
+        }
       })
 
     },
