@@ -1,47 +1,44 @@
 <template>
   <div>
-  <AlertDanger :message="message"/>
-  <table class="table table-hover table-dark">
-    <thead>
-    <tr>
-      <th scope="col">Linn</th>
-      <th scope="col">Asukoht</th>
-      <th scope="col">Teenused</th>
-      <th v-if="roleType === 'admin'"></th>
-    </tr>
-    </thead>
-    <tbody v-if="apiError.message == ''">
-
-    <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
-      <td>{{ atmLocation.cityName }}</td>
-      <td>
-
-        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
-          {{ atmLocation.locationName }}
-        </router-link>
-
-      </td>
-      <td>
-        <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
-          {{ transactionType.typeName }}
-        </div>
-      </td>
-      <td v-if="roleType === 'admin'">
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                           icon="fa-regular fa-pen-to-square"/>
-        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion" class="mx-4"/>
-      </td>
-    </tr>
-    </tbody>
-    <tbody v-else>
+    <AlertDanger :message="message"/>
+    <table class="table table-hover table-dark">
+      <thead>
       <tr>
-        <td colspan="4" class="text-start">
-          {{apiError.message}}
+        <th scope="col">Linn</th>
+        <th scope="col">Asukoht</th>
+        <th scope="col">Teenused</th>
+        <th v-if="roleType === 'admin'"></th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
+        <td>{{ atmLocation.cityName }}</td>
+        <td>
+
+          <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
+            {{ atmLocation.locationName }}
+          </router-link>
+
+        </td>
+        <td>
+          <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
+            {{ transactionType.typeName }}
+          </div>
+        </td>
+        <td v-if="roleType === 'admin'">
+          <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                             icon="fa-regular fa-pen-to-square"/>
+          <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion"
+                             class="mx-4"/>
         </td>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+
   </div>
+
+
 </template>
 <script>
 
@@ -71,7 +68,10 @@ export default {
       apiError: {
         message: '',
         errorCode: ''
-      }
+      },
+
+      message: '',
+
     }
   },
   methods: {
@@ -90,8 +90,10 @@ export default {
         this.atmLocations = response.data
       }).catch(error => {
         this.apiError = error.response.data
+
         if (this.apiError.errorCode == '555') {
           this.message = this.apiError.message
+          this.atmLocations = []
         } else {
           this.$router.push({name: 'errorRoute'})
         }

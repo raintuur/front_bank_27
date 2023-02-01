@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h4>
-      Midagi läks valesti! :(
-    </h4>
+    <h1>Midagi läks valesti! :)</h1>
+
   </div>
 </template>
 
@@ -11,3 +10,7 @@ export default {
   name: "ErrorView"
 }
 </script>
+
+<style scoped>
+
+</style>
