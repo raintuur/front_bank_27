@@ -8,3 +8,9 @@
     background-color: red !important;
     color: white;
 }
+
+.icon-hover:hover {
+    color: red;
+    cursor: pointer;
+    height: 20px;
+}

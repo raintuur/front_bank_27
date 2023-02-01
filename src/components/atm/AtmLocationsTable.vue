@@ -25,9 +25,9 @@
         </td>
         <td v-if="roleType === 'admin'">
           <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                             icon="fa-regular fa-pen-to-square"/>
+                             icon="fa-regular fa-pen-to-square" class="icon-hover"/>
           <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can"
-                             class="mx-4"/>
+                             class="mx-4 icon-hover"/>
         </td>
       </tr>
       </tbody>
