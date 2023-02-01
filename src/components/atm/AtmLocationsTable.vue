@@ -1,39 +1,45 @@
 <template>
-  <table class="table table-hover table-dark">
-    <thead>
-    <tr>
-      <th scope="col">Linn</th>
-      <th scope="col">Asukoht</th>
-      <th scope="col">Teenused</th>
-      <th v-if="roleType === 'admin'">Muuda</th>
-    </tr>
-    </thead>
-    <tbody>
+  <div>
+    <AlertDanger :message ="message"/>
+    <table class="table table-hover table-dark">
+      <thead>
+      <tr>
+        <th scope="col">Linn</th>
+        <th scope="col">Asukoht</th>
+        <th scope="col">Teenused</th>
+        <th v-if="roleType === 'admin'">Muuda</th>
+      </tr>
+      </thead>
+      <tbody>
 
-    <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
-      <td>{{ atmLocation.cityName }}</td>
-      <td>
-        <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
-          {{ atmLocation.locationName }}
-        </router-link>
-      <td>
-        <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
-          {{ transactionType.typeName }}
-        </div>
-      </td>
-      <td v-if="roleType === 'admin'">
-        <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                           icon="fa-regular fa-pen-to-square"/>
-        <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can"
-                           class="mx-4"/>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
+        <td>{{ atmLocation.cityName }}</td>
+        <td>
+          <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
+            {{ atmLocation.locationName }}
+          </router-link>
+        <td>
+          <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
+            {{ transactionType.typeName }}
+          </div>
+        </td>
+        <td v-if="roleType === 'admin'">
+          <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
+                             icon="fa-regular fa-pen-to-square"/>
+          <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-trash-can"
+                             class="mx-4"/>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: 'AtmLocationsTable',
+  components: {AlertDanger},
   data: function () {
     return {
       roleType: sessionStorage.getItem('roleType'),
@@ -53,12 +59,14 @@ export default {
       apiError: {
         message: "",
         errorCode: ""
-      }
+      },
+      message: ''
     }
   },
   methods: {
 
     getAtmLocations: function (cityId) {
+      this.message = ''
       this.$http.get("/atm/locations", {
             params: {
               cityId: cityId
@@ -71,7 +79,9 @@ export default {
         this.atmLocations = response.data
       }).catch(error => {
         this.apiError = error.response.data
-        if (this.apiError.errorCode == "444") {
+        if (this.apiError.errorCode == "555") {
+          this.message = this.apiError.message
+          this.atmLocations = []
 
         } else {
           this.$router.push({name: 'errorRoute'})
