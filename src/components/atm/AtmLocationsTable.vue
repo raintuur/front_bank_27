@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <AlertDanger :message="message"/>
   <table class="table table-hover table-dark">
     <thead>
     <tr>
@@ -8,7 +10,7 @@
       <th v-if="roleType === 'admin'"></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody v-if="apiError.message == ''">
 
     <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
       <td>{{ atmLocation.cityName }}</td>
@@ -31,14 +33,25 @@
       </td>
     </tr>
     </tbody>
+    <tbody v-else>
+      <tr>
+        <td colspan="4" class="text-start">
+          {{apiError.message}}
+        </td>
+      </tr>
+    </tbody>
   </table>
+  </div>
 </template>
 <script>
 
 // <router-link v-if="roleType === 'admin'" :to="{name: 'editLocationRoute', query: { locationId: atmLocation.locationId } }">{{ atmLocation.locationName }}</router-link>
 
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: 'AtmLocationsTable',
+  components: {AlertDanger},
   data: function () {
     return {
       roleType: sessionStorage.getItem('roleType'),
@@ -54,12 +67,17 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      apiError: {
+        message: '',
+        errorCode: ''
+      }
     }
   },
   methods: {
 
     getAtmLocations: function (cityId) {
+      this.message = ''
       this.$http.get("/atm/locations", {
             params: {
               cityId: cityId
@@ -71,7 +89,12 @@ export default {
       ).then(response => {
         this.atmLocations = response.data
       }).catch(error => {
-        console.log(error)
+        this.apiError = error.response.data
+        if (this.apiError.errorCode == '555') {
+          this.message = this.apiError.message
+        } else {
+          this.$router.push({name: 'errorRoute'})
+        }
       })
 
     },

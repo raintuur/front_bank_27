@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AtmsView from "@/views/AtmsView.vue";
+import ErrorView from "@/views/ErrorView.vue";
 import AtmLocationView from "@/views/AtmLocationView.vue";
 import LoginView from "@/views/LoginView.vue";
 
@@ -12,6 +13,11 @@ const routes = [
     path: '/login',
     name: 'loginRoute',
     component: LoginView
+  },
+  {
+    path: '/error',
+    name: 'errorRoute',
+    component: ErrorView
   },
   {
     path: '/atm/location',
