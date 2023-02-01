@@ -4,6 +4,8 @@
 
     <div class="col-4 ">
 
+      <AlertDanger :message="message"/>
+
 
       <form class="px-4 py-3">
         <div class="mb-3">
@@ -25,37 +27,65 @@
 </template>
 
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: "LoginView",
+  components: {AlertDanger},
   data: function () {
     return {
+
+      message: '',
+    loginSuccessResponse: {
+      userId: 0,
+      roleType: ''
+    },
+      apiError: {
+       message: '',
+        errorCode: '',
+      },
+
+
       username: '',
       password: '',
     }
   },
 
   methods: {
+
+
+
     login: function () {
-      this.$http.get("/login", {
-            params: {
-              username: this.username,
-              password: this.password
-            }
-          }
-      ).then(response => {
-        let userId = response.data.userId;
-        let roleType = response.data.roleType;
+      this.message = '';
+      if(this.username == '' || this.password == '') {
+        this.message = 'Täida kõik v2äljad'
+      }
+      else {
+        this.sendLoginRequest();
+      }
 
-        sessionStorage.setItem('userId', userId)
-        sessionStorage.setItem('roleType', roleType)
-        localStorage.setItem('lang', 'EST')
-
-        this.$router.push({name: 'atmsRoute'})
-
-      }).catch(error => {
-        console.log(error)
-      })
     },
+
+    sendLoginRequest: function () {
+      this.$http.get("/login", {
+          params: {
+            username: this.username,
+            password: this.password
+          }
+        }
+    ).then(response => {
+      this.loginSuccessResponse = response.data
+
+      sessionStorage.setItem('userId', this.loginSuccessResponse.userId)
+      sessionStorage.setItem('roleType', this.loginSuccessResponse.roleType)
+      localStorage.setItem('lang', 'EST')
+
+      this.$router.push({name: 'atmsRoute'})
+
+    }).catch(error => {
+      this.apiError = error.response.data
+        this.message = this.apiError.message
+    });}
   }
 }
 </script>
