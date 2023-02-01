@@ -59,6 +59,10 @@ export default {
         message: '',
         errorCode: ''
       }
+
+
+
+
     }
   },
   methods: {
@@ -77,10 +81,10 @@ export default {
       }).catch(error => {
         this.apiError = error.response.data
 
-        is (this.apiError.errorCode === '555'){
-          //siis error sõnum siia samasse vaatesse
+        if (this.apiError.errorCode == '444') {
+          // siis error sõnum siia samasse vaatesse
         } else {
-          this.$router
+          this.$router.push({name: 'errorRoute'})
         }
       })
 
