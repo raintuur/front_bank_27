@@ -15,12 +15,12 @@
       <div class="col-3">
         <AtmLocationName ref="atmLocationName" :is-view="isView" @emitLocationNameEvent="setAtmRequestLocationName"/>
         <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
-        <AtmTransactionTypes ref="atmTransactionTypes" :is-view="isView" :is-add="isAdd"
+        <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView"
                              @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
         <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
 
-        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
-        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
+        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
         <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 

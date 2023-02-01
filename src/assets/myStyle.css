@@ -5,3 +5,9 @@
 .input-danger {
     background-color: palevioletred !important;
 }
+
+.icon-hover:hover {
+    color: darkorange;
+    cursor: pointer;
+    height: 20px;
+}
