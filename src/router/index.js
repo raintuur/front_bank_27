@@ -4,10 +4,16 @@ import HomeView from '../views/HomeView.vue'
 import AtmsView from "@/views/AtmsView.vue";
 import AtmLocationView from "@/views/AtmLocationView.vue";
 import LoginView from "@/views/LoginView.vue";
+import ErrorView from "@/views/ErrorView.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/error',
+    name: 'errorRoute',
+    component: ErrorView
+  },
   {
     path: '/login',
     name: 'loginRoute',
