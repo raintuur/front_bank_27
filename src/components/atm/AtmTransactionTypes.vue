@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-start my-3">
     <h5>Teenused:</h5>
 
     <!--  VAATAMINE  -->

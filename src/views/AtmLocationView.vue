@@ -17,13 +17,14 @@
         <AtmQuantity ref="atmQuantity" :is-view="isView" @emitNumberOfAtmsEvent="setAtmRequestNumberOfAtms"/>
         <AtmTransactionTypes ref="atmTransactionTypes" :is-add="isAdd" :is-view="isView"
                              @emitTransactionTypesEvent="setAtmRequestTransactionTypes"/>
-        <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture"/>
+        <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture" class="my-3 text-start"/>
 
-        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
-        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
-        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda
+
+        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success float-end my-3">Lisa</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success float-end my-3">Muuda
         </button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger float-end my-3 mx-2">Tagasi</button>
+        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger float-end my-3 mx-2">Tühista</button>
 
       </div>
 

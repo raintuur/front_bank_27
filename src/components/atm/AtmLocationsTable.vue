@@ -15,22 +15,21 @@
       <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
         <td>{{ atmLocation.cityName }}</td>
         <td>
-
           <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
             {{ atmLocation.locationName }}
           </router-link>
 
         </td>
-        <td>
+        <td class="text-start">
           <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
             {{ transactionType.typeName }}
           </div>
         </td>
         <td v-if="roleType === 'admin'">
           <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                             icon="fa-regular fa-pen-to-square"/>
+                             icon="fa-regular fa-pen-to-square" class="icon-hover"/>
           <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion"
-                             class="mx-4"/>
+                             class="mx-4 icon-hover"/>
         </td>
       </tr>
       </tbody>
