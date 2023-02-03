@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <AlertDanger :message="message"/>
     <table class="table table-hover table-dark">
@@ -40,7 +39,6 @@
   </div>
 
 
-
 </template>
 <script>
 
@@ -67,12 +65,12 @@ export default {
           ]
         }
       ],
-
       apiError: {
         message: '',
         errorCode: ''
-      }
+      },
 
+      message: '',
 
     }
   },
@@ -93,13 +91,12 @@ export default {
       }).catch(error => {
         this.apiError = error.response.data
 
-        if (this.apiError.errorCode === '444') {
+        if (this.apiError.errorCode == '555') {
           this.message = this.apiError.message
           this.atmLocations = []
         } else {
           this.$router.push({name: 'errorRoute'})
         }
-
       })
 
     },

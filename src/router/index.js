@@ -14,7 +14,6 @@ const routes = [
     name: 'errorRoute',
     component: ErrorView
   },
-
   {
     path: '/login',
     name: 'loginRoute',
