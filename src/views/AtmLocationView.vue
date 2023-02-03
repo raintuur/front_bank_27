@@ -150,7 +150,6 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
@@ -161,7 +160,6 @@ export default {
     },
 
     postAtmLocation: function () {
-
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest)
           .then(response => {
