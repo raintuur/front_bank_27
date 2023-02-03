@@ -27,9 +27,9 @@
 
       </div>
 
-      <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm_template.jpg" class="img-thumbnail">
+        <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
@@ -156,7 +156,7 @@ export default {
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
-                                          // some() -
+      // some() -
       // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
 
