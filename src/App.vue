@@ -3,14 +3,14 @@
     <nav>
       <router-link to="/"><font-awesome-icon icon="fa-solid fa-house-chimney" /></router-link> |
       <router-link to="/atms">Pangaautomaadid</router-link> |
-      <router-link v-if="isAdmin" :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht</router-link> |
-      <router-link v-if="userLoggedIn" to="/">Logi välja</router-link>
+      <router-link v-if="isAdmin" :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht | </router-link>
+      <router-link v-if="userLoggedIn" to="/" >Logi välja</router-link>
       <router-link v-else to="/login">Sisse logimine</router-link>
-
     </nav>
     <router-view @emitLoginSuccessEvent="updateNavigationMenu"/>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -19,7 +19,7 @@ export default {
     return {
       userLoggedIn: false,
       isAdmin: false,
-      userId: sessionStorage.getItem('userId')
+      userId: sessionStorage.getItem('userId'),
       roleType: sessionStorage.getItem('roleType')
     }
   },
@@ -29,13 +29,14 @@ export default {
       this.roleType = sessionStorage.getItem('roleType')
       // kui userId on tühi, siis userLoggedIn = false
       // kui userId on täidetud, siis userLoggedIn = true
-      this.userLoggedIn = this.userId == null
+      this.userLoggedIn = this.userId != null
 
-      this.isAdmin = this.roleType == 'admin'
+      this.isAdmin = this.roleType === 'admin'
+
     }
   },
   mounted() {
-    this.updateStatus()
+    this.updateNavigationMenu()
   }
 }
 </script>

@@ -77,7 +77,6 @@ export default {
         sessionStorage.setItem('roleType', this.loginResponse.roleType)
         localStorage.setItem('lang', 'EST')
         this.$emit('emitLoginSuccessEvent')
-
         this.$router.push({name: 'atmsRoute'})
 
       }).catch(error => {

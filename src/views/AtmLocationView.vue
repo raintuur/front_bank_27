@@ -22,8 +22,7 @@
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda
-        </button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 
@@ -150,7 +149,6 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
@@ -161,7 +159,6 @@ export default {
     },
 
     postAtmLocation: function () {
-
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest)
           .then(response => {
