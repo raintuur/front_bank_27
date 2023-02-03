@@ -6,10 +6,34 @@
       <router-link :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht</router-link> |
       <router-link to="/login">Sisse logimine</router-link>
     </nav>
-    <router-view/>
+    <router-view @emitLoginSuccessEvent=""/>
   </div>
 </template>
+<script>
 
+  export default {
+  name: "App",
+  data: function () {
+  return {
+  displayWithLogin: true,
+  userId: sessionStorage.getItem('userId')
+}
+},
+  methods: {
+  updateStatus: function () {
+  this.userId = sessionStorage.getItem('userId')
+  // kui userId on tühi, siis displayWithLogin = true
+  // kui userId on täidetud, siis displayWithLogin = false
+  this.displayWithLogin = this.userId == null
+
+}
+},
+  mounted() {
+  this.updateNavigationMenu()
+}
+}
+
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
