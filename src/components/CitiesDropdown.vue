@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     getAllCities: function () {
-      this.$http.get("/atm/cities")
+      this.$http.get("/cities")
           .then(result => {
             this.cities = result.data
 
@@ -40,7 +40,6 @@ export default {
     setSelectedCityId: function (cityId) {
       this.selectedCityId = cityId
     }
-
 
   },
   beforeMount() {
