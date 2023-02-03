@@ -7,3 +7,12 @@
     background-color: red !important;
     color: white;
 }
+
+.delete-icon-hover:hover {
+    cursor: pointer;
+    color: crimson;
+}
+.edit-icon-hover:hover {
+    cursor: pointer;
+    color: greenyellow;
+}

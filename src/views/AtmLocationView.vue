@@ -22,14 +22,14 @@
         <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tagasi</button>
         <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger">Tühista</button>
         <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success">Lisa</button>
-        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda
-        </button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success">Muuda</button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm_template.jpg" class="img-thumbnail">
+        <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
@@ -119,6 +119,7 @@ export default {
 
     setAtmRequestPicture: function (pictureBase64Data) {
       this.atmRequest.picture = pictureBase64Data
+
     },
 
     navigateToAtms: function () {
@@ -158,18 +159,8 @@ export default {
     },
 
     postAtmLocation: function () {
-      let preferExample = 'code=200'
-
-      if (this.atmRequest.locationName === 'Rimi') {
-        preferExample = 'code=403, example=403';
-      }
-
       // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest, {
-            headers: {
-              Prefer: preferExample
-            }
-          }
+      this.$http.post("/atm/location", this.atmRequest
       ).then(response => {
         this.messageSuccess = 'Uus ATM on edukalt lisatud'
         this.timeoutAndReloadPage(2000)
@@ -188,7 +179,7 @@ export default {
       this.messagesReset();
       this.callAtmRequestEmits();
 
-      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      // kontrollime, et kas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.putAtmLocation();
       } else {

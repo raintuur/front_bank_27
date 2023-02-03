@@ -4,11 +4,12 @@
 
     <div class="col-4 ">
 
+      <alert-danger :message="message"/>
 
       <form class="px-4 py-3">
         <div class="mb-3">
           <label class="form-label">Kasutajanimi</label>
-          <input v-model="username" type="text" class="form-control"placeholder="Mart123">
+          <input v-model="username" type="text" class="form-control" placeholder="Mart123">
         </div>
         <div class="mb-3">
           <label class="form-label">Parool</label>
@@ -24,11 +25,26 @@
   </div>
 </template>
 
+
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+
 export default {
   name: "LoginView",
+  components: {AlertDanger},
   data: function () {
     return {
+
+      message: '',
+
+      loginResponse: {
+        userId: 0,
+        roleType: ''
+      },
+      apiError: {
+        message: '',
+        errorCode: ''
+      },
       username: '',
       password: '',
     }
@@ -36,6 +52,16 @@ export default {
 
   methods: {
     login: function () {
+
+      this.message = '';
+
+      if (this.username == '' || this.password == '') {
+        this.message = "Täida kõik kohustuslikud väljad"
+      } else {
+        this.sendLoginRequest();
+      }
+    },
+    sendLoginRequest: function () {
       this.$http.get("/login", {
             params: {
               username: this.username,
@@ -43,19 +69,22 @@ export default {
             }
           }
       ).then(response => {
-        let userId = response.data.userId;
-        let roleType = response.data.roleType;
 
-        sessionStorage.setItem('userId', userId)
-        sessionStorage.setItem('roleType', roleType)
+        this.loginResponse.userId = response.data.userId;
+        this.loginResponse.roleType = response.data.roleType;
+
+        sessionStorage.setItem('userId', this.loginResponse.userId)
+        sessionStorage.setItem('roleType', this.loginResponse.roleType)
         localStorage.setItem('lang', 'EST')
-
+        this.$emit('emitLoginSuccessEvent')
         this.$router.push({name: 'atmsRoute'})
 
       }).catch(error => {
-        console.log(error)
-      })
-    },
+        this.apiError = error.response.data;
+        this.message = this.apiError.message;
+
+      });
+    }
   }
 }
 </script>

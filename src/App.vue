@@ -6,9 +6,19 @@
       <router-link :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht</router-link> |
       <router-link to="/login">Sisse logimine</router-link>
     </nav>
-    <router-view/>
+    <router-view @emitLoginSuccessEvent=""/>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    changeLoginButton: function () {
+
+    }
+  }
+}
+</script>
 
 <style>
 #app {
