@@ -7,3 +7,9 @@
     background-color: red !important;
     color: white;
 }
+
+.icon-hover:hover {
+    color: greenyellow;
+    cursor: pointer;
+    height: 20px;
+}
