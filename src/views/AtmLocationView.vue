@@ -29,7 +29,8 @@
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm_template.jpg" class="img-thumbnail">
+        <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
