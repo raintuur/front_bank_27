@@ -2,7 +2,7 @@
 
   <div>
     <AlertDanger :message="message"/>
-    <table class="table table-hover table-dark">
+    <table class="table table-hover table-light">
       <thead>
       <tr>
         <th scope="col">Linn</th>
@@ -28,10 +28,11 @@
           </div>
         </td>
         <td v-if="roleType === 'admin'">
+
           <font-awesome-icon v-on:click="navigateToEditAtmLocation(atmLocation.locationId)"
-                             icon="fa-regular fa-pen-to-square"/>
-          <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-solid fa-explosion"
-                             class="mx-4"/>
+                             icon="fa-regular fa-pen-to-square" class="icon-hover"/>
+          <font-awesome-icon v-on:click="deleteAtmLocation(atmLocation.locationId)" icon="fa-regular fa-trash-can"
+                             class="mx-4 icon-hover"/>
         </td>
       </tr>
       </tbody>

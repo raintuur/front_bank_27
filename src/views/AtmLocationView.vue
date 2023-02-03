@@ -29,9 +29,11 @@
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm_template.jpeg" class="img-thumbnail">
+        <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
+
     </div>
 
 
@@ -150,33 +152,22 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
-                                          // some() -
+      // some() -
       // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
 
     postAtmLocation: function () {
-      let preferExample = 'code=200'
-
-      if (this.atmRequest.locationName === 'Rimi') {
-        preferExample = 'code=403, example=403';
-      }
-
       // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest, {
-            headers: {
-              Prefer: preferExample
-            }
-          }
-      ).then(response => {
-        this.messageSuccess = 'Uus ATM on edukalt lisatud'
-        this.timeoutAndReloadPage(2000)
-      }).catch(error => {
+      this.$http.post("/atm/location", this.atmRequest)
+          .then(response => {
+            this.messageSuccess = 'Uus ATM on edukalt lisatud'
+            this.timeoutAndReloadPage(2000)
+          }).catch(error => {
         this.messageError = error.response.data.errorMessage
       });
     },
