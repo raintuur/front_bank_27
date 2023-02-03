@@ -1,7 +1,6 @@
 <template>
   <div class="row justify-content-center">
 
-
     <div class="col-4 ">
 
       <AlertDanger :message="message"/>
@@ -71,11 +70,9 @@ export default {
           }
       ).then(response => {
         this.loginResponse = response.data
-
         sessionStorage.setItem('userId', this.loginResponse.userId)
         sessionStorage.setItem('roleType', this.loginResponse.roleType)
-        localStorage.setItem('lang', 'EST')
-
+        this.$emit('emitLoginSuccessEvent')
         this.$router.push({name: 'atmsRoute'})
 
       }).catch(error => {

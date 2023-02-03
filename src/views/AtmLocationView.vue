@@ -20,25 +20,31 @@
         <ImageInput v-if="!isView" @emitBase64Event="setAtmRequestPicture" class="my-3 text-start"/>
 
 
-        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success float-end my-3">Lisa</button>
-        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button" class="btn btn-outline-success float-end my-3">Muuda
+        <button v-if="isAdd" v-on:click="addAtmLocation" type="button" class="btn btn-outline-success float-end my-3">
+          Lisa
         </button>
-        <button v-if="isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger float-end my-3 mx-2">Tagasi</button>
-        <button v-if="!isView" v-on:click="navigateToAtms" type="button" class="btn btn-outline-danger float-end my-3 mx-2">Tühista</button>
+        <button v-if="isEdit" v-on:click="updateAtmLocation" type="button"
+                class="btn btn-outline-success float-end my-3">Muuda
+        </button>
+        <button v-if="isView" v-on:click="navigateToAtms" type="button"
+                class="btn btn-outline-danger float-end my-3 mx-2">Tagasi
+        </button>
+        <button v-if="!isView" v-on:click="navigateToAtms" type="button"
+                class="btn btn-outline-danger float-end my-3 mx-2">Tühista
+        </button>
 
       </div>
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm.png" class="img-thumbnail">
+        <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
 
-
   </div>
 </template>
-
 
 <script>
 import AtmTransactionTypes from "@/components/atm/AtmTransactionTypes.vue";
@@ -151,33 +157,21 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
           this.atmRequest.numberOfAtms > 0 &&
           this.atmRequest.transactionTypes.some(transactionType => transactionType.isSelected)
-                                          // some() -
+      // some() -
       // kui massiivis vähemalt ühe objekti mingisugune võrdlus on tõene, siis meetodi tulemus rehkendub tõeseks
     },
 
     postAtmLocation: function () {
-      let preferExample = 'code=200'
-
-      if (this.atmRequest.locationName === 'Rimi') {
-        preferExample = 'code=403, example=403';
-      }
-
-      // saadame POST sõnumi
-      this.$http.post("/atm/location", this.atmRequest, {
-            headers: {
-              Prefer: preferExample
-            }
-          }
-      ).then(response => {
-        this.messageSuccess = 'Uus ATM on edukalt lisatud'
-        this.timeoutAndReloadPage(2000)
-      }).catch(error => {
+      this.$http.post("/atm/location", this.atmRequest)
+          .then(response => {
+            this.messageSuccess = 'Uus ATM on edukalt lisatud'
+            this.timeoutAndReloadPage(2000)
+          }).catch(error => {
         this.messageError = error.response.data.errorMessage
       });
     },
