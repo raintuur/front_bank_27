@@ -1,7 +1,6 @@
 <template>
   <div>
-
-    <alert-danger :message = "message"/>
+    <AlertDanger :message="message"/>
     <table class="table table-hover table-dark">
       <thead>
       <tr>
@@ -38,6 +37,8 @@
     </table>
 
   </div>
+
+
 </template>
 <script>
 
@@ -69,8 +70,7 @@ export default {
         errorCode: ''
       },
 
-      message: ''
-
+      message: '',
 
     }
   },
@@ -90,7 +90,8 @@ export default {
         this.atmLocations = response.data
       }).catch(error => {
         this.apiError = error.response.data
-        if (this.apiError.errorCode === '555') {
+
+        if (this.apiError.errorCode == '555') {
           this.message = this.apiError.message
           this.atmLocations = []
         } else {

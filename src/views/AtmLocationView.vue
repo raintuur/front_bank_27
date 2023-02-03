@@ -26,9 +26,8 @@
 
       </div>
 
-      <!--  COLUMN 3  -->
       <div class="col-3">
-        <img v-if="atmRequest.picture ==null" src="../assets/atm_template.jpg" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm_template.jpg" class="img-thumbnail">
         <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
@@ -150,7 +149,6 @@ export default {
       this.$refs.atmTransactionTypes.emitTransactionTypes()
     },
 
-
     allRequiredFieldsAreFilled: function () {
       return this.atmRequest.cityId > 0 &&
           this.atmRequest.locationName !== '' &&
@@ -161,7 +159,6 @@ export default {
     },
 
     postAtmLocation: function () {
-
       // saadame POST sõnumi
       this.$http.post("/atm/location", this.atmRequest)
           .then(response => {

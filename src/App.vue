@@ -3,37 +3,45 @@
     <nav>
       <router-link to="/"><font-awesome-icon icon="fa-solid fa-house-chimney" /></router-link> |
       <router-link to="/atms">Pangaautomaadid</router-link> |
-      <router-link :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht</router-link> |
-      <router-link to="/login">Sisse logimine</router-link>
+      <router-link v-if="isAdmin" :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht | </router-link>
+      <router-link v-if="userLoggedIn" to="/" >Logi välja</router-link>
+      <router-link v-else to="/login">Sisse logimine</router-link>
     </nav>
-    <router-view @emitLoginSuccessEvent=""/>
+    <router-view @emitLoginSuccessEvent="updateNavigationMenu"/>
   </div>
 </template>
-<script>
 
-  export default {
+
+<script>
+export default {
   name: "App",
   data: function () {
-  return {
-  displayWithLogin: true,
-  userId: sessionStorage.getItem('userId')
-}
-},
+    return {
+      userLoggedIn: false,
+      isAdmin: false,
+      userId: sessionStorage.getItem('userId'),
+      roleType: sessionStorage.getItem('roleType')
+    }
+  },
   methods: {
-  updateStatus: function () {
-  this.userId = sessionStorage.getItem('userId')
-  // kui userId on tühi, siis displayWithLogin = true
-  // kui userId on täidetud, siis displayWithLogin = false
-  this.displayWithLogin = this.userId == null
+    updateNavigationMenu: function () {
+      this.userId = sessionStorage.getItem('userId')
+      this.roleType = sessionStorage.getItem('roleType')
+      // kui userId on tühi, siis userLoggedIn = false
+      // kui userId on täidetud, siis userLoggedIn = true
+      this.userLoggedIn = this.userId != null
 
-}
-},
+      this.isAdmin = this.roleType === 'admin'
+
+    }
+  },
   mounted() {
-  this.updateNavigationMenu()
+    this.updateNavigationMenu()
+  }
 }
-}
-
 </script>
+
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

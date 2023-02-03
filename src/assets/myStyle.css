@@ -9,6 +9,7 @@
 }
 
 .icon-hover:hover {
-    color: red;
+    color: darkorange;
     cursor: pointer;
+    height: 20px;
 }
