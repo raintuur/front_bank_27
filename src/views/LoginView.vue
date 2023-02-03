@@ -33,6 +33,9 @@ export default {
   components: {AlertDanger},
   data: function () {
     return {
+
+      message: '',
+
       loginResponse: {
         userId: 0,
         roleType: ''
@@ -45,8 +48,6 @@ export default {
 
       username: '',
       password: '',
-
-      message: '',
     }
   },
 

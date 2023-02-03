@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     emitNumberOfAtms: function () {
-      this.$emit('emitNumberOfAtmsEvent', Number( this.numberOfAtms))
+      this.$emit('emitNumberOfAtmsEvent', Number(this.numberOfAtms))
     },
     setNumberOfAtms(numberOfAtms) {
       this.numberOfAtms = numberOfAtms

@@ -15,10 +15,12 @@ export default {
       locationName: ''
     }
   },
-  methods: {
+  methods:{
+
     emitLocationName: function () {
       this.$emit('emitLocationNameEvent', this.locationName)
     },
+
     setLocationName(locationName) {
       this.locationName = locationName
     }

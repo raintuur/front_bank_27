@@ -28,7 +28,8 @@
 
       <!--  COLUMN 3  -->
       <div class="col-3">
-        <img :src="atmRequest.picture" class="img-thumbnail">
+        <img v-if="atmRequest.picture == null" src="../assets/atm_template.png" class="img-thumbnail">
+        <img v-else :src="atmRequest.picture" class="img-thumbnail">
 
       </div>
     </div>
@@ -94,7 +95,7 @@ export default {
         this.$refs.citiesDropdown.setSelectedCityId(this.atmRequest.cityId)
         this.$refs.atmLocationName.setLocationName(this.atmRequest.locationName)
         this.$refs.atmQuantity.setNumberOfAtms(this.atmRequest.numberOfAtms)
-        this.$refs.atmTransactionTypes.setAtmTransactionTypes(this.atmRequest.transactionTypes)
+        this.$refs.atmTransactionTypes.setTransactionTypes(this.atmRequest.transactionTypes)
       }).catch(error => {
         console.log(error)
       })
@@ -131,10 +132,6 @@ export default {
       // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
       if (this.allRequiredFieldsAreFilled()) {
         this.postAtmLocation();
-
-        let timeOut = 3000
-
-        this.timeoutAndReloadPage();
       } else {
         this.messageError = 'Täida kõik kohustuslikud väljad ning vali vähemalt 1 teenus!'
       }
@@ -181,19 +178,27 @@ export default {
       });
     },
 
-    timeoutAndReloadPage: function (timeout) {
+    timeoutAndReloadPage: function (timeOut) {
       setTimeout(() => {
         this.$router.go(0)
-      }, timeout)
+      }, timeOut)
     },
 
     updateAtmLocation: function () {
-      this.callAtmRequestEmits()
-      this.putAtmLocation();
+      this.messagesReset();
+      this.callAtmRequestEmits();
+
+      // kontrollime, etkas kõik vajalikud väljad on nõuetekohaselt täidetud
+      if (this.allRequiredFieldsAreFilled()) {
+        this.putAtmLocation();
+      } else {
+        this.messageError = 'Täida kõik kohustuslikud väljad, vali ka vähemalt 1 teenus!'
+      }
+
     },
 
     putAtmLocation: function () {
-      this.$http.post("/atm/location", this.atmRequest, {
+      this.$http.put("/atm/location", this.atmRequest, {
             params: {
               locationId: this.locationId
             }
@@ -203,7 +208,8 @@ export default {
       }).catch(error => {
         console.log(error)
       })
-    }
+    },
+
   },
 
   beforeMount() {

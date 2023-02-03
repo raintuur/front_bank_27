@@ -15,7 +15,8 @@
       <tr v-for="atmLocation in atmLocations" :key="atmLocation.locationId">
         <td>{{ atmLocation.cityName }}</td>
         <td>
-          <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}} ">
+
+          <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId:atmLocation.locationId}}">
             {{ atmLocation.locationName }}
           </router-link>
 
@@ -35,7 +36,6 @@
       </tbody>
     </table>
   </div>
-
 </template>
 <script>
 
