@@ -18,6 +18,7 @@
           <router-link :to="{name: 'atmLocationRoute', query: {isView: 'true', locationId: atmLocation.locationId}}">
             {{ atmLocation.locationName }}
           </router-link>
+        </td>
         <td>
           <div v-for="transactionType in atmLocation.transactionTypes" :key="transactionType.typeName">
             {{ transactionType.typeName }}

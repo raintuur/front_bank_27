@@ -1,14 +1,48 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/"><font-awesome-icon icon="fa-solid fa-house-user" /></router-link> |
+      <router-link to="/">
+        <font-awesome-icon icon="fa-solid fa-house-user"/>
+      </router-link>|
       <router-link to="/atms">Pangaautomaadid</router-link> |
-      <router-link :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht</router-link> |
-      <router-link to="/login">Sisse logimine</router-link>
+      <router-link v-if="isAdmin" :to="{name: 'atmLocationRoute', query: {isAdd:'true'}}">Asukoht | </router-link>
+      <router-link v-if="userLoggedIn" to="/">Logi välja</router-link>
+      <router-link v-else to="/login">Sisse logimine</router-link>
     </nav>
-    <router-view/>
+    <router-view @emitLoginSuccessEvent="updateNavigationMenu"/>
   </div>
 </template>
+
+
+<script>
+export default {
+  name: "App",
+  data: function () {
+    return {
+      userLoggedIn: false,
+      isAdmin: false,
+      userId: sessionStorage.getItem('userId'),
+      roleType: sessionStorage.getItem('roleType')
+    }
+  },
+  methods: {
+    updateNavigationMenu: function () {
+      this.userId = sessionStorage.getItem('userId')
+      this.roleType = sessionStorage.getItem('roleType')
+      // kui userId on tühi, siis userLoggedIn = false
+      // kui userId on täidetud, siis userLoggedIn = true
+      this.userLoggedIn = this.userId != null
+      this.isAdmin = this.roleType === 'admin'
+
+    }
+  },
+  mounted() {
+    this.updateNavigationMenu()
+  }
+}
+</script>
+
+
 
 <style>
 #app {
