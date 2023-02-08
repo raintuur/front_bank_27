@@ -79,7 +79,9 @@ export default {
 
       }).catch(error => {
         this.apiError = error.response.data
-        this.message = this.apiError.message
+        if (this.apiError.errorCode == '666') {
+          this.message = this.apiError.message
+        }
       });
     },
   }
